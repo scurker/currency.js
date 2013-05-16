@@ -1,5 +1,5 @@
 /*!
- * currency.js v0.0.1
+ * currency.js v0.1
  * github.com/scurker/currency.js
  */
 (function(window) {
@@ -20,7 +20,7 @@
   };
 
   // currency.js version
-  currency.version = '0.0.1';
+  currency.version = '0.1';
 
   // Default options
   var settings = currency.settings = {
