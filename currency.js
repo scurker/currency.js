@@ -1,5 +1,6 @@
 /*!
  * currency.js v0.0.1
+ * github.com/scurker/currency.js
  */
 (function(window) {
 
