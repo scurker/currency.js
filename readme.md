@@ -6,7 +6,7 @@ currency.js
 **Examples**
 ```javascript
 currency(123.50).add(0.23);       // 123.73
-currency(5.00).subtract(0.50)     // 4.50
+currency(5.00).subtract(0.50);    // 4.50
 currency(45.25).multiply(3);      // 135.75
 currency(1.12).distribute(5);     // [0.23, 0.23, 0.22, 0.22, 0.22]
 ```
