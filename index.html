@@ -7,7 +7,81 @@
     <script type="text/javascript" src="https://raw.github.com/scurker/currency.js/master/currency.min.js"></script>
     <link rel="stylesheet" href="./css/normalize.css"/>
     <link rel="stylesheet" href="./css/style.css"/>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700">
   </head>
   <body>
+    <div class="container">
+
+      <header>
+        <h1>currency.js</h1>
+        <p>A small, lightweight javascript library for working with currency values. It resolves issues working with floating point numbers in javascript and includes a simple formatter to boot.</p>
+
+        <a class="btn" href="https://raw.github.com/scurker/currency.js/master/currency.min.js">Download v0.1</a>
+
+        <div>
+          <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>
+          <div class="g-plusone" data-size="medium"></div>
+        </div>
+      </header>
+
+      <section>
+        <h2>Basic Usage</h2>
+        <p>Using <strong>currency.js</strong> is easy!</p>
+        <p><em>[easy how to use to go here]</em></p>
+      </section>
+
+      <section>
+        <h2>Methods</h2>
+        <h3><strong>currency.add</strong></h3>
+        <p>Basic arithmetic.</p>
+        <pre class="prettyprint">currency(123.45).add(.01);    // 123.46
+currency(987.65).add(123.45); // 1111.00
+</pre>
+        <h3><strong>currency.subtract</strong></h3>
+        <pre class="prettyprint">currency(123.45).subtract(.01);    // 123.44
+currency(123.45).subtract(987.65); // -864.20
+</pre>
+        <h3><strong>currency.multiply</strong></h3>
+        <pre class="prettyprint">currency(123.45).multiply(2); // 246.90</pre>
+        <h3><strong>currency.divide</strong></h3>
+        <pre class="prettyprint">currency(123.45).divide(2); // 61.73</pre>
+        <h3><strong>currency.distribute</strong></h3>
+        <p>Distribute takes the amount and tries to distribute the it evenly. Any extra pennies left over from the distribution will be stacked onto the first set of entries.</p>
+        <pre class="prettyprint">currency(12.35).distribute(3); // [4.12, 4.12, 4.11]
+currency(12.00).distribute(3); // [4.00, 4.00, 4.00]</pre>
+        <h3><strong>currency.format</strong></h3>
+        <p>A basic formatter that outputs a friendly format.</p>
+        <pre class="prettyprint">currency(1000.00).format();              // "1,000.00"
+currency("1,234,567.89").add("200,000"); // "1,434,567.89"</pre>
+        <p>The formatter can be overridden by setting the <code>currency.setting</code> values.</p>
+        <pre class="prettyprint">currency.settings.seperator = ' ';
+currency.settings.decimal = ',';
+
+...
+
+currency(1000.00).format();              // "1 000,00"
+currency("1,234,567.89").add("200,000"); // "1 434 567,89"</pre>
+      </section>
+
+
+      <footer>
+        <div class="pull-left">Made by <a href="http://twitter.com/scurker">@scurker</a></div>
+        <div class="pull-right">
+          <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>
+          <div class="g-plusone" data-size="medium"></div>
+        </div>
+      </footer>
+
+    </div>
+
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js" type="text/javascript"></script>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
   </body>
 </html>
