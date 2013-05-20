@@ -9,6 +9,16 @@ body {
   font-size: 62.5%;
 }
 
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
 a {
   color: #284aac;
 }
@@ -27,6 +37,7 @@ header {
   padding: 1em;
   text-align: center;
   font-size: 2em;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
@@ -74,6 +85,8 @@ footer {
 }
 
 .btn {
+  display: inline-block;
+  white-space: nowrap;
   border: 1px solid #284aac;
   background-color: #4b70d9;
   background-image: -webkit-linear-gradient(top, #85a5ff, #4b70d9);
@@ -83,6 +96,10 @@ footer {
   border-radius: 4px;
   padding: 0.3em 0.6em;
   text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.social {
+  margin-top: 25px;
 }
 
 .btn:hover {
