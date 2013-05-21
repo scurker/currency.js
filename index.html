@@ -51,7 +51,7 @@ currency("($5,000)").add(1234.56); // -3765.44
 </pre>
         <p>By default, currency resolves to a string value. This makes it easy to perform calculations using inputs:</p>
         <pre class="prettyprint lang-js">// Sets the first input to the resolved currency value
-document.getElementsByTagName("input").value = currency(1234.56).add(6.44); // 1241.00</pre>
+document.getElementsByTagName("input")[0].value = currency(1234.56).add(6.44); // 1241.00</pre>
 </pre>
       </section>
 
