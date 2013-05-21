@@ -90,7 +90,7 @@ code {
   border: 1px solid #284aac;
   background-color: #4b70d9;
   background-image: -webkit-linear-gradient(top, #85a5ff, #4b70d9);
-  background-image: -mox-linear-gradient(top, #85a5ff, #4b70d9);
+  background-image: -moz-linear-gradient(top, #85a5ff, #4b70d9);
   background-image: -o-linear-gradient(top, #85a5ff, #4b70d9);
   background-image: linear-gradient(top, #85a5ff, #4b70d9);
   text-decoration: none;
