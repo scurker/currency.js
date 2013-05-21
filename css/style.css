@@ -1,23 +1,24 @@
+/*! normalize.css v2.1.2 | MIT License | git.io/normalize */article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,video{display:inline-block}audio:not([controls]){display:none;height:0}[hidden]{display:none}html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}a:focus{outline:thin dotted}a:active,a:hover{outline:0}h1{font-size:2em;margin:.67em 0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}mark{background:#ff0;color:#000}code,kbd,pre,samp{font-family:monospace,serif;font-size:1em}pre{white-space:pre-wrap}q{quotes:"\201C" "\201D" "\2018" "\2019"}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:0}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}button,input{line-height:normal}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}textarea{overflow:auto;vertical-align:top}table{border-collapse:collapse;border-spacing:0}
+
 html {
-  font-family: "Source Sans Pro", sans-serif;
-  background-image: -webkit-linear-gradient(top, #e9e9e9, #eee);
-  background-image: linear-gradient(top, #e9e9e9, #eee);
-  padding: 25px;
+  height: 100%;
 }
 
 body {
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: #e9e9e9;
+  background-image: -webkit-linear-gradient(top, #e9e9e9, #eee);
+  background-image: -moz-linear-gradient(top, #e9e9e9, #eee);
+  background-image: -o-linear-gradient(top, #e9e9e9, #eee);
+  background-image: linear-gradient(top, #e9e9e9, #eee);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100%;
+  padding: 25px;
   font-size: 62.5%;
 }
 
-.cf:before,
-.cf:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
-}
-
-.cf:after {
-    clear: both;
-}
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
 a {
   color: #284aac;
@@ -40,6 +41,12 @@ header {
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+header em {
+  color: #777;
+  font-size: 0.8em;
+  font-style: normal;
+}
+
 header h1 {
   margin-top: 0;
   font-size: 2.5em;
@@ -59,7 +66,15 @@ section h2 {
 }
 
 section h3 {
+  color: #454545;
   font-size: 1.25em;
+}
+
+footer {
+  font-size: 1.4em;
+  margin: 1em 0;
+  padding: 1em 0;
+  border-top: 1px solid #ccc;
 }
 
 code {
@@ -69,11 +84,34 @@ code {
   border-radius: 3px;
 }
 
-footer {
-  font-size: 1.4em;
-  margin-top: 1em;
-  padding: 1em 0;
-  border-top: 1px solid #ccc;
+.btn {
+  display: inline-block;
+  white-space: nowrap;
+  border: 1px solid #284aac;
+  background-color: #4b70d9;
+  background-image: -webkit-linear-gradient(top, #85a5ff, #4b70d9);
+  background-image: -mox-linear-gradient(top, #85a5ff, #4b70d9);
+  background-image: -o-linear-gradient(top, #85a5ff, #4b70d9);
+  background-image: linear-gradient(top, #85a5ff, #4b70d9);
+  text-decoration: none;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.25);
+  color: #fff;
+  border-radius: 4px;
+  padding: 0.3em 0.6em;
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.btn:hover {
+  color: #fff;
+}
+
+.social {
+  margin-top: 25px;
+}
+
+.container {
+  margin: 0 auto;
+  width: 720px;
 }
 
 .pull-left {
@@ -84,68 +122,45 @@ footer {
   float: right;
 }
 
-.btn {
-  display: inline-block;
-  white-space: nowrap;
-  border: 1px solid #284aac;
-  background-color: #4b70d9;
-  background-image: -webkit-linear-gradient(top, #85a5ff, #4b70d9);
-  text-decoration: none;
-  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.25);
-  color: #fff;
-  border-radius: 4px;
-  padding: 0.3em 0.6em;
-  text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.5);
+.cf:before,
+.cf:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
 }
 
-.social {
-  margin-top: 25px;
+.cf:after {
+  clear: both;
 }
 
-.btn:hover {
-  color: #fff;
+/* Responsive */
+@media (max-width: 780px) {
+  .container {
+    width: 100%;
+  }
 }
 
-.container {
-  margin: 0 auto;
-  width: 720px;
-}
-
-
-
-
-
-/* desert scheme ported from vim to google prettify */
-pre.prettyprint { display: block; background-color: #333; border: none !important; border-radius: 4px; font-size: 0.8em; padding: 0.8em !important;}
-pre .nocode { background-color: none; color: #000 }
-pre .str { color: #ffa0a0 } /* string  - pink */
-pre .kwd { color: #f0e68c; font-weight: bold }
-pre .com { color: #87ceeb } /* comment - skyblue */
-pre .typ { color: #98fb98 } /* type    - lightgreen */
-pre .lit { color: #cd5c5c } /* literal - darkred */
-pre .pun { color: #fff }    /* punctuation */
-pre .pln { color: #fff }    /* plaintext */
-pre .tag { color: #f0e68c; font-weight: bold } /* html/xml tag    - lightyellow */
-pre .atn { color: #bdb76b; font-weight: bold } /* attribute name  - khaki */
-pre .atv { color: #ffa0a0 } /* attribute value - pink */
-pre .dec { color: #98fb98 } /* decimal         - lightgreen */
-
-/* Specify class=linenums on a pre to get line numbering */
-ol.linenums { margin-top: 0; margin-bottom: 0; color: #AEAEAE } /* IE indents via margin-left */
-li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 { list-style-type: none }
-/* Alternate shading for lines */
-li.L1,li.L3,li.L5,li.L7,li.L9 { }
-
-@media print {
-  pre.prettyprint { background-color: none }
-  pre .str, code .str { color: #060 }
-  pre .kwd, code .kwd { color: #006; font-weight: bold }
-  pre .com, code .com { color: #600; font-style: italic }
-  pre .typ, code .typ { color: #404; font-weight: bold }
-  pre .lit, code .lit { color: #044 }
-  pre .pun, code .pun { color: #440 }
-  pre .pln, code .pln { color: #000 }
-  pre .tag, code .tag { color: #006; font-weight: bold }
-  pre .atn, code .atn { color: #404 }
-  pre .atv, code .atv { color: #060 }
-}
+/* Pretty printing styles. Used with prettify.js.
+ *
+ * Name:  Stanley Ng
+ * Email:   stanleyhlng@googlegroups.com
+ *
+ * Credits:
+ * https://github.com/chriskempson/tomorrow-theme
+ */
+.pln { color: #c5c8c6; }
+.str { color: #b5bd68; }
+.kwd { color: #b294bb; }
+.com { color: #969896; font-style: italic; }
+.typ { color: #de935f; }
+.lit { color: #f0c674; }
+.pun { color: #c5c8c6; }
+.opn { color: #c5c8c6; }
+.clo { color: #c5c8c6; }
+.tag { color: #cc6666; }
+.atn { color: #f0c674; }
+.atv { color: #8abeb7; }
+.dec { color: #c5c8c6; }
+.var { color: #c82829; }
+.fun { color: #cc6666; }
+/* Put a border around prettyprinted code snippets. */
+pre.prettyprint { background-color: #333; padding: 10px; border: 1px solid #e1e1e1; border-radius: 5px; font-size: 0.75em;}
