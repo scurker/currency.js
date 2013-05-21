@@ -16,3 +16,5 @@ Also included is a basic formatter, that allows you to work with and output stri
 currency('2,573,693.75').add('100,275.50').format();  // '2,673,969.25'
 currency('1,237.72').subtract(300).format();          // '937.72'
 ```
+
+View more examples and documentation at [scurker.github.io/currency.js](http://scurker.github.io/currency.js).
