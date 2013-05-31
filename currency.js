@@ -68,12 +68,12 @@
 
     multiply: function(number) {
       var v = this.value;
-      return currency((v *= parse(number, true)) / 10000);
+      return currency((v *= parse(number, false)) / 10000);
     },
 
     divide: function(number) {
       var v = this.value;
-      return currency(v /= parse(number, true));
+      return currency(v /= parse(number, false));
     },
 
     distribute: function(count) {
