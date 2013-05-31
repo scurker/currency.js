@@ -1,5 +1,5 @@
 /*!
- * currency.js v0.1
+ * currency.js v0.1.1
  * github.com/scurker/currency.js
  */
 (function(window) {
@@ -20,7 +20,7 @@
   };
 
   // currency.js version
-  currency.version = '0.1';
+  currency.version = '0.1.1';
 
   // Default options
   var settings = currency.settings = {
@@ -30,8 +30,11 @@
   };
 
   // Convert a number to a normalized value
-  function parse(value) {
+  function parse(value, round) {
     var v = 0;
+
+    // Set default rounding
+    typeof(round) === undefined && (round = true);
 
     if (typeof value === 'number') {
       v = value * 100;
@@ -48,7 +51,7 @@
       v = isNaN(v) ? 0 : v;
     }
 
-    return Math.round(v);
+    return round ? Math.round(v) : v;
   }
 
   currency.prototype = {
@@ -65,12 +68,12 @@
 
     multiply: function(number) {
       var v = this.value;
-      return currency((v *= parse(number)) / 10000);
+      return currency((v *= parse(number, true)) / 10000);
     },
 
     divide: function(number) {
       var v = this.value;
-      return currency(v /= parse(number));
+      return currency(v /= parse(number, true));
     },
 
     distribute: function(count) {
