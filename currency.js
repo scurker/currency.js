@@ -1,5 +1,5 @@
 /*!
- * currency.js v0.1.1
+ * currency.js v0.1.2
  * github.com/scurker/currency.js
  */
 (function(window) {
@@ -20,7 +20,7 @@
   };
 
   // currency.js version
-  currency.version = '0.1.1';
+  currency.version = '0.1.2';
 
   // Default options
   var settings = currency.settings = {
@@ -34,7 +34,7 @@
     var v = 0;
 
     // Set default rounding
-    typeof(round) === undefined && (round = true);
+    typeof(round) === 'undefined' && (round = true);
 
     if (typeof value === 'number') {
       v = value * 100;

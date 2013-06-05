@@ -116,3 +116,17 @@ test("should get cent value", function() {
   strictEqual(value.cents(), 23, 'is cent amount');
   strictEqual(value.add(.31).cents(), 54, 'is cent amount');
 });
+
+test("parse should default rounding", function() {
+  expect(4);
+
+  var round1 = currency(1.234)
+    , round2 = currency(5.6789)
+    , multiply = currency(10.00)
+    , divide = currency(0.01);
+
+  strictEqual(round1.value, 123, 'value is rounded to nearest cent');
+  strictEqual(round2.value, 568, 'value is rounded to nearest cent');
+  strictEqual(multiply.multiply(.001).value, 1, 'multiply value is not rounded');
+  strictEqual(divide.divide(.001).value, 1000, 'divide value is not rounded');
+});
