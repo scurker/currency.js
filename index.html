@@ -16,7 +16,7 @@
         <p>A small, lightweight javascript library for working with currency values.</p>
         <div>
           <a class="btn" href="https://raw.github.com/scurker/currency.js/master/currency.min.js">Download</a>
-          <div><em>v0.1.2 (1.19 kb)</em></div>
+          <div><em>v0.1.3 (1.25 kb)</em></div>
         </div>
 
         <div class="social cf">
@@ -53,6 +53,11 @@ currency("($5,000)").add(1234.56); // -3765.44
         <pre class="prettyprint lang-js">// Sets the first input to the resolved currency value
 document.getElementsByTagName("input")[0].value = currency(1234.56).add(6.44); // 1241.00</pre>
 </pre>
+        <p>Currency stores the values internally as both an integer value and the float value which you can access with <code>.intValue</code> or <code>.value</code>:</p>
+        <pre class="prettyprint lang-js">// Get the internal values
+currency(123.45).add(.1).value;     // 123.46
+currency(123.45).add(.1).intValue;  // 12346</pre>
+</pre>
       </section>
 
       <section>
@@ -64,6 +69,8 @@ document.getElementsByTagName("input")[0].value = currency(1234.56).add(6.44); /
           <li><a href="#currency.divide">currency.divide</a></li>
           <li><a href="#currency.distribute">currency.distribute</a></li>
           <li><a href="#currency.format">currency.format</a></li>
+          <li><a href="#currency.format">currency.dollars</a></li>
+          <li><a href="#currency.format">currency.cents</a></li>
         </ul>
         <p><strong>currency.js</strong> has several basic arithmetic methods:</p>
         <h3 id="currency.add"><strong>currency.add</strong></h3>
@@ -95,7 +102,14 @@ currency.settings.decimal = ',';
 currency(1000.00).format(); // "1 000,00"
 currency(1234567.89).add("200 000").format(); // "1 434 567,89"</pre>
       </section>
-
+        <h3 id="currency.dollars"><strong>currency.dollars</strong></h3>
+        <p>Returns the dollar value of a currency.</p>
+        <pre class="prettyprint lang-js">currency(123.45).dollars(); // 123
+currency("0.99").dollars(); // 0</pre>
+        <h3 id="currency.cents"><strong>currency.cents</strong></h3>
+        <p>Returns the cent value of a currency.</p>
+        <pre class="prettyprint lang-js">currency(123.45).dollars(); // 45
+currency("0.99").cents(); // 99</pre>
       <section>
         <h2>Issues/Feedback</h2>
         <p>For creating issues, please <a href="https://github.com/scurker/currency.js/issues">use GitHub</a>. For feedback, you can reach out to me on twitter <a href="http://twitter.com/scurker">@scurker</a>.</p>
