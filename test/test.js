@@ -125,8 +125,18 @@ test("parse should default rounding", function() {
     , multiply = currency(10.00)
     , divide = currency(0.01);
 
-  strictEqual(round1.value, 123, 'value is rounded to nearest cent');
-  strictEqual(round2.value, 568, 'value is rounded to nearest cent');
-  strictEqual(multiply.multiply(.001).value, 1, 'multiply value is not rounded');
-  strictEqual(divide.divide(.001).value, 1000, 'divide value is not rounded');
+  strictEqual(round1.value, 1.23, 'value is rounded to nearest cent');
+  strictEqual(round2.value, 5.68, 'value is rounded to nearest cent');
+  strictEqual(multiply.multiply(.001).value, .01, 'multiply value is not rounded');
+  strictEqual(divide.divide(.001).value, 10, 'divide value is not rounded');
+});
+
+test("should have int value and real value", function() {
+  var value1 = currency(2.51).add(.01)
+    , value2 = currency(2.52).subtract(.01);
+
+  strictEqual(value1.value, 2.52, 'real value is 2.52');
+  strictEqual(value1.intValue, 252, 'int value is 252');
+  strictEqual(value2.value, 2.51, 'real value is 2.51');
+  strictEqual(value2.intValue, 251, 'int value is 251');
 });

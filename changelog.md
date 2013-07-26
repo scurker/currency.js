@@ -1,3 +1,7 @@
+**v0.1.3**
+
+* Switching value returned to be the real float value and not the int value.
+
 **v0.1.2**
 
 * Fixed issue with rounding not being defaulted correctly.

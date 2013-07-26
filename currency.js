@@ -1,5 +1,5 @@
 /*!
- * currency.js v0.1.2
+ * currency.js v0.1.3
  * github.com/scurker/currency.js
  */
 (function(window) {
@@ -15,12 +15,13 @@
       return new currency(value);
     }
 
-    // Set value
-    that.value = parse(value);
+    // Set int/real values
+    that.intValue = parse(value);
+    that.value = that.intValue / 100;
   };
 
   // currency.js version
-  currency.version = '0.1.2';
+  currency.version = '0.1.3';
 
   // Default options
   var settings = currency.settings = {
@@ -39,7 +40,7 @@
     if (typeof value === 'number') {
       v = value * 100;
     } else if (value instanceof currency) {
-      v = value.value;
+      v = value.intValue;
     } else {
       var regex = new RegExp('[^-\\d' + settings.decimal + ']', 'g');
       v = parseFloat(
@@ -57,33 +58,33 @@
   currency.prototype = {
 
     add: function(number) {
-      var v = this.value;
+      var v = this.intValue;
       return currency((v += parse(number)) / 100);
     },
 
     subtract: function(number) {
-      var v = this.value;
+      var v = this.intValue;
       return currency((v -= parse(number)) / 100);
     },
 
     multiply: function(number) {
-      var v = this.value;
+      var v = this.intValue;
       return currency((v *= parse(number, false)) / 10000);
     },
 
     divide: function(number) {
-      var v = this.value;
+      var v = this.intValue;
       return currency(v /= parse(number, false));
     },
 
     distribute: function(count) {
-      var value = this.value
+      var value = this.intValue
         , distribution = []
         , split = Math[value >= 0 ? 'floor' : 'ceil'](value / count)
         , pennies = Math.abs(value - (split * count));
 
       for(; count != 0; count--) {
-        var item = new currency(split / 100);
+        var item = currency(split / 100);
 
         // Add any left over pennies
         pennies-- > 0 && (item = parseFloat(item) >= 0 ? item.add(.01) : item.subtract(.01));
@@ -95,11 +96,11 @@
     },
 
     dollars: function() {
-      return Math.round(this.value / 100);
+      return Math.round(this.intValue / 100);
     },
 
     cents: function() {
-      return Math.round(this.value % 100);
+      return Math.round(this.intValue % 100);
     },
 
     format: function() {
@@ -110,7 +111,7 @@
     },
 
     toString: function() {
-      return (this.value / 100).toFixed(2);
+      return (this.intValue / 100).toFixed(2);
     }
 
   };
