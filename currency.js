@@ -112,6 +112,10 @@
 
     toString: function() {
       return (this.intValue / 100).toFixed(2);
+    },
+
+    toJSON: function() {
+      return this.value;
     }
 
   };
