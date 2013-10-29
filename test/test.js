@@ -140,3 +140,13 @@ test("should have int value and real value", function() {
   strictEqual(value2.value, 2.51, 'real value is 2.51');
   strictEqual(value2.intValue, 251, 'int value is 251');
 });
+
+test("should stringify json", function() {
+  var value1 = currency(1.23)
+    , value2 = currency(2.51).add(.01)
+    , value3 = currency(2.52).subtract(.02);
+
+  strictEqual(JSON.stringify({ "value": value1 }), '{"value":1.23}', 'value is 1.23');
+  strictEqual(JSON.stringify({ "value": value2 }), '{"value":2.52}', 'value is 2.52');
+  strictEqual(JSON.stringify({ "value": value3 }), '{"value":2.5}', 'value is 2.50');
+});
