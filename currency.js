@@ -24,7 +24,7 @@
   };
 
   // currency.js version
-  currency.version = '0.1.3';
+  currency.version = '0.1.4';
 
   // Default options
   var settings = currency.settings = {
