@@ -1,6 +1,9 @@
 /*!
- * currency.js v0.1.3
- * github.com/scurker/currency.js
+ * currency.js - v0.1.4
+ * http://scurker.github.io/currency.js
+ *
+ * Copyright (c) 2013 Jason Wilson
+ * Released under MIT license
  */
 (function(window) {
 
@@ -112,6 +115,10 @@
 
     toString: function() {
       return (this.intValue / 100).toFixed(2);
+    },
+
+    toJSON: function() {
+      return this.value;
     }
 
   };
