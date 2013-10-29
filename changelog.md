@@ -1,3 +1,8 @@
+**v0.1.4**
+
+* Fixes issue #1 with serializing currency via JSON.stringify
+* Added grunt tasks
+
 **v0.1.3**
 
 * Switching value returned to be the real float value and not the int value.
