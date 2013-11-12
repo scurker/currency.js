@@ -32,8 +32,9 @@
 
       <section>
         <h2>Basic Usage</h2>
-        <p><strong>currency.js</strong> was built to resolve floating point issues in javascript and made to be easy to use.</p>
+        <p><strong>currency.js</strong> was built to work around floating point issues in javascript and made to be easy to use.</p>
         <p>When working with currencies, we only need the decimals to be precise up to the penny and don't want to deal with complex calculations every time we're trying to perform arithmetic with money. We resolve this issue by working entirely with integers behind the scenes, so you don't have to worry about decimal precision.</p>
+        <p>Here is an excellent talk by Bartek Szopka on <a href="http://www.youtube.com/watch?v=MqHDDtVYJRI">everything you never wanted to know about Javascript numbers</a> explaining why Javascript and other IEEE 754 implementations have floating point issues.</p>
         <h3>Examples:</h3>
         <pre class="prettyprint lang-js">2.51 + .01;                   // 2.5199999999999996
 currency(2.51).add(.01);      // 2.52
