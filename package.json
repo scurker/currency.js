@@ -1,11 +1,14 @@
 {
   "name": "currency.js",
   "homepage": "http://scurker.github.io/currency.js",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "A javascript library for handling currency values.",
   "main": "currency.js",
   "directories": {
     "test": "test"
+  },
+  "scripts": {
+    "test": "grunt qunit"
   },
   "repository": {
     "type": "git",
