@@ -1,11 +1,12 @@
 /*!
- * currency.js - v0.1.4
+ * currency.js - v0.2.0
  * http://scurker.github.io/currency.js
  *
- * Copyright (c) 2013 Jason Wilson
+ * Copyright (c) 2014 Jason Wilson
  * Released under MIT license
  */
-(function(window) {
+(function(global) {
+  "use strict";
 
   /**
    * Create a new instance of currency.js
@@ -14,7 +15,7 @@
   var currency = function(value) {
     var that = this;
 
-    if(!(that instanceof currency)) {
+    if (!(that instanceof currency)) {
       return new currency(value);
     }
 
@@ -24,7 +25,7 @@
   };
 
   // currency.js version
-  currency.version = '0.1.4';
+  currency.version = '0.2.0';
 
   // Default options
   var settings = currency.settings = {
@@ -86,7 +87,7 @@
         , split = Math[value >= 0 ? 'floor' : 'ceil'](value / count)
         , pennies = Math.abs(value - (split * count));
 
-      for(; count != 0; count--) {
+      for (; count != 0; count--) {
         var item = currency(split / 100);
 
         // Add any left over pennies
@@ -123,6 +124,11 @@
 
   };
 
-  window.currency = currency;
+  var noGlobal = typeof global === 'undefined';
+  if (noGlobal && typeof module === 'object' && typeof module.exports == 'object') {
+    module.exports = currency;
+  } else if (!noGlobal) {
+    global.currency = currency;
+  }
 
-})(window);
+})(typeof window !== 'undefined' ? window : undefined);
