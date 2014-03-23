@@ -1,3 +1,7 @@
+**v0.2.0**
+
+* Adding nodejs / commonjs support
+
 **v0.1.4**
 
 * Fixes issue #1 with serializing currency via JSON.stringify
