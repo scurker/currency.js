@@ -18,3 +18,10 @@ currency('1,237.72').subtract(300).format();          // '937.72'
 ```
 
 View more examples and documentation at [scurker.github.io/currency.js](http://scurker.github.io/currency.js).
+
+**Install via npm**
+
+*currency.js* is also available from npm:
+
+* The latest version ```npm install currency.js```
+* Or GitHub master branch ```npm install scurker/currency.js```
