@@ -108,10 +108,9 @@
     },
 
     format: function() {
-      return (this + '')
-        .replace(/(\d)(?=(\d{3})+\b)/g,'$1' + settings.seperator)
-        // replace any decimals
-        .replace(/\./, settings.decimal);
+      var v = (this + '').split('.');
+
+      return v[0].replace(/(\d)(?=(\d{3})+\b)/g,'$1' + settings.seperator) + settings.decimal + v[1];
     },
 
     toString: function() {
