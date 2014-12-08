@@ -150,3 +150,13 @@ test("should stringify json", function() {
   strictEqual(JSON.stringify({ "value": value2 }), '{"value":2.52}', 'value is 2.52');
   strictEqual(JSON.stringify({ "value": value3 }), '{"value":2.5}', 'value is 2.50');
 });
+
+test("should do dutch formatting", function() {
+  currency.settings.symbol     = '€'; // 'symbol' is defined in the lib but not used anywhere (wtf?)
+  currency.settings.seperator  = '.';
+  currency.settings.decimal    = ',';
+
+  strictEqual(currency(1.23).format(), '1,23', 'value is 1,23');
+  strictEqual(currency(1000.00).format(), '1.000,00', 'value is 1.000,00');
+  strictEqual(currency(1000.23).format(), '1.000,23', 'value is 1.000,23');
+});
