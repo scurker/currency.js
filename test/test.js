@@ -156,7 +156,7 @@ test("should do dutch formatting", function() {
   currency.settings.seperator  = '.';
   currency.settings.decimal    = ',';
 
-  strictEqual(currency(1.23), '1,23', 'value is 1,23');
-  strictEqual(currency(1000.00), '1.000,00', 'value is 1.000,00');
-  strictEqual(currency(1000.23), '1.000,23', 'value is 1.000,23');
+  strictEqual(currency(1.23).format(), '1,23', 'value is 1,23');
+  strictEqual(currency(1000.00).format(), '1.000,00', 'value is 1.000,00');
+  strictEqual(currency(1000.23).format(), '1.000,23', 'value is 1.000,23');
 });
