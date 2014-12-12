@@ -1,6 +1,8 @@
 currency.js
 ===========
 
+https://travis-ci.org/scurker/currency.js.svg?branch=master
+
 *currency.js* is a lightweight javascript library for working with currency values. It was built to work around floating point issues in javascript. This [talk by Bartek Szopka](http://www.youtube.com/watch?v=MqHDDtVYJRI) explains in detail why javascript has floating point issues.
 
 **Examples**
