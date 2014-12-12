@@ -1,3 +1,9 @@
+**v0.3.0**
+
+* Added new format option to optionally include the set currency symbol
+* Added travis ci integration
+* Fixed issue #6 where international values were not being formatted correctly
+
 **v0.2.0**
 
 * Adding nodejs / commonjs support

@@ -150,3 +150,63 @@ test("should stringify json", function() {
   strictEqual(JSON.stringify({ "value": value2 }), '{"value":2.52}', 'value is 2.52');
   strictEqual(JSON.stringify({ "value": value3 }), '{"value":2.5}', 'value is 2.50');
 });
+
+test("should format value using defaults", function() {
+  expect(4);
+
+  var value1 = currency(1.23).format()
+    , value2 = currency(1234.56).format()
+    , value3 = currency(1234567.89).format();
+
+  strictEqual(typeof value1, "string", 'value is string');
+  strictEqual(value1, '1.23', 'value is "1.23"');
+  strictEqual(value2, '1,234.56', 'value is "1,234.45"');
+  strictEqual(value3, '1,234,567.89', 'value is "1,234,567.89"');
+});
+
+test("should format value using international", function() {
+  currency.settings.seperator = '.';
+  currency.settings.decimal = ',';
+
+  strictEqual(currency(1.23).format(), '1,23', 'value is "1,23"');
+  strictEqual(currency(1000.00).format(), '1.000,00', 'value is "1.000,00"');
+  strictEqual(currency(1000000.00).format(), '1.000.000,00', 'value is "1.000.000,00"');
+
+  currency.settings.seperator = ',';
+  currency.settings.decimal = '.';
+});
+
+test("should parse international values", function() {
+  currency.settings.seperator = '.';
+  currency.settings.decimal = ',';
+
+  strictEqual(currency('1,23').format(), '1,23', 'value is "1,23"');
+  strictEqual(currency('1.000,00').format(), '1.000,00', 'value is "1.000,00"');
+  strictEqual(currency('1.000.000,00').format(), '1.000.000,00', 'value is "1.000.000,00"');
+
+  currency.settings.seperator = ',';
+  currency.settings.decimal = '.';
+});
+
+test("should format with symbol", function() {
+  strictEqual(currency(1.23).format(true), '$1.23', 'value is "$1.23"');
+});
+
+test("should format without symbol", function() {
+  strictEqual(currency(1.23).format(false), '1.23', 'value is "1.23"');
+});
+
+test("should format with international symbol", function() {
+  currency.settings.symbol = '£';
+  strictEqual(currency(1.23).format(true), '£1.23', 'value is "£1.23"');
+  currency.settings.symbol = '¥';
+  strictEqual(currency(1.23).format(true), '¥1.23', 'value is "¥1.23"');
+  currency.settings.symbol = '$';
+});
+
+test("should format with symbol globally", function() {
+  currency.settings.formatWithSymbol = true;
+  strictEqual(currency(1.23).format(), '$1.23', 'value is "$1.23"');
+  strictEqual(currency(1.23).format(false), '1.23', 'value is "1.23"');
+  currency.settings.formatWithSymbol = false;
+});

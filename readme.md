@@ -1,7 +1,7 @@
-currency.js
+currency.js [![Build Status](https://travis-ci.org/scurker/currency.js.svg?branch=master)](https://travis-ci.org/scurker/currency.js) [![npm](https://img.shields.io/npm/v/currency.js.svg)](https://www.npmjs.com/package/currency.js)
 ===========
 
-*currency.js* is a lightweight Javascript library for working with currency values.
+*currency.js* is a lightweight javascript library for working with currency values. It was built to work around floating point issues in javascript. This [talk by Bartek Szopka](http://www.youtube.com/watch?v=MqHDDtVYJRI) explains in detail why javascript has floating point issues.
 
 **Examples**
 ```javascript
@@ -17,6 +17,14 @@ currency('2,573,693.75').add('100,275.50').format();  // '2,673,969.25'
 currency('1,237.72').subtract(300).format();          // '937.72'
 ```
 
+You can also change the format, converting to international values.
+```javascript
+currency.settings.seperator = '.';
+currency.settings.decimal = ',';
+currency('2.573.693,75').add('100.275,50').format();  // '2.673.969,25'
+currency('1.237,72').subtract(300).format();          // '937,72'
+```
+
 View more examples and documentation at [scurker.github.io/currency.js](http://scurker.github.io/currency.js).
 
 **Install via npm**
@@ -25,3 +33,10 @@ View more examples and documentation at [scurker.github.io/currency.js](http://s
 
 * The latest version ```npm install currency.js```
 * Or GitHub master branch ```npm install scurker/currency.js```
+
+**Local Development**
+
+Running locally? Everything is built with Grunt.
+
+1. `npm install`
+1. `grunt`
