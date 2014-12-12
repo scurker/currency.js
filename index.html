@@ -16,7 +16,7 @@
         <p>A small, lightweight javascript library for working with currency values.</p>
         <div>
           <a class="btn" href="https://raw.github.com/scurker/currency.js/master/currency.min.js">Download</a>
-          <div><em>v0.2.0 (1.51 kb)</em></div>
+          <div><em>v0.3.0 (1.67 kb)</em></div>
         </div>
 
         <div class="social cf">
@@ -62,6 +62,18 @@ currency(123.45).add(.1).intValue;  // 12346</pre>
       </section>
 
       <section>
+        <h2>Options</h2>
+        <p>Currency has a couple of default settings that change the way that currency values are parsed or formatted. These values can be overwritten to your locale, but by default they are US centric values.</p>
+        <pre class="prettyprint lang-js">currency.settings.seperator = ' ';
+currency.settings.decimal = ',';
+currency.settings.symbol = '€';
+currency.settings.formatWithSymbol = true;
+
+currency(1234.56).format(); // "€1 234.56";
+</pre>
+      </section>
+
+      <section>
         <h2>Methods</h2>
         <ul>
           <li><a href="#currency.add">currency.add</a></li>
@@ -70,8 +82,8 @@ currency(123.45).add(.1).intValue;  // 12346</pre>
           <li><a href="#currency.divide">currency.divide</a></li>
           <li><a href="#currency.distribute">currency.distribute</a></li>
           <li><a href="#currency.format">currency.format</a></li>
-          <li><a href="#currency.format">currency.dollars</a></li>
-          <li><a href="#currency.format">currency.cents</a></li>
+          <li><a href="#currency.dollars">currency.dollars</a></li>
+          <li><a href="#currency.cents">currency.cents</a></li>
         </ul>
         <p><strong>currency.js</strong> has several basic arithmetic methods:</p>
         <h3 id="currency.add"><strong>currency.add</strong></h3>
@@ -102,6 +114,18 @@ currency.settings.decimal = ',';
 
 currency(1000.00).format(); // "1 000,00"
 currency(1234567.89).add("200 000").format(); // "1 434 567,89"</pre>
+        <p>You can also include the set currency symbol in a couple of different ways. By default it's turned off, but you can turn it on via global settings or by passing in a boolean option to the formatter.</p>
+        <pre class="prettyprint">currency(1000.00).format(true);  // "$1,000.00"
+
+...
+
+currency.settings.formatWithSymbol = true;
+
+...
+
+currency(1000.00).format();      // "$1,000.00"
+currency(1000.00).format(false); // "1,000.00"
+</pre>
         <h3 id="currency.dollars"><strong>currency.dollars</strong></h3>
         <p>Returns the dollar value of a currency.</p>
         <pre class="prettyprint lang-js">currency(123.45).dollars(); // 123
