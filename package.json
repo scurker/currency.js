@@ -30,10 +30,10 @@
     "url": "https://github.com/scurker/currency.js/issues"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-qunit": "~0.3.0",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-closure-tools": "~0.8.3",
-    "grunt-contrib-concat": "~0.3.0"
+    "grunt": "~0.4.5",
+    "grunt-contrib-qunit": "~0.5.2",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-closure-tools": "~0.9.7",
+    "grunt-contrib-concat": "~0.5.0"
   }
 }
