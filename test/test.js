@@ -187,3 +187,26 @@ test("should parse international values", function() {
   currency.settings.seperator = ',';
   currency.settings.decimal = '.';
 });
+
+test("should format with symbol", function() {
+  strictEqual(currency(1.23).format(true), '$1.23', 'value is "$1.23"');
+});
+
+test("should format without symbol", function() {
+  strictEqual(currency(1.23).format(false), '1.23', 'value is "1.23"');
+});
+
+test("should format with international symbol", function() {
+  currency.settings.symbol = '£';
+  strictEqual(currency(1.23).format(true), '£1.23', 'value is "£1.23"');
+  currency.settings.symbol = '¥';
+  strictEqual(currency(1.23).format(true), '¥1.23', 'value is "¥1.23"');
+  currency.settings.symbol = '$';
+});
+
+test("should format with symbol globally", function() {
+  currency.settings.formatWithSymbol = true;
+  strictEqual(currency(1.23).format(), '$1.23', 'value is "$1.23"');
+  strictEqual(currency(1.23).format(false), '1.23', 'value is "1.23"');
+  currency.settings.formatWithSymbol = false;
+});

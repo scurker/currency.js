@@ -32,6 +32,7 @@
     symbol: '$'
     , seperator: ','
     , decimal: '.'
+    , formatWithSymbol: false
   };
 
   // Convert a number to a normalized value
@@ -109,8 +110,11 @@
       return Math.round(this.intValue % 100);
     },
 
-    format: function() {
-      return (this + '')
+    format: function(symbol) {
+      // set symbol formatting
+      typeof(symbol) === 'undefined' && (symbol = settings.formatWithSymbol);
+
+      return ((symbol ? settings.symbol : '') + this)
         .replace(/(\d)(?=(\d{3})+\b)/g, '$1' + settings.seperator)
         // replace only the last decimal
         .replace(/\.(\d{2})$/, settings.decimal + '$1');
