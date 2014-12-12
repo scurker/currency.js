@@ -1,5 +1,5 @@
 /*!
- * currency.js - v0.2.0
+ * currency.js - v0.3.0
  * http://scurker.github.io/currency.js
  *
  * Copyright (c) 2014 Jason Wilson
@@ -25,7 +25,7 @@
   };
 
   // currency.js version
-  currency.version = '0.2.0';
+  currency.version = '0.3.0';
 
   // Default options
   var settings = currency.settings = {
@@ -47,10 +47,12 @@
       v = value.intValue;
     } else {
       var regex = new RegExp('[^-\\d' + settings.decimal + ']', 'g');
+      var decimal = new RegExp('\\' + settings.decimal, 'g');
       v = parseFloat(
             value
               .replace(/\((.*)\)/, '-$1') // allow negative e.g. (1.99)
               .replace(regex, '')         // replace any non numeric values
+              .replace(decimal, '.')      // convert any decimal values
               * 100                       // scale number to integer value
           );
       v = isNaN(v) ? 0 : v;
@@ -109,9 +111,9 @@
 
     format: function() {
       return (this + '')
-        .replace(/(\d)(?=(\d{3})+\b)/g,'$1' + settings.seperator)
-        // replace any decimals
-        .replace(/\./, settings.decimal);
+        .replace(/(\d)(?=(\d{3})+\b)/g, '$1' + settings.seperator)
+        // replace only the last decimal
+        .replace(/\.(\d{2})$/, settings.decimal + '$1');
     },
 
     toString: function() {

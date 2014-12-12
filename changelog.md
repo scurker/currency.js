@@ -1,3 +1,7 @@
+**v0.3.0**
+
+* Fixed issue #6 where international values were not being formatted correctly
+
 **v0.2.0**
 
 * Adding nodejs / commonjs support
