@@ -13,7 +13,7 @@ currency(2.51).add(.01);      // 2.52
 currency(2.52).subtract(.01); // 2.51
 ```
 
-This should work for most *reasonable* values of currencies. Once you get into the 90 trillions of dollars, there may be some incorrect overflow calculations.
+This should work for most *reasonable* values of currencies. As long as your currency values are less than 2<sup>53</sup> (in cents) or 90,071,992,547,409.91 you should be okay.
 
 **Examples**
 ```javascript
