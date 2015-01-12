@@ -1,0 +1,28 @@
+{
+  "name": "currency.js",
+  "main": "currency.js",
+  "version": "0.3.0",
+  "homepage": "http://scurker.github.io/currency.js",
+  "authors": [
+    "Jason Wilson"
+  ],
+  "description": "A javascript library for handling currencies",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-qunit": "~0.5.2",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-closure-tools": "~0.9.7",
+    "grunt-contrib-concat": "~0.5.0"
+  }
+}
