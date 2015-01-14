@@ -1,3 +1,7 @@
+**v0.3.1**
+
+Added bower support
+
 **v0.3.0**
 
 * Added new format option to optionally include the set currency symbol
