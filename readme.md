@@ -31,7 +31,7 @@ currency('1,237.72').subtract(300).format();          // '937.72'
 
 You can also change the format, converting to international values.
 ```javascript
-currency.settings.seperator = '.';
+currency.settings.separator = '.';
 currency.settings.decimal = ',';
 currency('2.573.693,75').add('100.275,50').format();  // '2.673.969,25'
 currency('1.237,72').subtract(300).format();          // '937,72'
