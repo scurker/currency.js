@@ -1,6 +1,11 @@
+**v0.3.2**
+
+* Fix spelling of "seperator" to "separator"
+* Automatic publish to npm when tags are pushed to master
+
 **v0.3.1**
 
-Added bower support
+* Added bower support
 
 **v0.3.0**
 
