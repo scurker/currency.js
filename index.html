@@ -16,7 +16,7 @@
         <p>A small, lightweight javascript library for working with currency values.</p>
         <div>
           <a class="btn" href="https://raw.github.com/scurker/currency.js/master/currency.min.js">Download</a>
-          <div><em>v0.3.0 (1.67 kb)</em></div>
+          <div><em>v0.3.2 (1.68 kb)</em></div>
         </div>
 
         <div class="social cf">
@@ -65,7 +65,7 @@ currency(123.45).add(.1).intValue;  // 12346</pre>
       <section>
         <h2>Options</h2>
         <p>Currency has a couple of default settings that change the way that currency values are parsed or formatted. These values can be overwritten to your locale, but by default they are US centric values.</p>
-        <pre class="prettyprint lang-js">currency.settings.seperator = ' ';
+        <pre class="prettyprint lang-js">currency.settings.separator = ' ';
 currency.settings.decimal = ',';
 currency.settings.symbol = '€';
 currency.settings.formatWithSymbol = true;
@@ -108,7 +108,7 @@ currency(12.00).distribute(3); // [4.00, 4.00, 4.00]</pre>
         <pre class="prettyprint lang-js">currency(1000.00).format(); // "1,000.00"
 currency("1,234,567.89").add("200,000").format(); // "1,434,567.89"</pre>
         <p>The formatter can be overridden by setting the <code>currency.setting</code> values.</p>
-        <pre class="prettyprint">currency.settings.seperator = ' ';
+        <pre class="prettyprint">currency.settings.separator = ' ';
 currency.settings.decimal = ',';
 
 ...
