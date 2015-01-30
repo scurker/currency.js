@@ -11,3 +11,5 @@ deploy:
     tags: true
     all_branches: true
     repo: scurker/currency.js
+  email:
+    secure: bGqxxzNYHojWnTJ2VZ2AmzMfQVegYFbrn9ngn5TxvLWUGByWDcaZZKpCahi+ACBRxium+r8jbiPrQR6C47uXqsKEdYB+LK83ZbxObahD1IsbzBgR+5T/BmCoxdQtsjbhEbq2GeLTpPQDjWbwk0qFbvwajxt/x1cvF+IfClKEx+U=
