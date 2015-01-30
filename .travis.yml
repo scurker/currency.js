@@ -9,3 +9,5 @@ deploy:
     secure: mwDzaP0gmD0f+McfuT+MTFgCsTxsRtB/GDCq6FvaGEbRLF+Lxh8aT+Cb9+K7Whyw1JZFPMoJgr3agEPviNcWq4WHBeEs4m7UTgk1qw69jkiq7XWIkrzGYPEZbfOIhV4WI5+R0Kagi5y/G+F3B27LpLglAf/eoX8EPX5upXsD2Ek=
   on:
     tags: true
+    all_branches: true
+    repo: scurker/currency.js
