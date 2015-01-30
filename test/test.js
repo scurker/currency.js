@@ -165,18 +165,31 @@ test("should format value using defaults", function() {
 });
 
 test("should format value using international", function() {
-  currency.settings.seperator = '.';
+  currency.settings.separator = '.';
   currency.settings.decimal = ',';
 
   strictEqual(currency(1.23).format(), '1,23', 'value is "1,23"');
   strictEqual(currency(1000.00).format(), '1.000,00', 'value is "1.000,00"');
   strictEqual(currency(1000000.00).format(), '1.000.000,00', 'value is "1.000.000,00"');
 
-  currency.settings.seperator = ',';
+  currency.settings.separator = ',';
   currency.settings.decimal = '.';
 });
 
 test("should parse international values", function() {
+  currency.settings.separator = '.';
+  currency.settings.decimal = ',';
+
+  strictEqual(currency('1,23').format(), '1,23', 'value is "1,23"');
+  strictEqual(currency('1.000,00').format(), '1.000,00', 'value is "1.000,00"');
+  strictEqual(currency('1.000.000,00').format(), '1.000.000,00', 'value is "1.000.000,00"');
+
+  currency.settings.separator = ',';
+  currency.settings.decimal = '.';
+});
+
+// We'll remove this in a later version, but for now we don't want to break existing integrations
+test("should not regress separator spelling", function() {
   currency.settings.seperator = '.';
   currency.settings.decimal = ',';
 

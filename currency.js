@@ -1,5 +1,5 @@
 /*!
- * currency.js - v0.3.1
+ * currency.js - v0.3.2
  * http://scurker.github.io/currency.js
  *
  * Copyright (c) 2015 Jason Wilson
@@ -30,7 +30,7 @@
   // Default options
   var settings = currency.settings = {
     symbol: '$'
-    , seperator: ','
+    , separator: ','
     , decimal: '.'
     , formatWithSymbol: false
   };
@@ -115,7 +115,8 @@
       typeof(symbol) === 'undefined' && (symbol = settings.formatWithSymbol);
 
       return ((symbol ? settings.symbol : '') + this)
-        .replace(/(\d)(?=(\d{3})+\b)/g, '$1' + settings.seperator)
+        // check for misspelled separator option first so we don't regress < 0.3.1 versions
+        .replace(/(\d)(?=(\d{3})+\b)/g, '$1' + (settings.seperator || settings.separator))
         // replace only the last decimal
         .replace(/\.(\d{2})$/, settings.decimal + '$1');
     },
