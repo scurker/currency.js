@@ -1,7 +1,7 @@
 {
   "name": "currency.js",
   "homepage": "http://scurker.github.io/currency.js",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "A javascript library for handling currency values.",
   "main": "currency.js",
   "directories": {
@@ -34,6 +34,7 @@
     "grunt-contrib-qunit": "~0.5.2",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-closure-tools": "~0.9.7",
-    "grunt-contrib-concat": "~0.5.0"
+    "grunt-contrib-concat": "~0.5.0",
+    "grunt-contrib-uglify": "~0.7.0"
   }
 }
