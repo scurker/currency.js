@@ -1,3 +1,7 @@
+**v0.3.4**
+
+* Fix bower package management
+
 **v0.3.2**
 
 * Fix spelling of "seperator" to "separator"

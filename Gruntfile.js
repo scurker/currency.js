@@ -58,7 +58,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-sync-pkg');
 
-  grunt.registerTask('default', ['qunit', 'closureCompiler', 'concat']);
+  grunt.registerTask('default', ['qunit', 'closureCompiler', 'concat', 'sync']);
 
 };
