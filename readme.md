@@ -1,4 +1,4 @@
-currency.js [![Build Status](https://travis-ci.org/scurker/currency.js.svg?branch=master)](https://travis-ci.org/scurker/currency.js) [![npm](https://img.shields.io/npm/v/currency.js.svg?style=flat)](https://www.npmjs.com/package/currency.js)
+currency.js [![Build Status](https://travis-ci.org/scurker/currency.js.svg?branch=master)](https://travis-ci.org/scurker/currency.js) [![npm](https://img.shields.io/npm/v/currency.js.svg?style=flat)](https://www.npmjs.com/package/currency.js) ![bower](https://img.shields.io/bower/v/currency.js.svg)
 ===========
 
 *currency.js* is a lightweight javascript library for working with currency values. It was built to work around floating point issues in javascript. This [talk by Bartek Szopka](http://www.youtube.com/watch?v=MqHDDtVYJRI) explains in detail why javascript has floating point issues.
@@ -41,10 +41,14 @@ View more examples and documentation at [scurker.github.io/currency.js](http://s
 
 **Install via npm**
 
-*currency.js* is also available from npm:
 
 * The latest version ```npm install currency.js```
 * Or GitHub master branch ```npm install scurker/currency.js```
+
+**Install via bower**
+
+* The latest version ```bower install currency.js```
+* Or GitHub master branch ```bower install scurker/currency.js```
 
 **Local Development**
 
