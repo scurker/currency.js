@@ -7,30 +7,43 @@ test("currency should be immutable", function() {
   strictEqual(parseFloat(value), 1, 'original value not modified');
 });
 
-test("currency should allow numbers, strings, and currency", function() {
-  expect(3);
-
-  var intVal = currency(1.23),
-      strVal = currency('1.23'),
-      curVal = currency(strVal);
-
+test("currency should allow numbers", function() {
+  var intVal = currency(1.23);
   strictEqual(parseFloat(intVal), 1.23, "currency(1.23) is 1.23");
+});
+
+test("currency should allow strings", function() {
+  var strVal = currency('1.23');
   strictEqual(parseFloat(strVal), 1.23, "currency('1.23') is 1.23");
+});
+
+test("currency should allow currency", function() {
+  var curVal = currency('1.23');
   strictEqual(parseFloat(curVal), 1.23, "currency(currency('1.23')) is 1.23");
 });
 
-test("currency should allow different types of strings", function() {
-  expect(4);
+test("currency should accept strings with symbols", function() {
+  var str1 = currency("$1234.56"),
+      str2 = currency("£78.90");
+  strictEqual(parseFloat(str1), 1234.56, "currency('$1234.56') is 1234.56");
+  strictEqual(parseFloat(str2), 78.90, "currency('£78.90') is 78.90");
+});
 
-  var str1 = currency('1,234,567.89'),
-      str2 = currency('$1234.56'),
-      str3 = currency('(5.24)'),
-      str4 = currency('a1b2c3');
+test("currency should allow comma delimited strings", function() {
+  var str = currency("1,234,567.89");
+  strictEqual(parseFloat(str), 1234567.89, "currency('1,234,567.89') is 1234567.89");
+});
 
-  strictEqual(parseFloat(str1), 1234567.89, "currency('1,234,567.89') is 1234567.89");
-  strictEqual(parseFloat(str2), 1234.56, "currency('$1234.56') is 1234.56");
-  strictEqual(parseFloat(str3), -5.24, "currency('(5.24)') is -5.24");
-  strictEqual(parseFloat(str4), 123, "currency('a1b2c3') is 123");
+test("currency should strip invalid characters", function() {
+  var str = currency("a1b2c3");
+  strictEqual(parseFloat(str), 123, "currency('a1b2c3') is 123");
+});
+
+test("currency should allow negative strings", function() {
+  var str1 = currency('(5.24)'),
+      str2 = currency('-12.34');
+  strictEqual(parseFloat(str1), -5.24, "currency('(5.24)') is -5.24");
+  strictEqual(parseFloat(str2), -12.34, "currency('-12.34') is -12.34");
 });
 
 test("should add floating point value", function() {
