@@ -70,7 +70,7 @@ View more examples and full documentation at [scurker.github.io/currency.js](htt
 
 **Local Development**
 
-Running locally? Everything is built with Grunt.
+Running locally? You will need [grunt](http://gruntjs.com/) and optionally Java if you want to minify currency.js
 
 1. `npm install`
 1. `grunt`

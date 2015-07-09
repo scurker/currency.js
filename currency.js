@@ -115,8 +115,7 @@
       typeof(symbol) === 'undefined' && (symbol = settings.formatWithSymbol);
 
       return ((symbol ? settings.symbol : '') + this)
-        // check for misspelled separator option first so we don't regress < 0.3.1 versions
-        .replace(/(\d)(?=(\d{3})+\b)/g, '$1' + (settings.seperator || settings.separator))
+        .replace(/(\d)(?=(\d{3})+\b)/g, '$1' + settings.separator)
         // replace only the last decimal
         .replace(/\.(\d{2})$/, settings.decimal + '$1');
     },
@@ -131,10 +130,9 @@
 
   };
 
-  var noGlobal = typeof global === 'undefined';
-  if (noGlobal && typeof module === 'object' && typeof module.exports == 'object') {
+  if (!global && typeof module === 'object' && typeof module.exports == 'object') {
     module.exports = currency;
-  } else if (!noGlobal) {
+  } else if (global) {
     global.currency = currency;
   }
 
