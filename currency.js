@@ -46,7 +46,7 @@
       v = value * 100;
     } else if (value instanceof currency) {
       v = value.intValue;
-    } else {
+    } else if (typeof(value) === 'string') {
       var regex = new RegExp('[^-\\d' + settings.decimal + ']', 'g');
       var decimal = new RegExp('\\' + settings.decimal, 'g');
       v = parseFloat(
@@ -57,6 +57,8 @@
               * 100                       // scale number to integer value
           );
       v = isNaN(v) ? 0 : v;
+    } else {
+      throw "Invalid input";
     }
 
     return round ? Math.round(v) : v;
