@@ -1,3 +1,8 @@
+**0.4.0**
+
+* Removed deprecated "seperator" option, is now "separator".
+* Currency can now throw an error with undefined inputs with the `errorOnInvalid` option set to true.
+
 **v0.3.4**
 
 * Fix bower package management

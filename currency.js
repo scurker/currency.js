@@ -1,5 +1,5 @@
 /*!
- * currency.js - v0.3.4
+ * currency.js - v0.4.0
  * http://scurker.github.io/currency.js
  *
  * Copyright (c) 2015 Jason Wilson
@@ -25,7 +25,7 @@
   };
 
   // currency.js version
-  currency.version = '0.3.4';
+  currency.version = '0.4.0';
 
   // Default options
   var settings = currency.settings = {
