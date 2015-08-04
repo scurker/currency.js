@@ -9,14 +9,13 @@ script:
 sudo: false
 cache:
   directories:
-    - node_modules
+  - node_modules
 deploy:
   provider: npm
+  email:
+    secure: E5X6CQNG5Qj32TVZv6OJRFtaXZKSBd9fR/u20yWZik1BCpGNzQ9A42+xXkjliHWwu7n2Xh482iaqgiv00NWVzPMaycFVJrF7SPHDl08SH6p/R5DvgLQV79ISBtEwHxzDC3hrJOeVFknZMKaGo+TUQXiL7CYVnHMxHqlTDNJKh6g=
   api_key:
-    secure: mwDzaP0gmD0f+McfuT+MTFgCsTxsRtB/GDCq6FvaGEbRLF+Lxh8aT+Cb9+K7Whyw1JZFPMoJgr3agEPviNcWq4WHBeEs4m7UTgk1qw69jkiq7XWIkrzGYPEZbfOIhV4WI5+R0Kagi5y/G+F3B27LpLglAf/eoX8EPX5upXsD2Ek=
+    secure: NJogJXmMUaBUV2T9gdeNph+mMy72ZKh2yyeqywkLWejfUuISo93LI6Zbe6Irs9ouXlF2olcFMqWxOjxc//UoCICizwq/LQUd4X6mB2/Kob2joSqKQG1VAnqNj6dkTAYaNPXrf/FSoW5GljwCjss/lBioSOfIHQhn6omGI9Ecf7E=
   on:
     tags: true
-    all_branches: true
     repo: scurker/currency.js
-  email:
-    secure: bGqxxzNYHojWnTJ2VZ2AmzMfQVegYFbrn9ngn5TxvLWUGByWDcaZZKpCahi+ACBRxium+r8jbiPrQR6C47uXqsKEdYB+LK83ZbxObahD1IsbzBgR+5T/BmCoxdQtsjbhEbq2GeLTpPQDjWbwk0qFbvwajxt/x1cvF+IfClKEx+U=
