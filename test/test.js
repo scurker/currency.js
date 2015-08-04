@@ -8,6 +8,11 @@ test("currency should be immutable", function() {
   strictEqual(parseFloat(value), 1, 'original value not modified');
 });
 
+test("currency should be instance of currency", function() {
+  var value = currency(1);
+  strictEqual(value instanceof currency, true, "value is instance of currency");
+});
+
 test("currency should allow numbers", function() {
   var intVal = currency(1.23);
   strictEqual(parseFloat(intVal), 1.23, "currency(1.23) is 1.23");
@@ -19,7 +24,7 @@ test("currency should allow strings", function() {
 });
 
 test("currency should allow currency", function() {
-  var curVal = currency('1.23');
+  var curVal = currency(currency('1.23'));
   strictEqual(parseFloat(curVal), 1.23, "currency(currency('1.23')) is 1.23");
 });
 
