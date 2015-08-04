@@ -19,7 +19,7 @@ test("currency should allow strings", function() {
 });
 
 test("currency should allow currency", function() {
-  var curVal = currency('1.23');
+  var curVal = currency(currency('1.23'));
   strictEqual(parseFloat(curVal), 1.23, "currency(currency('1.23')) is 1.23");
 });
 
