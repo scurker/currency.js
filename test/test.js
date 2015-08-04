@@ -223,3 +223,9 @@ test("should format with symbol globally", function() {
   strictEqual(currency(1.23).format(false), '1.23', 'value is "1.23"');
   currency.settings.formatWithSymbol = false;
 });
+
+test("should throw exception with invalid input", function() {
+  raises(function() {
+    currency(null);
+  }, /^Invalid input$/, 'Didn\'t throw exception');
+});
