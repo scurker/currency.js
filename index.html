@@ -16,7 +16,7 @@
         <p>A small, lightweight javascript library for working with currency values.</p>
         <div>
           <a class="btn" href="https://raw.github.com/scurker/currency.js/master/currency.min.js">Download</a>
-          <div><em>v0.3.4 (1.68 kb)</em></div>
+          <div><em>v0.4.0 (1.74 kB)</em></div>
         </div>
 
         <div class="social cf">
@@ -36,6 +36,17 @@
         <p>When working with currencies, we only need the decimals to be precise up to the penny and don't want to deal with complex calculations every time we're trying to perform arithmetic with money. We resolve this issue by working entirely with integers behind the scenes, so you don't have to worry about decimal precision.</p>
         <p>Here is an excellent talk by Bartek Szopka on <a href="http://www.youtube.com/watch?v=MqHDDtVYJRI">everything you never wanted to know about Javascript numbers</a> explaining why Javascript and other IEEE 754 implementations have floating point issues.</p>
         <h3>Examples:</h3>
+        <p><strong>currency.js</strong> will work with a wide range of inputs, including strings, numbers, decimals, and the currency object itself.</p>
+        <pre class="prettyprint lang-js">
+          currency(123);      // 123.00
+          currency(1.23);     // 1.23
+          currency("1.23")    // 1.23
+          currency("$12.30")  // 12.30
+          
+          var value = currency('123.45');
+          currency(value);    // 123.45
+        </pre>
+        <p>Behind the scenes, we handle the currency values so you don't have to worry about floating point issues!</p>
         <pre class="prettyprint lang-js">2.51 + .01;                   // 2.5199999999999996
 currency(2.51).add(.01);      // 2.52
 
