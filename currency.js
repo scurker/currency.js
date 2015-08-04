@@ -33,6 +33,7 @@
     , separator: ','
     , decimal: '.'
     , formatWithSymbol: false
+    , errorOnInvalid: false
   };
 
   // Convert a number to a normalized value
@@ -46,7 +47,7 @@
       v = value * 100;
     } else if (value instanceof currency) {
       v = value.intValue;
-    } else {
+    } else if (typeof(value) === 'string') {
       var regex = new RegExp('[^-\\d' + settings.decimal + ']', 'g');
       var decimal = new RegExp('\\' + settings.decimal, 'g');
       v = parseFloat(
@@ -57,6 +58,11 @@
               * 100                       // scale number to integer value
           );
       v = isNaN(v) ? 0 : v;
+    } else {
+      if(settings.errorOnInvalid) {
+        throw Error("Invalid Input");
+      }
+      v = 0;
     }
 
     return round ? Math.round(v) : v;
@@ -90,7 +96,7 @@
         , split = Math[value >= 0 ? 'floor' : 'ceil'](value / count)
         , pennies = Math.abs(value - (split * count));
 
-      for (; count != 0; count--) {
+      for (; count !== 0; count--) {
         var item = currency(split / 100);
 
         // Add any left over pennies
@@ -115,8 +121,7 @@
       typeof(symbol) === 'undefined' && (symbol = settings.formatWithSymbol);
 
       return ((symbol ? settings.symbol : '') + this)
-        // check for misspelled separator option first so we don't regress < 0.3.1 versions
-        .replace(/(\d)(?=(\d{3})+\b)/g, '$1' + (settings.seperator || settings.separator))
+        .replace(/(\d)(?=(\d{3})+\b)/g, '$1' + settings.separator)
         // replace only the last decimal
         .replace(/\.(\d{2})$/, settings.decimal + '$1');
     },
@@ -131,10 +136,9 @@
 
   };
 
-  var noGlobal = typeof global === 'undefined';
-  if (noGlobal && typeof module === 'object' && typeof module.exports == 'object') {
+  if (!global && typeof module === 'object' && typeof module.exports === 'object') {
     module.exports = currency;
-  } else if (!noGlobal) {
+  } else if (global) {
     global.currency = currency;
   }
 

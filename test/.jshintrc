@@ -1,0 +1,8 @@
+{
+  "extends": "../.jshintrc",
+  "qunit": true,
+  "strict": false,
+  "globals": {
+    "currency": true
+  }
+}

@@ -15,7 +15,22 @@ currency(2.52).subtract(.01); // 2.51
 
 This should work for most *reasonable* values of currencies. As long as your currency values are less than 2<sup>53</sup> (in cents) or 90,071,992,547,409.91 you should be okay.
 
-**Examples**
+### Usage
+
+Currency will accept numbers, strings, or the currency object itself as values.
+
+```javascript
+currency(123);      // 123.00
+currency(1.23);     // 1.23
+currency("1.23")    // 1.23
+currency("$12.30")  // 12.30
+
+var value = currency('123.45');
+currency(value);    // 123.45
+```
+
+There's various arithmetic methods that help take the guesswork out of trying to resolve floating point problems.
+
 ```javascript
 currency(123.50).add(0.23);       // 123.73
 currency(5.00).subtract(0.50);    // 4.50
@@ -23,13 +38,15 @@ currency(45.25).multiply(3);      // 135.75
 currency(1.12).distribute(5);     // [0.23, 0.23, 0.22, 0.22, 0.22]
 ```
 
-Also included is a basic formatter, this allows you to work with and output strings.
+There's even a built in formatter that will automatically place comma delimiters in the right place.
+
 ```javascript
 currency('2,573,693.75').add('100,275.50').format();  // '2,673,969.25'
 currency('1,237.72').subtract(300).format();          // '937.72'
 ```
 
-You can also change the format, converting to international values.
+You can also change the format, localizing the decimal and/or delimiter to your locale.
+
 ```javascript
 currency.settings.separator = '.';
 currency.settings.decimal = ',';
@@ -37,10 +54,11 @@ currency('2.573.693,75').add('100.275,50').format();  // '2.673.969,25'
 currency('1.237,72').subtract(300).format();          // '937,72'
 ```
 
-View more examples and documentation at [scurker.github.io/currency.js](http://scurker.github.io/currency.js).
+View more examples and full documentation at [scurker.github.io/currency.js](http://scurker.github.io/currency.js).
+
+### Installation
 
 **Install via npm**
-
 
 * The latest version ```npm install currency.js```
 * Or GitHub master branch ```npm install scurker/currency.js```
@@ -52,7 +70,7 @@ View more examples and documentation at [scurker.github.io/currency.js](http://s
 
 **Local Development**
 
-Running locally? Everything is built with Grunt.
+Running locally? You will need [grunt](http://gruntjs.com/) and optionally Java if you want to minify currency.js
 
 1. `npm install`
 1. `grunt`

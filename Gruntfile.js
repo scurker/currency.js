@@ -1,6 +1,8 @@
 /*global module:false*/
 module.exports = function(grunt) {
 
+  'use strict';
+
   grunt.initConfig({
 
     pkg: grunt.file.readJSON('package.json'),
@@ -41,6 +43,15 @@ module.exports = function(grunt) {
       }
     },
 
+    jshint: {
+      options: {
+        jshintrc: true
+      },
+      files: {
+        src: ['currency.js', 'Gruntfile.js', 'test/*.js']
+      }
+    },
+
     qunit: {
       files: ['test/*.html']
     },
@@ -48,18 +59,14 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: ['currency.js'],
-        tasks: ['qunit']
+        tasks: ['qunit', 'jshint']
       }
     }
 
   });
 
-  grunt.loadNpmTasks('grunt-closure-tools');
-  grunt.loadNpmTasks('grunt-contrib-qunit');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-sync-pkg');
+  require('matchdep').filterAll('grunt-*').forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('default', ['qunit', 'closureCompiler', 'concat', 'sync']);
+  grunt.registerTask('default', ['qunit', 'jshint', 'closureCompiler', 'concat', 'sync']);
 
 };
