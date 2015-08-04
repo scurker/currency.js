@@ -5,6 +5,7 @@ before_script:
 - npm install -g grunt-cli
 script:
 - grunt jshint
+- npm run test
 sudo: false
 cache:
   directories:
