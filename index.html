@@ -37,15 +37,13 @@
         <p>Here is an excellent talk by Bartek Szopka on <a href="http://www.youtube.com/watch?v=MqHDDtVYJRI">everything you never wanted to know about Javascript numbers</a> explaining why Javascript and other IEEE 754 implementations have floating point issues.</p>
         <h3>Examples:</h3>
         <p><strong>currency.js</strong> will work with a wide range of inputs, including strings, numbers, decimals, and the currency object itself.</p>
-        <pre class="prettyprint lang-js">
-          currency(123);      // 123.00
-          currency(1.23);     // 1.23
-          currency("1.23")    // 1.23
-          currency("$12.30")  // 12.30
-          
-          var value = currency('123.45');
-          currency(value);    // 123.45
-        </pre>
+        <pre class="prettyprint lang-js">currency(123);      // 123.00
+currency(1.23);     // 1.23
+currency("1.23")    // 1.23
+currency("$12.30")  // 12.30
+
+var value = currency('123.45');
+currency(value);    // 123.45</pre>
         <p>Behind the scenes, we handle the currency values so you don't have to worry about floating point issues!</p>
         <pre class="prettyprint lang-js">2.51 + .01;                   // 2.5199999999999996
 currency(2.51).add(.01);      // 2.52
@@ -83,6 +81,8 @@ currency.settings.formatWithSymbol = true;
 
 currency(1234.56).format(); // "€1 234.56";
 </pre>
+        <h3>Invalid Inputs</h3>
+        <p>By default, currency converts any invalid inputs to 0, however you may want to throw an error when on undefined or null values. You can change this by setting <code>currency.settings.errorOnInvalid</code> to <code>true</code>.</code></code></p>
       </section>
 
       <section>
