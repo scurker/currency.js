@@ -33,6 +33,7 @@
     , separator: ','
     , decimal: '.'
     , formatWithSymbol: false
+    , errorOnInvalid: false
   };
 
   // Convert a number to a normalized value
@@ -58,7 +59,10 @@
           );
       v = isNaN(v) ? 0 : v;
     } else {
-      throw "Invalid input";
+      if(settings.errorOnInvalid) {
+        throw Error("Invalid Input");
+      }
+      v = 0;
     }
 
     return round ? Math.round(v) : v;
@@ -92,7 +96,7 @@
         , split = Math[value >= 0 ? 'floor' : 'ceil'](value / count)
         , pennies = Math.abs(value - (split * count));
 
-      for (; count != 0; count--) {
+      for (; count !== 0; count--) {
         var item = currency(split / 100);
 
         // Add any left over pennies
@@ -132,7 +136,7 @@
 
   };
 
-  if (!global && typeof module === 'object' && typeof module.exports == 'object') {
+  if (!global && typeof module === 'object' && typeof module.exports === 'object') {
     module.exports = currency;
   } else if (global) {
     global.currency = currency;

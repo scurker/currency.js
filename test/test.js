@@ -2,6 +2,7 @@ module("currency.js");
 
 test("currency should be immutable", function() {
   var value = currency(1),
+      /* jshint unused: false */
       newValue = value.add(0.25);
 
   strictEqual(parseFloat(value), 1, 'original value not modified');
@@ -224,8 +225,14 @@ test("should format with symbol globally", function() {
   currency.settings.formatWithSymbol = false;
 });
 
+test("should return 0.00 currency with invalid input", function() {
+  currency.settings.errorOnInvalid = false;
+  var value = currency(undefined);
+  strictEqual(value.value, 0, 'value is "0.00"');
+});
+
 test("should throw exception with invalid input", function() {
-  raises(function() {
-    currency(null);
-  }, /^Invalid input$/, 'Didn\'t throw exception');
+  currency.settings.errorOnInvalid = true;
+  raises(function() { currency(undefined); }, Error, "Threw exception");
+  currency.settings.errorOnInvalid = false;
 });

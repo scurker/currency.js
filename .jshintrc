@@ -1,0 +1,14 @@
+{
+  "eqeqeq": true,
+  "node": true,
+  "browser": true,
+  "latedef": "nofunc",
+  "laxbreak": true,
+  "laxcomma": true,
+  "newcap": false,
+  "strict": true,
+  "undef": true,
+  "unused": true,
+  "-W008": false, // ignore leading decimal
+  "-W030": false // allow expression assignments
+}
