@@ -1,5 +1,5 @@
 /*!
- * currency.js - v0.4.0
+ * currency.js - v0.4.1
  * http://scurker.github.io/currency.js
  *
  * Copyright (c) 2015 Jason Wilson

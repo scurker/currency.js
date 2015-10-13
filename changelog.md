@@ -1,3 +1,7 @@
+**0.4.1**
+
+* Switched to mocha for testing and added test coverage.
+
 **0.4.0**
 
 * Removed deprecated "seperator" option, is now "separator".
