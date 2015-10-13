@@ -43,6 +43,15 @@ module.exports = function(grunt) {
       }
     },
 
+    mochaTest: {
+      options: {
+        reporter: 'spec'
+      },
+      test: {
+        src: ['test/**/*.js']
+      }
+    },
+
     jshint: {
       options: {
         jshintrc: true
@@ -50,10 +59,6 @@ module.exports = function(grunt) {
       files: {
         src: ['currency.js', 'Gruntfile.js', 'test/*.js']
       }
-    },
-
-    qunit: {
-      files: ['test/*.html']
     },
 
     watch: {
@@ -67,6 +72,6 @@ module.exports = function(grunt) {
 
   require('matchdep').filterAll('grunt-*').forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('default', ['qunit', 'jshint', 'closureCompiler', 'concat', 'sync']);
+  grunt.registerTask('default', ['jshint', 'mochaTest', 'closureCompiler', 'concat', 'sync']);
 
 };
