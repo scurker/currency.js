@@ -1,9 +1,9 @@
 language: node_js
 node_js:
 - '0.12'
-- 'iojs'
+- '4.1'
 before_script:
-- npm install -g grunt-cli
+- npm install -g grunt-cli coveralls
 script:
 - grunt jshint
 - npm run test
@@ -11,6 +11,9 @@ sudo: false
 cache:
   directories:
   - node_modules
+after_success:
+  - npm run coverage
+  - cat reports/lcov.info | coveralls
 deploy:
   provider: npm
   email:

@@ -8,7 +8,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "grunt qunit"
+    "test": "node_modules/.bin/mocha test",
+    "coverage": "node_modules/.bin/istanbul cover --dir ./reports node_modules/.bin/_mocha test"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,7 @@
     "decimal"
   ],
   "author": "Jason Wilson",
-  "license": "mit",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/scurker/currency.js/issues"
   },
@@ -35,9 +36,11 @@
     "grunt-closure-tools": "~0.9.7",
     "grunt-contrib-concat": "~0.5.0",
     "grunt-contrib-jshint": "^0.11.2",
-    "grunt-contrib-qunit": "^0.7.0",
     "grunt-contrib-watch": "~0.6.1",
+    "grunt-mocha-test": "^0.12.7",
     "grunt-sync-pkg": "~0.1.2",
-    "matchdep": "^0.3.0"
+    "istanbul": "^0.3.22",
+    "matchdep": "^1.0.0",
+    "mocha": "^2.3.3"
   }
 }

@@ -1,6 +1,6 @@
 {
   "extends": "../.jshintrc",
-  "qunit": true,
+  "mocha": true,
   "strict": false,
   "globals": {
     "currency": true
