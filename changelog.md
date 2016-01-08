@@ -1,3 +1,7 @@
+**0.4.2**
+
+* Whitelist currency.js files for smaller npm size.
+
 **0.4.1**
 
 * Switched to mocha for testing and added test coverage.
