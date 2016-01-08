@@ -2,7 +2,7 @@
  * currency.js - v0.4.1
  * http://scurker.github.io/currency.js
  *
- * Copyright (c) 2015 Jason Wilson
+ * Copyright (c) 2016 Jason Wilson
  * Released under MIT license
  */
 (function(global) {

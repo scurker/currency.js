@@ -15,6 +15,10 @@
     "type": "git",
     "url": "git://github.com/scurker/currency.js.git"
   },
+  "files": [
+    "currency.js",
+    "currency.min.js"
+  ],
   "keywords": [
     "currency",
     "money",
