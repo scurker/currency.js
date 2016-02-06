@@ -15,13 +15,12 @@ module.exports = function(grunt) {
       ' * Released under MIT license\n'+
       ' */\n',
 
-    closureCompiler: {
+    'closure-compiler': {
       compile: {
         src: 'currency.js',
         dest: 'currency.min.js'
       },
       options: {
-        compilerFile: 'lib/compiler.jar',
         compilation_level: 'ADVANCED_OPTIMIZATIONS'
       }
     },
@@ -70,9 +69,10 @@ module.exports = function(grunt) {
 
   });
 
+  require('google-closure-compiler').grunt(grunt);
   require('matchdep').filterAll('grunt-*').forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('build', ['closureCompiler', 'concat', 'sync']);
+  grunt.registerTask('build', ['closure-compiler', 'concat', 'sync']);
   grunt.registerTask('default', ['jshint', 'mochaTest', 'build']);
 
 };
