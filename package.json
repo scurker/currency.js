@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "node_modules/.bin/mocha test",
-    "coverage": "node_modules/.bin/istanbul cover --dir ./reports node_modules/.bin/_mocha test"
+    "coverage": "node_modules/.bin/istanbul cover --dir ./reports node_modules/.bin/_mocha test",
+    "prepublish": "grunt build"
   },
   "repository": {
     "type": "git",

@@ -24,9 +24,6 @@
     that.value = that.intValue / 100;
   };
 
-  // currency.js version
-  currency.version = '0.4.0';
-
   // Default options
   var settings = currency.settings = {
     symbol: '$'
@@ -136,10 +133,13 @@
 
   };
 
-  if (!global && typeof module === 'object' && typeof module.exports === 'object') {
+  /* istanbul ignore next */
+  if(typeof define === 'function' && define.amd) {
+    define([], function() { return currency; });
+  } else if (typeof module === 'object' && typeof module.exports === 'object') {
     module.exports = currency;
-  } else if (global) {
+  } else {
     global.currency = currency;
   }
 
-})(typeof window !== 'undefined' ? window : undefined);
+})(this);

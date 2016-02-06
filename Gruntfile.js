@@ -72,6 +72,7 @@ module.exports = function(grunt) {
 
   require('matchdep').filterAll('grunt-*').forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('default', ['jshint', 'mochaTest', 'closureCompiler', 'concat', 'sync']);
+  grunt.registerTask('build', ['closureCompiler', 'concat', 'sync']);
+  grunt.registerTask('default', ['jshint', 'mochaTest', 'build']);
 
 };

@@ -9,6 +9,9 @@
   "strict": true,
   "undef": true,
   "unused": true,
+  "globals": {
+    "define": true
+  },
   "-W008": false, // ignore leading decimal
   "-W030": false // allow expression assignments
 }
