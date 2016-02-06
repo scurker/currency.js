@@ -1,7 +1,7 @@
 {
   "name": "currency.js",
   "homepage": "http://scurker.github.io/currency.js",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "A javascript library for handling currency values.",
   "main": "currency.js",
   "directories": {
@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "node_modules/.bin/mocha test",
-    "coverage": "node_modules/.bin/istanbul cover --dir ./reports node_modules/.bin/_mocha test"
+    "coverage": "node_modules/.bin/istanbul cover --dir ./reports node_modules/.bin/_mocha test",
+    "prepublish": "grunt build"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "url": "https://github.com/scurker/currency.js/issues"
   },
   "devDependencies": {
+    "google-closure-compiler": "^20151216.2.0",
     "grunt": "~0.4.5",
     "grunt-closure-tools": "~0.9.7",
     "grunt-contrib-concat": "~0.5.0",

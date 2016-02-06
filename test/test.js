@@ -3,17 +3,6 @@ var assert = require('assert')
 
 describe('currency.js', function() {
 
-  it('should attach to window', function() {
-    delete require.cache[require.resolve('../currency.js')];
-    global.window = {};
-    require('../currency.js');
-    assert.ok(typeof global.window.currency !== 'undefined', 'currency is attached to window');
-    assert.strictEqual(global.window.currency(1.23).value, 1.23, 'currency(1.23) is 1.23');
-    global.window = null;
-    delete require.cache[require.resolve('../currency.js')];
-    currency = require('../currency.js');
-  });
-
   it('should be immutable', function() {
     var value = currency(1),
         /* jshint unused: false */

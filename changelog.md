@@ -1,3 +1,9 @@
+**0.4.3**
+
+* Added AMD support.
+* Fixed issue #24 resolving bundling with webpack/browserify.
+* Updated closure compiler for minification, now minified version is much smaller!
+
 **0.4.2**
 
 * Whitelist currency.js files for smaller npm size.
