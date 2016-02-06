@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         dest: 'currency.min.js'
       },
       options: {
-        compilation_level: 'ADVANCED_OPTIMIZATIONS'
+        compilation_level: 'SIMPLE'
       }
     },
 

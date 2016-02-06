@@ -1,8 +1,12 @@
+**0.4.4**
+
+* Fix for currency.min.js being compiled incorrectly.
+
 **0.4.3**
 
 * Added AMD support.
 * Fixed issue #24 resolving bundling with webpack/browserify.
-* Updated closure compiler for minification, now minified version is much smaller!
+* Updated to latest closure compiler for minification.
 
 **0.4.2**
 
