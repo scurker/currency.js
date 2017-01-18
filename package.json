@@ -37,16 +37,16 @@
     "url": "https://github.com/scurker/currency.js/issues"
   },
   "devDependencies": {
-    "google-closure-compiler": "^20151216.2.0",
-    "grunt": "~0.4.5",
+    "google-closure-compiler": "^20161201.0.0",
+    "grunt": "~1.0.1",
     "grunt-closure-tools": "~0.9.7",
-    "grunt-contrib-concat": "~0.5.0",
-    "grunt-contrib-jshint": "^0.11.2",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-mocha-test": "^0.12.7",
+    "grunt-contrib-concat": "~1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-watch": "~1.0.0",
+    "grunt-mocha-test": "^0.13.2",
     "grunt-sync-pkg": "~0.1.2",
-    "istanbul": "^0.3.22",
+    "istanbul": "^0.4.5",
     "matchdep": "^1.0.0",
-    "mocha": "^2.3.3"
+    "mocha": "^3.2.0"
   }
 }
