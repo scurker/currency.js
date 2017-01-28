@@ -37,7 +37,7 @@
     "url": "https://github.com/scurker/currency.js/issues"
   },
   "devDependencies": {
-    "google-closure-compiler": "^20161201.0.0",
+    "google-closure-compiler": "^20170124.0.0",
     "grunt": "~1.0.1",
     "grunt-closure-tools": "~0.9.7",
     "grunt-contrib-concat": "~1.0.1",
