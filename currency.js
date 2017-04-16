@@ -69,7 +69,7 @@
 
     add: function(number) {
       var v = this.intValue;
-      return currency((v += parse(number)) / 100);
+      return currency((v -= parse(number)) / 100);
     },
 
     subtract: function(number) {
