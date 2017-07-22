@@ -1,9 +1,9 @@
 {
   "name": "currency.js",
   "main": [
-    "currency.js"
+    "dist/currency.cjs.js"
   ],
-  "version": "0.4.4",
+  "version": "1.0.0-rc1",
   "homepage": "http://scurker.github.io/currency.js",
   "authors": [
     "Jason Wilson"

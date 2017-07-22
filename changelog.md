@@ -1,3 +1,9 @@
+**1.0.0**
+
+* Node < 4 support dropped.
+* Global currency settings removed. Settings are now passed per currency.js instance.
+* Different precision currencies supported. (#29)
+
 **0.4.4**
 
 * Fix for currency.min.js being compiled incorrectly.

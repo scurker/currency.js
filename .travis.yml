@@ -1,11 +1,11 @@
 language: node_js
 node_js:
-- '0.12'
-- '4.1'
+- '6'
+- '7'
 before_install:
 - npm install -g grunt-cli coveralls
 script:
-- grunt jshint
+- npm run lint
 - npm run test
 sudo: false
 cache:
@@ -13,7 +13,7 @@ cache:
   - node_modules
 after_success:
   - npm run coverage
-  - cat reports/lcov.info | coveralls
+  - ./node_modules/.bin/nyc report --reporter=text-lcov | coveralls
 deploy:
   provider: npm
   email:

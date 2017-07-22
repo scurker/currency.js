@@ -56,6 +56,28 @@ currency('1.237,72').subtract(300).format();          // '937,72'
 
 View more examples and full documentation at [scurker.github.io/currency.js](http://scurker.github.io/currency.js).
 
+### Options
+
+*currency.js* comes with its own set of default options conforming to USD.
+
+`symbol` *default*: `$`<br/>
+When `formatWithSymbol` is set to `true`, will include the currency symbol when calling `currency.format()`.
+
+`separator` *default*: `,`<br/>
+Separator dividing the number groups when calling `currency.format()`.
+
+`decimal` *default*: `.`<br/>
+Decimal used when calling `currency.format()`.
+
+`precision` *default*: `2`<br/>
+Number of decimal points to store as cents.
+
+`formatWithSymbol` *default*: `false`<br/>
+Includes the `symbol` option when calling `currency.format()`.
+
+`errorOnInvalid` *default*: `false`<br/>
+If an invalid value such as `null` or `undefined` is passed in, will throw an error.
+
 ### Installation
 
 **Install via npm**
@@ -74,3 +96,34 @@ Running locally? You will need [grunt](http://gruntjs.com/) and optionally Java 
 
 1. `npm install`
 1. `grunt`
+
+### v1.0.0 breaking changes
+
+In all version prior to `v1.0.0`, currency options were global. These global options were removed in `v1.0.0` and now are passed to each instance of currency.js as the second param. This allows you to set options without any unintended side effects. 
+
+#### v0.4.x
+
+```js
+currency.settings.separator = ' ';
+currency.settings.decimal = ',';
+currency.settings.symbol = '€';
+currency.settings.formatWithSymbol = true;
+```
+
+#### v1.x
+
+```js
+currency(1.23, { separator: ' ', decimal: ',', symbol: '€', formatWithSymbol: true })
+```
+
+If you need to work with multiple currency values, the easiest way is to setup factory functions with your required currency settings.
+
+```js
+const USD = value => currency(value, { symbol: '$', precision: 2 });
+const JPY = value => currency(value, { symbol: '¥', precision: 0 });
+const GAS = value => currency(value, { precision: 3 });
+```
+
+## License
+
+[MIT](/license)

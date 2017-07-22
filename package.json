@@ -1,24 +1,29 @@
 {
   "name": "currency.js",
   "homepage": "http://scurker.github.io/currency.js",
-  "version": "0.4.4",
+  "version": "1.0.0-rc1",
   "description": "A javascript library for handling currency values.",
-  "main": "currency.js",
+  "main": "dist/currency.cjs.js",
+  "browser": "dist/currency.js",
+  "engines": {
+    "node": ">=4"
+  },
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha test",
-    "coverage": "node_modules/.bin/istanbul cover --dir ./reports node_modules/.bin/_mocha test",
-    "prepublish": "grunt build"
+    "test": "BABEL_ENV=test ava",
+    "coverage": "BABEL_ENV=test nyc ava",
+    "lint": "eslint .",
+    "build": "rollup -c && grunt build",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/scurker/currency.js.git"
   },
   "files": [
-    "currency.js",
-    "currency.min.js"
+    "dist"
   ],
   "keywords": [
     "currency",
@@ -37,7 +42,12 @@
     "url": "https://github.com/scurker/currency.js/issues"
   },
   "devDependencies": {
-    "google-closure-compiler": "^20161201.0.0",
+    "ava": "^0.21.0",
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "google-closure-compiler": "^20170626.0.0",
     "grunt": "~1.0.1",
     "grunt-closure-tools": "~0.9.7",
     "grunt-contrib-concat": "~1.0.1",
@@ -45,8 +55,13 @@
     "grunt-contrib-watch": "~1.0.0",
     "grunt-mocha-test": "^0.13.2",
     "grunt-sync-pkg": "~0.1.2",
-    "istanbul": "^0.4.5",
     "matchdep": "^1.0.0",
-    "mocha": "^3.2.0"
+    "nyc": "^11.0.3",
+    "rollup": "^0.45.2",
+    "rollup-plugin-babel": "^2.7.1"
+  },
+  "ava": {
+    "babel": "inherit",
+    "require": "babel-register"
   }
 }

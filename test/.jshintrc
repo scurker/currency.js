@@ -1,8 +1,0 @@
-{
-  "extends": "../.jshintrc",
-  "mocha": true,
-  "strict": false,
-  "globals": {
-    "currency": true
-  }
-}

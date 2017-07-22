@@ -3,3 +3,6 @@
 node_modules/
 bower_components/
 reports/
+dist/
+coverage/
+.nyc_output
