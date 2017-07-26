@@ -139,23 +139,39 @@ test('should get cent value', t => {
 });
 
 test('should support different precision values', t => {
-  let c1 = value => currency(value, { precision: 3 });
-  let c2 = value => currency(value, { symbol: '¥', precision: 0 });
+  let c1 = currency(1.234, { precision: 3 });
+  let c2 = currency(1.234, { symbol: '¥', precision: 0 });
 
-  t.is(c1(1.234).value, 1.234);
-  t.is(c2(1.234).value, 1);
-  t.is(c1(1.234).intValue, 1234);
-  t.is(c2(1.234).intValue, 1);
-  t.is(c1(1.234).add(4.567).value, 5.801);
-  t.is(c2(1.234).add(4.567).value, 6);
-  t.is(c1(1.234).subtract(4.567).value, -3.333);
-  t.is(c2(1.234).subtract(4.567).value, -4);
-  t.is(c1(1.234).cents(), 234);
-  t.is(c2(1.234).cents(), 0);
-  t.is(c1(1.234).format(true), '$1.234');
-  t.is(c2(1.234).format(true), '¥1');
-  t.deepEqual(c1(1.234).distribute(4).map(x => x.value), [.309, .309, .308, .308]);
-  t.deepEqual(c2(1.234).distribute(4).map(x => x.value), [1, 0, 0, 0]);
+  t.is(c1.value, 1.234);
+  t.is(c2.value, 1);
+  t.is(c1.intValue, 1234);
+  t.is(c2.intValue, 1);
+  t.is(c1.add(4.567).value, 5.801);
+  t.is(c2.add(4.567).value, 6);
+  t.is(c1.subtract(4.567).value, -3.333);
+  t.is(c2.subtract(4.567).value, -4);
+  t.is(c1.cents(), 234);
+  t.is(c2.cents(), 0);
+  t.is(c1.format(true), '$1.234');
+  t.is(c2.format(true), '¥1');
+  t.deepEqual(c1.distribute(4).map(x => x.value), [.309, .309, .308, .308]);
+  t.deepEqual(c2.distribute(4).map(x => x.value), [1, 0, 0, 0]);
+});
+
+test('should use source precision for arithmetic with different precisions', t => {
+  let c1 = currency(1.23);
+  let c2 = currency(1.239, { precision: 3 });
+
+  t.is(c1.add(c2).value, 2.47);
+  t.is(c2.add(c1).value, 2.469);
+});
+
+test('should use source formatting for mixed currency formats', t => {
+  let c1 = currency('1,234.56');
+  let c2 = currency('1 234,56', { separator: ' ', decimal: ',' });
+
+  t.is(c1.add(c2).format(), '2,469.12');
+  t.is(c2.add(c1).format(), '2 469,12');
 });
 
 test('parse should default rounding', t => {
@@ -202,11 +218,11 @@ test('should format value using defaults', t => {
 });
 
 test('should format value using international', t => {
-  let defaults = { separator: '.', decimal: ',' };
+  let c = value => currency(value, { separator: '.', decimal: ',' });
 
-  t.is(currency(1.23, defaults).format(), '1,23', 'value is "1,23"');
-  t.is(currency(1000.00, defaults).format(), '1.000,00', 'value is "1.000,00"');
-  t.is(currency(1000000.00, defaults).format(), '1.000.000,00', 'value is "1.000.000,00"');
+  t.is(c(1.23).format(), '1,23', 'value is "1,23"');
+  t.is(c(1000.00).format(), '1.000,00', 'value is "1.000,00"');
+  t.is(c(1000000.00).format(), '1.000.000,00', 'value is "1.000.000,00"');
 });
 
 test('should parse international values', t => {

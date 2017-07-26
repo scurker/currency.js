@@ -20,26 +20,24 @@ function currency(value, opts) {
   }
 
   let settings = Object.assign({}, defaults, opts)
-    , precision = Math.pow(10, settings.precision);
+    , precision = Math.pow(10, settings.precision)
+    , v = parse(value, settings);
 
-  that.intValue = parse(value, settings);
-  that.value = that.intValue / precision;
+  that.intValue = v;
+  that.value = v / precision;
   that.settings = settings;
   that.precision = precision;
 }
 
-function parse(value, opts) {
+function parse(value, opts, round = true) {
   let v = 0
-    , { round, decimal, errorOnInvalid, precision: decimals } = opts
+    , { decimal, errorOnInvalid, precision: decimals } = opts
     , precision = Math.pow(10, decimals);
-
-  // Set default rounding
-  typeof(round) === 'undefined' && (round = true);
 
   if (typeof value === 'number') {
     v = value * precision;
   } else if (value instanceof currency) {
-    v = value.intValue;
+    v = value.value * precision;
   } else if (typeof(value) === 'string') {
     let regex = new RegExp('[^-\\d' + decimal + ']', 'g')
       , decimalString = new RegExp('\\' + decimal, 'g');
@@ -90,8 +88,7 @@ currency.prototype = {
    */
   multiply(number) {
     let { intValue, settings } = this;
-    settings.round = false;
-    return currency((intValue *= parse(number, settings)) / Math.pow(10, settings.precision + 2), settings);
+    return currency((intValue *= parse(number, settings, false)) / Math.pow(10, settings.precision + 2), settings);
   },
 
   /**
@@ -101,8 +98,7 @@ currency.prototype = {
    */
   divide(number) {
     let { intValue, settings } = this;
-    settings.round = false;
-    return currency(intValue /= parse(number, settings), settings);
+    return currency(intValue /= parse(number, settings, false), settings);
   },
 
   /**
@@ -112,16 +108,16 @@ currency.prototype = {
    * @returns {array}
    */
   distribute(count) {
-    let { intValue, precision } = this
+    let { intValue, precision, settings } = this
       , distribution = []
       , split = Math[intValue >= 0 ? 'floor' : 'ceil'](intValue / count)
       , pennies = Math.abs(intValue - (split * count));
 
     for (; count !== 0; count--) {
-      let item = currency(split / precision, this.settings);
+      let item = currency(split / precision, settings);
 
       // Add any left over pennies
-      pennies-- > 0 && (item = parseFloat(item) >= 0 ? item.add(1/precision) : item.subtract(1/precision));
+      pennies-- > 0 && (item = parseFloat(item) >= 0 ? item.add(1 / precision) : item.subtract(1 / precision));
 
       distribution.push(item);
     }
@@ -142,7 +138,8 @@ currency.prototype = {
    * @returns {number}
    */
   cents() {
-    return ~~(this.intValue % this.precision);
+    let { intValue, precision } = this;
+    return ~~(intValue % precision);
   },
 
   /**
@@ -167,8 +164,8 @@ currency.prototype = {
    * @returns {string}
    */
   toString() {
-    let { precision, settings } = this;
-    return (this.intValue / precision).toFixed(settings.precision);
+    let { intValue, precision, settings } = this;
+    return (intValue / precision).toFixed(settings.precision);
   },
 
   /**
