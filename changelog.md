@@ -1,8 +1,9 @@
 **1.0.0**
 
 * Node < 4 support dropped.
+* Separate UMD, CommonJS modules now available.
 * Global currency settings removed. Settings are now passed per currency.js instance.
-* Different precision currencies supported. (#29)
+* Different precision currencies supported. ([#29](https://github.com/scurker/currency.js/issues/29))
 
 **0.4.4**
 

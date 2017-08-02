@@ -57,6 +57,14 @@ test('should default to 0 with invalid strings', t => {
   t.is(currency('abc').value, 0, 'currency("abc") is 0');
 });
 
+test('should return value', t => {
+  t.is(currency(1.23).value, 1.23, 'currency.value exists');
+});
+
+test('should return intValue', t => {
+  t.is(currency(1.23).intValue, 123, 'currency.intValue exists');
+});
+
 test('should add floating point value', t => {
   var value = currency(2.51).add(.01);
 
@@ -228,9 +236,9 @@ test('should format value using international', t => {
 test('should parse international values', t => {
   let c = value => currency(value, { separator: '.', decimal: ',' });
 
-  t.is(c('1,23').format(), '1,23', 'value is "1,23"');
-  t.is(c('1.000,00').format(), '1.000,00', 'value is "1.000,00"');
-  t.is(c('1.000.000,00').format(), '1.000.000,00', 'value is "1.000.000,00"');
+  t.is(c('1,23').value, 1.23, 'value is "1.23"');
+  t.is(c('1.000,00').value, 1000.00, 'value is "1,000.00"');
+  t.is(c('1.000.000,00').value, 1000000.00, 'value is "1,000,000.00"');
 });
 
 test('should format with symbol', t => {
