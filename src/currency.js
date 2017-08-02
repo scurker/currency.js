@@ -7,6 +7,11 @@ const defaults = {
   precision: 2
 };
 
+const regex = {
+  groupedNumbers: /(\d)(?=(\d{3})+\b)/g,
+  lastDecimal: /\.(\d+)$/
+};
+
 /**
  * Create a new instance of currency.js
  * @param {number|string|currency} value
@@ -117,7 +122,7 @@ currency.prototype = {
       let item = currency(split / precision, settings);
 
       // Add any left over pennies
-      pennies-- > 0 && (item = parseFloat(item) >= 0 ? item.add(1 / precision) : item.subtract(1 / precision));
+      pennies-- > 0 && (item = item.value >= 0 ? item.add(1 / precision) : item.subtract(1 / precision));
 
       distribution.push(item);
     }
@@ -154,9 +159,9 @@ currency.prototype = {
     typeof(useSymbol) === 'undefined' && (useSymbol = formatWithSymbol);
 
     return ((useSymbol ? symbol : '') + this)
-      .replace(/(\d)(?=(\d{3})+\b)/g, '$1' + separator)
+      .replace(regex.groupedNumbers, '$1' + separator)
       // replace only the last decimal
-      .replace(/\.(\d+)$/, decimal + '$1');
+      .replace(regex.lastDecimal, decimal + '$1');
   },
 
   /**

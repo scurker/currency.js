@@ -4,6 +4,7 @@
 * Separate UMD, CommonJS modules now available.
 * Global currency settings removed. Settings are now passed per currency.js instance.
 * Different precision currencies supported. ([#29](https://github.com/scurker/currency.js/issues/29))
+* Added Typescript definition. ([#36](https://github.com/scurker/currency.js/issues/36))
 
 **0.4.4**
 

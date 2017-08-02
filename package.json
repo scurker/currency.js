@@ -12,11 +12,16 @@
     "test": "test"
   },
   "scripts": {
-    "test": "BABEL_ENV=test ava",
+    "clean": "rm -rf dist/*",
     "coverage": "BABEL_ENV=test nyc ava",
+    "copy-typescript-definition": "cp -f src/currency.d.ts dist",
     "lint": "eslint .",
-    "build": "rollup -c && grunt build",
-    "prepublish": "npm run build"
+    "build": "npm-run-all clean transpile copy-typescript-definition && grunt build",
+    "prepublish": "npm run build",
+    "transpile": "rollup -c ",
+    "test": "npm-run-all --parallel test:ava test:typescript",
+    "test:ava": "BABEL_ENV=test ava ./test/*.js",
+    "test:typescript": "tsc --noEmit ./test/test.ts"
   },
   "repository": {
     "type": "git",
@@ -25,6 +30,7 @@
   "files": [
     "dist"
   ],
+  "typings": "./dist/currency.d.ts",
   "keywords": [
     "currency",
     "money",
@@ -53,9 +59,11 @@
     "grunt-contrib-concat": "~1.0.1",
     "grunt-sync-pkg": "~0.1.2",
     "matchdep": "^1.0.0",
+    "npm-run-all": "^4.0.2",
     "nyc": "^11.0.3",
     "rollup": "^0.45.2",
-    "rollup-plugin-babel": "^2.7.1"
+    "rollup-plugin-babel": "^2.7.1",
+    "typescript": "^2.4.2"
   },
   "ava": {
     "babel": "inherit",
