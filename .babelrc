@@ -1,0 +1,15 @@
+{
+  "presets": [
+    ["es2015", { modules: false }]
+  ],
+  "plugins": [
+    "./config/rename-internal"
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        ["es2015"]
+      ]
+    }
+  }
+}

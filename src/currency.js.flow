@@ -1,0 +1,32 @@
+// @flow
+
+declare type $currency$any = number | string | currency;
+
+declare type $currency$opts = {
+  symbol?: string,
+  separator?: string,
+  decimal?: string,
+  formatWithSymbol?: boolean,
+  errorOnInvalid?: boolean,
+  precision?: number
+}
+
+declare interface $currency {
+  (value: $currency$any, opts?: $currency$opts): currency,
+  static (value: $currency$any, opts?: $currency$opts): currency,
+  add(number: $currency$any): currency;
+  subtract(number: $currency$any): currency;
+  multiply(number: $currency$any): currency;
+  divide(number: $currency$any): currency;
+  distribute(count: number): Array<currency>;
+  dollars(): number;
+  cents(): number;
+  format(useSymbol?: boolean): string;
+  toString(): string;
+  toJSON(): number;
+  +intValue: number;
+  +value: number;
+}
+
+declare function currency(value: $currency$any, opts?: $currency$opts): $currency;
+declare module.exports: typeof currency;
