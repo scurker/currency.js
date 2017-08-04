@@ -1,7 +1,4 @@
-import { readFileSync } from 'fs';
 import babel from 'rollup-plugin-babel';
-
-const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
 
 export default {
   entry: 'src/currency.js',
@@ -14,7 +11,7 @@ export default {
   targets: [
     {
       format: 'umd',
-      dest: pkg.browser,
+      dest: 'dist/currency.umd.js',
       moduleName: 'currency'
     }
   ]

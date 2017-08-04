@@ -7,6 +7,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     minified: 'dist/currency.min.js',
+    umd: 'dist/currency.umd.js',
 
     banner: '/*!\n' +
       ' * <%= pkg.name %> - v<%= pkg.version %>\n' +
@@ -18,7 +19,7 @@ module.exports = function(grunt) {
 
     'closure-compiler': {
       compile: {
-        src: '<%= pkg.browser %>',
+        src: '<%= umd %>',
         dest: '<%= minified %>'
       },
       options: {
