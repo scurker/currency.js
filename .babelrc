@@ -3,8 +3,7 @@
     ["es2015", { modules: false }]
   ],
   "plugins": [
-    "transform-object-assign",
-    "./plugins/rename-internal"
+    "./config/rename-internal"
   ],
   "env": {
     "test": {

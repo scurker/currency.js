@@ -7,14 +7,11 @@ export default {
   entry: 'src/currency.js',
   plugins: [
     babel({
-      exclude: 'node_modules/**'
+      exclude: 'node_modules/**',
+      plugins: ['transform-object-assign']
     })
   ],
   targets: [
-    {
-      format: 'cjs',
-      dest: pkg.main
-    },
     {
       format: 'umd',
       dest: pkg.browser,
