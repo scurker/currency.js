@@ -3,8 +3,8 @@
   "homepage": "http://scurker.github.io/currency.js",
   "version": "1.0.0-rc1",
   "description": "A javascript library for handling currency values.",
-  "main": "dist/currency.cjs.js",
-  "browser": "dist/currency.js",
+  "main": "dist/currency.js",
+  "browser": "dist/currency.umd.js",
   "engines": {
     "node": ">=4"
   },
@@ -13,15 +13,17 @@
   },
   "scripts": {
     "clean": "rm -rf dist/*",
-    "coverage": "BABEL_ENV=test nyc ava",
+    "coverage": "BABEL_ENV=test nyc ava ./test/test.js",
     "copy-typescript-definition": "cp -f src/currency.d.ts dist",
+    "copy-flow-definition": "cp -f src/currency.js.flow dist",
     "lint": "eslint .",
-    "build": "npm-run-all clean transpile copy-typescript-definition && grunt build",
+    "build": "npm-run-all clean transpile copy-typescript-definition copy-flow-definition && grunt build",
     "prepublish": "npm run build",
     "transpile": "rollup -c ",
-    "test": "npm-run-all --parallel test:ava test:typescript",
-    "test:ava": "BABEL_ENV=test ava ./test/*.js",
-    "test:typescript": "tsc --noEmit ./test/test.ts"
+    "test": "npm-run-all --parallel test:ava test:typescript test:flow",
+    "test:ava": "BABEL_ENV=test ava ./test/test.js",
+    "test:typescript": "tsc --noEmit ./test/test.ts",
+    "test:flow": "touch .flowconfig && flow"
   },
   "repository": {
     "type": "git",
@@ -54,13 +56,14 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.24.1",
     "eslint": "^4.3.0",
+    "flow-bin": "^0.52.0",
     "google-closure-compiler": "^20170626.0.0",
     "grunt": "~1.0.1",
     "grunt-contrib-concat": "~1.0.1",
     "grunt-sync-pkg": "~0.1.2",
     "matchdep": "^1.0.0",
     "npm-run-all": "^4.0.2",
-    "nyc": "^11.0.3",
+    "nyc": "^11.1.0",
     "rollup": "^0.45.2",
     "rollup-plugin-babel": "^2.7.1",
     "typescript": "^2.4.2"

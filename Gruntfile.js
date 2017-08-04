@@ -30,7 +30,6 @@ module.exports = function(grunt) {
     concat: {
       dist: {
         files: {
-          '<%= pkg.browser %>': '<%= pkg.browser %>',
           '<%= minified %>': '<%= minified %>'
         }
       },

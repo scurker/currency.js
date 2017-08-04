@@ -1,7 +1,7 @@
 {
   "name": "currency.js",
   "main": [
-    "dist/currency.cjs.js"
+    "dist/currency.js"
   ],
   "version": "1.0.0-rc1",
   "homepage": "http://scurker.github.io/currency.js",
