@@ -70,6 +70,10 @@ section h3 {
   font-size: 1.25em;
 }
 
+h3 em {
+  font-weight: normal;
+}
+
 footer {
   font-size: 1.4em;
   margin: 1em 0;

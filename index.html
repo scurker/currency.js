@@ -14,8 +14,8 @@
         <h1>currency.js</h1>
         <p>A small, lightweight javascript library for working with currency values.</p>
         <div>
-          <a class="btn" href="https://raw.github.com/scurker/currency.js/master/currency.min.js">Download</a>
-          <div><em>v0.4.4 (1.71 Kb)</em></div>
+          <a class="btn" href="https://unpkg.com/currency.js@1.0.0/dist/currency.min.js">Download</a>
+          <div><em>v1.0.0 (2.15 Kb)</em></div>
         </div>
 
         <div class="social cf">
@@ -73,15 +73,36 @@ currency(123.45).add(.1).intValue;  // 12346</pre>
       <section>
         <h2>Options</h2>
         <p>Currency has a couple of default settings that change the way that currency values are parsed or formatted. These values can be overwritten to your locale, but by default they are US centric values.</p>
-        <pre class="prettyprint lang-js">currency.settings.separator = ' ';
-currency.settings.decimal = ',';
-currency.settings.symbol = '€';
-currency.settings.formatWithSymbol = true;
 
-currency(1234.56).format(); // "€1 234.56";
+        <h3 id="options.symbol">symbol <em>default: <code>$</code></em></h3>
+        <p>When <code>formatWithSymbol</code> is set to true, will include the currency symbol when calling currency.format().</p>
+        <pre class="prettyprint lang-js">currency(1.23, { formatWithSymbol: true }).format(); // '$1.23'</pre>
+
+        <h3 id="options.separator">separator <em>default: <code>,</code></em></h3>
+        <p>Separator dividing the number groups when calling currency.format().</p>
+        <pre class="prettyprint lang-js">currency(1234.56, { separator: ',' }).format(); // '1,234.56'
+currency(1234.56, { separator: ' ' }).format(); // '1 234.56'
 </pre>
-        <h3>Invalid Inputs</h3>
-        <p>By default, currency converts any invalid inputs to 0, however you may want to throw an error when on undefined or null values. You can change this by setting <code>currency.settings.errorOnInvalid</code> to <code>true</code>.</code></code></p>
+
+        <h3 id="options.decimal">decimal <em>default: <code>.</code></em></h3>
+        <p>Decimal used when calling currency.format().</p>
+        <pre class="prettyprint lang-js">currency(1.23, { decimal: '.' }).format(); // '1.23'
+currency(1.23, { decimal: ',' }).format(); // '1,23'</pre>
+
+        <h3 id="options.precision">precision <em>default: <code>2</code></em></h3>
+        <p>Number of decimal places to store as cents.</p>
+        <pre class="prettyprint lang-js">currency(1.234, { precision: 2 }); // '1.23'
+currency(1.234, { precision: 3 }); // '1.234'</pre>
+
+        <h3 id="options.formatWithSymbol">formatWithSymbol <em>default: <code>false</code></em></h3>
+        <p>Includes the <code>symbol</code> option when calling currency.format().</p>
+        <pre class="prettyprint lang-js">currency(1.23, { formatWithSymbol: true }).format();  // '$1.23'
+currency(1.23, { formatWithSymbol: false }).format(); // '1.23'</pre>
+
+        <h3 id="options.errorOnInvalid">errorOnInvalid <em>default: <code>false</code></em></h3>
+        <p>If an invalid value such as null or undefined is passed in, will throw an error.</p>
+        <pre class="prettyprint lang-js">currency(undefined, { errorOnInvalid: true }); // throws an error</pre>
+
       </section>
 
       <section>
@@ -117,25 +138,18 @@ currency(12.00).distribute(3); // [4.00, 4.00, 4.00]</pre>
         <p>A basic formatter that outputs a friendly format.</p>
         <pre class="prettyprint lang-js">currency(1000.00).format(); // "1,000.00"
 currency("1,234,567.89").add("200,000").format(); // "1,434,567.89"</pre>
-        <p>The formatter can be overridden by setting the <code>currency.setting</code> values.</p>
-        <pre class="prettyprint">currency.settings.separator = ' ';
-currency.settings.decimal = ',';
+        <p>The formatter can be overridden by passing in options as the second parameter.</p>
+        <pre class="prettyprint">var euro = value => currency(value, { separator: ' ', decimal: ',' });
 
 ...
 
-currency(1000.00).format(); // "1 000,00"
-currency(1234567.89).add("200 000").format(); // "1 434 567,89"</pre>
+euro(1000.00).format(); // "1 000,00"
+euro(1234567.89).add("200 000").format(); // "1 434 567,89"</pre>
         <p>You can also include the set currency symbol in a couple of different ways. By default it's turned off, but you can turn it on via global settings or by passing in a boolean option to the formatter.</p>
-        <pre class="prettyprint">currency(1000.00).format(true);  // "$1,000.00"
+        <pre class="prettyprint">var money = value => currency(value, { formatWithSymbol: true });
 
-...
-
-currency.settings.formatWithSymbol = true;
-
-...
-
-currency(1000.00).format();      // "$1,000.00"
-currency(1000.00).format(false); // "1,000.00"
+money(1000.00).format();      // "$1,000.00"
+money(1000.00).format(false); // "1,000.00"
 </pre>
         <h3 id="currency.dollars"><strong>currency.dollars</strong></h3>
         <p>Returns the dollar value of a currency.</p>
