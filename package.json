@@ -63,7 +63,7 @@
     "grunt": "~1.0.1",
     "grunt-contrib-concat": "~1.0.1",
     "grunt-sync-pkg": "~0.1.2",
-    "matchdep": "^1.0.0",
+    "matchdep": "^2.0.0",
     "npm-run-all": "^4.0.2",
     "nyc": "^11.1.0",
     "rollup": "^0.47.0",
