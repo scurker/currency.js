@@ -15,6 +15,32 @@ currency(2.52).subtract(.01); // 2.51
 
 This should work for most *reasonable* values of currencies. As long as your currency values are less than 2<sup>53</sup> (in cents) or 90,071,992,547,409.91 you should be okay.
 
+### Installation
+
+With [npm](https://www.npmjs.com/):
+
+```sh
+npm install --save currency.js
+```
+
+With [yarn](https://yarnpkg.com):
+
+```sh
+yarn install --save currency.js
+```
+
+With [bower](https://bower.io/):
+
+```sh
+bower install --save currency.js
+```
+
+Via cdn:
+
+```html
+<script src="https://unpkg.com/currency.js@1.0.0/dist/currency.min.js">
+```
+
 ### Usage
 
 Currency will accept numbers, strings, or the currency object itself as values.
@@ -53,8 +79,6 @@ euro("2.573.693,75").add("100.275,50").format();  // "2.673.969,25"
 euro("1.237,72").subtract(300).format();          // "937,72"
 ```
 
-View more examples and full documentation at [scurker.github.io/currency.js](http://scurker.github.io/currency.js).
-
 ### Options
 
 *currency.js* comes with its own set of default options conforming to USD. You can customize these according to your locale.
@@ -77,36 +101,7 @@ Includes the `symbol` option when calling `currency.format()`.
 `errorOnInvalid` *default*: `false`<br/>
 If an invalid value such as `null` or `undefined` is passed in, will throw an error.
 
-### Installation
-
-With [npm](https://www.npmjs.com/):
-
-```sh
-npm install --save currency.js
-```
-
-With [yarn](https://yarnpkg.com):
-
-```sh
-yarn install --save currency.js
-```
-
-With [bower](https://bower.io/):
-```sh
-bower install --save currency.js
-```
-
-Via cdn:
-```html
-<script src="https://unpkg.com/currency.js@1.0.0/dist/currency.min.js">
-```
-
-**Local Development**
-
-Running locally? You will need [grunt](http://gruntjs.com/) and optionally Java if you want to minify currency.js
-
-1. `npm install`
-1. `grunt`
+> View more examples and full documentation at [scurker.github.io/currency.js](http://scurker.github.io/currency.js).
 
 ### v1.0.0 breaking changes
 
@@ -133,6 +128,10 @@ If you need to work with multiple currency values, the easiest way is to setup f
 const USD = value => currency(value, { symbol: "$", precision: 2 });
 const JPY = value => currency(value, { symbol: "¥", precision: 0 });
 const GAS = value => currency(value, { precision: 3 });
+
+USD(1234.56).format(true); // "$1,234.56"
+JPY(1234.56).format(true); // "¥1,235"
+GAS(1234.56).format(true); // "$1,234.560"
 ```
 
 ## Add-ons
