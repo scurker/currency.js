@@ -75,6 +75,8 @@
     "require": "babel-register"
   },
   "nyc": {
-    "include": ["src/**/*.js"]
+    "include": [
+      "src/**/*.js"
+    ]
   }
 }
