@@ -79,15 +79,27 @@ If an invalid value such as `null` or `undefined` is passed in, will throw an er
 
 ### Installation
 
-**Install via npm**
+With [npm](https://www.npmjs.com/):
 
-* The latest version ```npm install currency.js```
-* Or GitHub master branch ```npm install scurker/currency.js```
+```sh
+npm install --save currency.js
+```
 
-**Install via bower**
+With [yarn](https://yarnpkg.com):
 
-* The latest version ```bower install currency.js```
-* Or GitHub master branch ```bower install scurker/currency.js```
+```sh
+yarn install --save currency.js
+```
+
+With [bower](https://bower.io/):
+```sh
+bower install --save currency.js
+```
+
+Via cdn:
+```html
+<script src="https://unpkg.com/currency.js@1.0.0/dist/currency.min.js">
+```
 
 **Local Development**
 
@@ -122,6 +134,10 @@ const USD = value => currency(value, { symbol: "$", precision: 2 });
 const JPY = value => currency(value, { symbol: "¥", precision: 0 });
 const GAS = value => currency(value, { precision: 3 });
 ```
+
+## Add-ons
+
+* [babel-plugin-transform-currency-operators](https://github.com/scurker/babel-plugin-transform-currency-operators): An experiental babel plugin for transforming currency operations `currency(1.23) + 4.56` to `currency(1.23).add(4.56)`.
 
 ## License
 
