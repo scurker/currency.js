@@ -59,7 +59,7 @@
     "babel-register": "^6.24.1",
     "eslint": "^4.3.0",
     "flow-bin": "^0.54.0",
-    "google-closure-compiler": "^20170806.0.0",
+    "google-closure-compiler": "^20170910.0.0",
     "grunt": "~1.0.1",
     "grunt-contrib-concat": "~1.0.1",
     "grunt-sync-pkg": "~0.1.2",
@@ -75,6 +75,8 @@
     "require": "babel-register"
   },
   "nyc": {
-    "include": ["src/**/*.js"]
+    "include": [
+      "src/**/*.js"
+    ]
   }
 }
