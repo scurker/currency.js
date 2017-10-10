@@ -1,5 +1,15 @@
-currency.js [![Build Status](https://travis-ci.org/scurker/currency.js.svg?branch=master)](https://travis-ci.org/scurker/currency.js) [![Coverage Status](https://coveralls.io/repos/scurker/currency.js/badge.svg?branch=test-coverage&service=github)](https://coveralls.io/github/scurker/currency.js?branch=test-coverage) [![npm](https://img.shields.io/npm/v/currency.js.svg?style=flat)](https://www.npmjs.com/package/currency.js) ![bower](https://img.shields.io/bower/v/currency.js.svg)
-===========
+<div align="center" markdown="1">
+
+![currency.js logo](https://user-images.githubusercontent.com/1062039/31397127-c8504f4c-adaa-11e7-875f-c8fed6eb1253.png)
+
+# currency.js
+
+[![Build Status](https://travis-ci.org/scurker/currency.js.svg?branch=master)](https://travis-ci.org/scurker/currency.js)
+[![Coverage Status](https://coveralls.io/repos/scurker/currency.js/badge.svg?branch=test-coverage&service=github)](https://coveralls.io/github/scurker/currency.js?branch=test-coverage)
+[![npm](https://img.shields.io/npm/v/currency.js.svg?style=flat)](https://www.npmjs.com/package/currency.js)
+![bower](https://img.shields.io/bower/v/currency.js.svg)
+
+</div>
 
 *currency.js* is a lightweight javascript library for working with currency values. It was built to work around floating point issues in javascript. This [talk by Bartek Szopka](http://www.youtube.com/watch?v=MqHDDtVYJRI) explains in detail why javascript has floating point issues.
 
