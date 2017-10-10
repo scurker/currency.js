@@ -1,6 +1,6 @@
 <div align="center" markdown="1">
 
-![currency.js logo](https://user-images.githubusercontent.com/1062039/31397127-c8504f4c-adaa-11e7-875f-c8fed6eb1253.png)
+![currency.js logo](https://user-images.githubusercontent.com/1062039/31397824-9dfa15f0-adac-11e7-9869-fb20746e90c1.png)
 
 # currency.js
 
