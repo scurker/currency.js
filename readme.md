@@ -36,7 +36,7 @@ npm install --save currency.js
 With [yarn](https://yarnpkg.com):
 
 ```sh
-yarn install --save currency.js
+yarn add currency.js
 ```
 
 With [bower](https://bower.io/):
