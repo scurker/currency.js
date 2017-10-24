@@ -52,7 +52,7 @@
     "url": "https://github.com/scurker/currency.js/issues"
   },
   "devDependencies": {
-    "ava": "^0.22.0",
+    "ava": "^0.23.0",
     "babel-cli": "^6.24.1",
     "babel-plugin-transform-object-assign": "^6.22.0",
     "babel-preset-es2015": "^6.24.1",
