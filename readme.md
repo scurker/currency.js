@@ -8,10 +8,11 @@
 [![Coverage Status](https://coveralls.io/repos/scurker/currency.js/badge.svg?branch=test-coverage&service=github)](https://coveralls.io/github/scurker/currency.js?branch=test-coverage)
 [![npm](https://img.shields.io/npm/v/currency.js.svg?style=flat)](https://www.npmjs.com/package/currency.js)
 ![bower](https://img.shields.io/bower/v/currency.js.svg)
+![gzip size](http://img.badgesize.io/https://unpkg.com/currency.js/dist/currency.min.js?compression=gzip)](https://unpkg.com/currency.js/dist/currency.min.js)
 
 </div>
 
-*currency.js* is a lightweight javascript library for working with currency values. It was built to work around floating point issues in javascript. This [talk by Bartek Szopka](http://www.youtube.com/watch?v=MqHDDtVYJRI) explains in detail why javascript has floating point issues.
+*currency.js* is a lightweight ~1kb javascript library for working with currency values. It was built to work around floating point issues in javascript. This [talk by Bartek Szopka](http://www.youtube.com/watch?v=MqHDDtVYJRI) explains in detail why javascript has floating point issues.
 
 currency.js works with values as integers behind the scenes, resolving some of the most basic precision problems.
 
