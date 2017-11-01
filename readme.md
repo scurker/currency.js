@@ -8,7 +8,7 @@
 [![Coverage Status](https://coveralls.io/repos/scurker/currency.js/badge.svg?branch=test-coverage&service=github)](https://coveralls.io/github/scurker/currency.js?branch=test-coverage)
 [![npm](https://img.shields.io/npm/v/currency.js.svg?style=flat)](https://www.npmjs.com/package/currency.js)
 ![bower](https://img.shields.io/bower/v/currency.js.svg)
-![gzip size](http://img.badgesize.io/https://unpkg.com/currency.js/dist/currency.min.js?compression=gzip)](https://unpkg.com/currency.js/dist/currency.min.js)
+[![gzip size](http://img.badgesize.io/https://unpkg.com/currency.js/dist/currency.min.js?compression=gzip)](https://unpkg.com/currency.js/dist/currency.min.js)
 
 </div>
 
@@ -38,12 +38,6 @@ With [yarn](https://yarnpkg.com):
 
 ```sh
 yarn add currency.js
-```
-
-With [bower](https://bower.io/):
-
-```sh
-bower install --save currency.js
 ```
 
 Via cdn:
