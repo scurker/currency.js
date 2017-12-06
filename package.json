@@ -59,7 +59,7 @@
     "babel-register": "^6.24.1",
     "eslint": "^4.3.0",
     "flow-bin": "^0.60.1",
-    "google-closure-compiler": "^20171112.0.0",
+    "google-closure-compiler": "^20171203.0.0",
     "grunt": "~1.0.1",
     "grunt-contrib-concat": "~1.0.1",
     "grunt-sync-pkg": "~0.1.2",
