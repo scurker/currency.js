@@ -4,20 +4,20 @@ import babel from 'rollup-plugin-babel';
 const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
 
 export default {
-  entry: 'src/currency.js',
+  input: 'src/currency.js',
   plugins: [
     babel({
       exclude: 'node_modules/**'
     })
   ],
-  targets: [
+  output: [
     {
       format: 'es',
-      dest: pkg.module
+      file: pkg.module
     },
     {
       format: 'cjs',
-      dest: pkg.main
+      file: pkg.main
     }
   ]
 };

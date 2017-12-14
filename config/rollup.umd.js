@@ -1,18 +1,18 @@
 import babel from 'rollup-plugin-babel';
 
 export default {
-  entry: 'src/currency.js',
+  input: 'src/currency.js',
   plugins: [
     babel({
       exclude: 'node_modules/**',
       plugins: ['transform-object-assign']
     })
   ],
-  targets: [
+  output: [
     {
       format: 'umd',
-      dest: 'dist/currency.umd.js',
-      moduleName: 'currency'
+      file: 'dist/currency.umd.js',
+      name: 'currency'
     }
   ]
 };
