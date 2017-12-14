@@ -24,7 +24,7 @@
     "transpile": "rollup -c ./config/rollup.config.js && rollup -c ./config/rollup.umd.js",
     "test": "npm-run-all test:typescript test:flow test:ava",
     "test:ava": "BABEL_ENV=test ava ./test/test.js",
-    "test:typescript": "tsc --noEmit ./test/test.ts",
+    "test:typescript": "tsc -p ./test --noEmit",
     "test:flow": "touch .flowconfig && flow"
   },
   "repository": {
