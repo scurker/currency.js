@@ -1,3 +1,7 @@
+**1.0.1**
+
+* Fixed default imports for Typescript. ([#73](https://github.com/scurker/currency.js/issues/73))
+
 **1.0.0**
 
 * Node < 4 support dropped.
