@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-- '6'
-- '7'
+- '4'
+- 'latest'
 before_install:
 - npm install -g grunt-cli coveralls
 script:
