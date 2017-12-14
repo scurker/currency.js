@@ -43,7 +43,7 @@ yarn add currency.js
 Via cdn:
 
 ```html
-<script src="https://unpkg.com/currency.js@1.0.0/dist/currency.min.js"></script>
+<script src="https://unpkg.com/currency.js@~1.0.0/dist/currency.min.js"></script>
 ```
 
 ### Usage
