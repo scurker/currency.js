@@ -31,11 +31,8 @@ declare interface currency {
 
 declare const currency : currency.Constructor;
 
-declare module 'currency.js' {
-  export function currency(
-    value: currency.Any,
-    opts?: currency.Options
-  ): currency;
-}
+export = currency;
 
-export default currency;
+declare module 'currency.js' {
+  export default currency;
+}

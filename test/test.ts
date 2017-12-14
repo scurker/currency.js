@@ -1,6 +1,10 @@
 import currency from '../src/currency.js';
+import * as namedCurrency from '../src/currency.js';
+import interopCurrency = require('../src/currency.js');
 
 const currencyInstance: currency = currency(1.23);
+const currencyInstance2: currency = namedCurrency(1.23);
+const currencyInstance3: currency = interopCurrency(1.23);
 
 // default uses
 new currency(1.23);
