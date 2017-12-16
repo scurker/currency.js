@@ -141,7 +141,7 @@ GAS(1234.56).format(true); // "$1,234.560"
 
 ## Add-ons
 
-* [babel-plugin-transform-currency-operators](https://github.com/scurker/babel-plugin-transform-currency-operators): An experiental babel plugin for transforming currency operations `currency(1.23) + 4.56` to `currency(1.23).add(4.56)`.
+* [babel-plugin-transform-currency-operators](https://github.com/scurker/babel-plugin-transform-currency-operators): An experimental babel plugin for transforming currency operations `currency(1.23) + 4.56` to `currency(1.23).add(4.56)`.
 
 ## License
 
