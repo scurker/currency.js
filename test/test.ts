@@ -23,7 +23,8 @@ currency(1.23, {
   formatWithSymbol: true,
   errorOnInvalid: true,
   precision: 2,
-  increment: .05
+  increment: .05,
+  useVedic: false
 });
 
 // add

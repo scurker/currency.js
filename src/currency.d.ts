@@ -11,7 +11,8 @@ declare namespace currency {
     formatWithSymbol?: boolean,
     errorOnInvalid?: boolean,
     precision?: number,
-    increment?: number
+    increment?: number,
+    useVedic?: boolean
   }
 }
 

@@ -247,6 +247,15 @@ test('should format value using international', t => {
   t.is(c(1000000.00).format(), '1.000.000,00', 'value is "1.000.000,00"');
 });
 
+test('should format vedic groupings', t => {
+  let c = value => currency(value, { useVedic: true })
+
+  t.is(c(1.23).format(), '1.23', 'value is "1.23"');
+  t.is(c(1000.00).format(), '1,000.00', 'value is "1,000"');
+  t.is(c(100000.00).format(), '1,00,000.00', 'value is "1,00,000,00"');
+  t.is(c(1000000.00).format(), '10,00,000.00', 'value is "10,00,000,00"');
+});
+
 test('should parse international values', t => {
   let c = value => currency(value, { separator: '.', decimal: ',' });
 
