@@ -13,7 +13,7 @@ const rounding = (value, increment) => round(value / increment) * increment;
 
 const lastDecimalRegex = /\.(\d+)$/;
 const groupRegex = /(\d)(?=(\d{3})+\b)/g;
-const vedicRegex = /(\d)(?=(\d{2})+\d\b)/g;
+const vedicRegex = /(\d)(?=(\d\d)+\d\b)/g;
 
 /**
  * Create a new instance of currency.js
