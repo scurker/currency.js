@@ -81,12 +81,26 @@ test('should subtract floating point', t => {
 
 test('currency multiplication', t => {
   var value = currency(1.23).multiply(2);
-  t.is(parseFloat(value), 2.46, 'currency(1.23).multiplication(2) is 2.46');
+  var floatingValue = currency(.1).multiply(.2);
+
+  t.is(parseFloat(value), 2.46, 'currency(1.23).multiply(2) is 2.46');
+  t.is(parseFloat(floatingValue), .02, 'currency(.1).multiply(.2) equals 0.02');
+  t.not(parseFloat(floatingValue), .1*.2, 'currency(.1).multiply(.2) does not equal 0.020000000000000004');
+});
+
+test('currency multiplication with precision', t => {
+  var value = currency(1.369, { precision: 3 }).multiply(3);
+  t.is(parseFloat(value), 4.107, 'currency(1.369).multiply(3) is 4.107');
 });
 
 test('currency division', t => {
   var value = currency(9.87).divide(2);
   t.is(parseFloat(value), 4.93, 'currency(9.87).divide(2) is 4.93');
+});
+
+test('currency division with precision', t => {
+  var value = currency(4.107, { precision: 3 }).divide(3);
+  t.is(parseFloat(value), 1.369, 'currency(4.107).divide(3) is 1.369');
 });
 
 test('should parse negative values', t => {

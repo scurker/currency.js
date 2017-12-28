@@ -7,6 +7,8 @@ const defaults = {
   precision: 2
 };
 
+const pow = p => Math.pow(10, p);
+
 const regex = {
   groupedNumbers: /(\d)(?=(\d{3})+\b)/g,
   lastDecimal: /\.(\d+)$/
@@ -25,7 +27,7 @@ function currency(value, opts) {
   }
 
   let settings = Object.assign({}, defaults, opts)
-    , precision = Math.pow(10, settings.precision)
+    , precision = pow(settings.precision)
     , v = parse(value, settings);
 
   that.intValue = v;
@@ -39,7 +41,7 @@ function currency(value, opts) {
 function parse(value, opts, round = true) {
   let v = 0
     , { decimal, errorOnInvalid, precision: decimals } = opts
-    , precision = Math.pow(10, decimals);
+    , precision = pow(decimals);
 
   if (typeof value === 'number') {
     v = value * precision;
@@ -95,7 +97,7 @@ currency.prototype = {
    */
   multiply(number) {
     let { intValue, _settings } = this;
-    return currency((intValue *= parse(number, _settings, false)) / Math.pow(10, _settings.precision + 2), _settings);
+    return currency((intValue *= number) / pow(_settings.precision), _settings);
   },
 
   /**
