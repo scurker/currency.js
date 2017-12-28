@@ -1,7 +1,7 @@
 {
   "name": "currency.js",
   "homepage": "http://scurker.github.io/currency.js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A javascript library for handling currency values.",
   "main": "dist/currency.js",
   "module": "dist/currency.es.js",
