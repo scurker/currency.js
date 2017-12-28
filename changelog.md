@@ -1,6 +1,10 @@
+**1.0.2**
+
+* Fixed multiplying with precisions other than 2. ([#76](https://github.com/scurker/currency.js/issues/76) thanks [@usb248](https://github.com/usb248))
+
 **1.0.1**
 
-* Fixed default imports for Typescript. ([#73](https://github.com/scurker/currency.js/issues/73))
+* Fixed default imports for Typescript. ([#73](https://github.com/scurker/currency.js/issues/73) thanks [@shepherdwind](https://github.com/shepherdwind))
 
 **1.0.0**
 
