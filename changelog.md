@@ -1,3 +1,7 @@
+**1.0.5**
+
+* Removed `static` properties from flow definition files.
+
 **1.0.2**
 
 * Fixed multiplying with precisions other than 2. ([#76](https://github.com/scurker/currency.js/issues/76) thanks [@usb248](https://github.com/usb248))
