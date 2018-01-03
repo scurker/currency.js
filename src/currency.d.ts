@@ -10,7 +10,8 @@ declare namespace currency {
     decimal?: string,
     formatWithSymbol?: boolean,
     errorOnInvalid?: boolean,
-    precision?: number
+    precision?: number,
+    increment?: number
   }
 }
 

@@ -22,7 +22,8 @@ currency(1.23, {
   decimal: '.',
   formatWithSymbol: true,
   errorOnInvalid: true,
-  precision: 2
+  precision: 2,
+  increment: .05
 });
 
 // add

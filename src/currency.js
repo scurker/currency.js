@@ -7,7 +7,9 @@ const defaults = {
   precision: 2
 };
 
+const round = v => Math.round(v);
 const pow = p => Math.pow(10, p);
+const rounding = (value, increment) => round(value / increment) * increment;
 
 const regex = {
   groupedNumbers: /(\d)(?=(\d{3})+\b)/g,
@@ -33,12 +35,15 @@ function currency(value, opts) {
   that.intValue = v;
   that.value = v / precision;
 
+  // Set default incremental value
+  settings.increment = settings.increment || (1 / precision);
+
   // Intended for internal usage only - subject to change
   this._settings = settings;
   this._precision = precision;
 }
 
-function parse(value, opts, round = true) {
+function parse(value, opts, useRounding = true) {
   let v = 0
     , { decimal, errorOnInvalid, precision: decimals } = opts
     , precision = pow(decimals);
@@ -65,7 +70,7 @@ function parse(value, opts, round = true) {
     v = 0;
   }
 
-  return round ? Math.round(v) : v;
+  return useRounding ? round(v) : v;
 }
 
 currency.prototype = {
@@ -174,7 +179,7 @@ currency.prototype = {
    */
   toString() {
     let { intValue, _precision, _settings } = this;
-    return (intValue / _precision).toFixed(_settings.precision);
+    return rounding(intValue / _precision, _settings.increment).toFixed(_settings.precision);
   },
 
   /**

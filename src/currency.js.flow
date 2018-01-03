@@ -8,7 +8,8 @@ declare type $currency$opts = {
   decimal?: string,
   formatWithSymbol?: boolean,
   errorOnInvalid?: boolean,
-  precision?: number
+  precision?: number,
+  increment?: number
 }
 
 declare interface $currency {

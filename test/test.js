@@ -273,6 +273,50 @@ test('should return 0.00 currency with invalid input', t => {
   t.is(value.value, 0, 'value is "0.00"');
 });
 
+test('should round to nearest increment', t => {
+  let c = value => currency(value, { increment: .05 });
+
+  t.is(c(1.00).add(.04).toString(), '1.05', 'value is rounded to 1.05');
+  t.is(c(1.00).add(.01).toString(), '1.00', 'value is rounded to 1.00');
+  t.is(c(-1.00).add(.04).toString(), '-0.95', 'value is rounded to -0.95');
+  t.is(c(-1.00).add(.01).toString(), '-1.00', 'value is rounded to -1.00');
+  t.is(c(1.00).add(.04).format(), '1.05', 'value is rounded to 1.05');
+  t.is(c(1.00).add(.01).format(), '1.00', 'value is rounded to 1.00');
+  t.is(c(1000.00).add(.04).format(), '1,000.05', 'value is rounded to 1.05');
+  t.is(c(1000.00).add(.01).format(), '1,000.00', 'value is rounded to 1.00');
+  t.is(c(1000000.00).add(.04).format(), '1,000,000.05', 'value is rounded to 1.05');
+  t.is(c(1000000.00).add(.01).format(), '1,000,000.00', 'value is rounded to 1.00');
+});
+
+test('should round only the final value to nearest increment', t => {
+  let c = value => currency(value, { increment: .05 });
+
+  t.is(c(1.00).add(.01).add(.01).add(.01).toString(), '1.05', 'value is rounded to 1.05');
+  t.is(c(1.00).subtract(.01).subtract(.01).subtract(.01).toString(), '0.95', 'value is rounded to 0.95');
+});
+
+test('should not modify internal values when rounding', t => {
+  let c = value => currency(value, { increment: .05 });
+
+  t.is(c(1.00).add(.01).intValue, 101, 'intValue is to 101');
+  t.is(c(1.00).add(.01).value, 1.01, 'value is to 1.01');
+  t.is(c(1.00).add(.04).intValue, 104, 'intValue is to 104');
+  t.is(c(1.00).add(.04).value, 1.04, 'value is to 1.04');
+});
+
+test('should allow arbitrary rounding increments', t => {
+  let c1 = value => currency(value, { increment: .1 });
+  let c2 = value => currency(value, { increment: .25 });
+  let c3 = value => currency(value, { increment: 5, precision: 0 });
+
+  t.is(c1(1.06).toString(), '1.10', 'value is rounded to 1.10');
+  t.is(c1(-1.06).toString(), '-1.10', 'value is rounded to -1.10');
+  t.is(c2(1.17).toString(), '1.25', 'value is rounded to 1.25');
+  t.is(c2(-1.17).toString(), '-1.25', 'value is rounded to -1.25');
+  t.is(c3(117).toString(), '115', 'value is rounded to 120');
+  t.is(c3(-117).toString(), '-115', 'value is rounded to 120');
+});
+
 test('should throw exception with invalid input', t => {
   t.throws(function() { currency(undefined, { errorOnInvalid: true }); }, Error, 'Threw exception');
 });
