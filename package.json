@@ -58,7 +58,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.24.1",
     "eslint": "^4.3.0",
-    "flow-bin": "^0.62.0",
+    "flow-bin": "^0.63.0",
     "google-closure-compiler": "^20171203.0.0",
     "grunt": "~1.0.1",
     "grunt-contrib-concat": "~1.0.1",
