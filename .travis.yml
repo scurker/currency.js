@@ -3,7 +3,7 @@ node_js:
 - 'node'
 - '6'
 before_install:
-- npm install -g grunt-cli coveralls
+- npm install -g grunt-cli codecov
 script:
 - npm run lint
 - npm run test
@@ -13,7 +13,7 @@ cache:
   - node_modules
 after_success:
   - npm run coverage
-  - ./node_modules/.bin/nyc report --reporter=text-lcov | coveralls
+  - npm run coverage-report && codecov
 deploy:
   provider: npm
   email:
