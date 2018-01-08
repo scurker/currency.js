@@ -15,6 +15,7 @@ after_success:
   - npm run coverage
   - ./node_modules/.bin/nyc report --reporter=text-lcov | coveralls
 deploy:
+  skip_cleanup: true
   provider: npm
   email:
     secure: E5X6CQNG5Qj32TVZv6OJRFtaXZKSBd9fR/u20yWZik1BCpGNzQ9A42+xXkjliHWwu7n2Xh482iaqgiv00NWVzPMaycFVJrF7SPHDl08SH6p/R5DvgLQV79ISBtEwHxzDC3hrJOeVFknZMKaGo+TUQXiL7CYVnHMxHqlTDNJKh6g=
