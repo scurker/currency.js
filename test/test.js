@@ -196,7 +196,7 @@ test('should use source formatting for mixed currency formats', t => {
   t.is(c2.add(c1).format(), '2 469,12');
 });
 
-test('parse should default rounding', t => {
+test('should default rounding when parsing', t => {
   var round1 = currency(1.234)
     , round2 = currency(5.6789)
     , multiply = currency(10.00)
@@ -273,19 +273,43 @@ test('should return 0.00 currency with invalid input', t => {
   t.is(value.value, 0, 'value is "0.00"');
 });
 
-test('should round to nearest increment', t => {
+test('should round down to nearest value when using increments', t => {
   let c = value => currency(value, { increment: .05 });
 
-  t.is(c(1.00).add(.04).toString(), '1.05', 'value is rounded to 1.05');
-  t.is(c(1.00).add(.01).toString(), '1.00', 'value is rounded to 1.00');
-  t.is(c(-1.00).add(.04).toString(), '-0.95', 'value is rounded to -0.95');
-  t.is(c(-1.00).add(.01).toString(), '-1.00', 'value is rounded to -1.00');
-  t.is(c(1.00).add(.04).format(), '1.05', 'value is rounded to 1.05');
-  t.is(c(1.00).add(.01).format(), '1.00', 'value is rounded to 1.00');
-  t.is(c(1000.00).add(.04).format(), '1,000.05', 'value is rounded to 1.05');
-  t.is(c(1000.00).add(.01).format(), '1,000.00', 'value is rounded to 1.00');
-  t.is(c(1000000.00).add(.04).format(), '1,000,000.05', 'value is rounded to 1.05');
-  t.is(c(1000000.00).add(.01).format(), '1,000,000.00', 'value is rounded to 1.00');
+  t.is(c(1.01).toString(), '1.00', 'value is rounded to 1.00');
+  t.is(c(1.02).toString(), '1.00', 'value is rounded to 1.00');
+  t.is(c(1.06).toString(), '1.05', 'value is rounded to 1.05');
+  t.is(c(1.07).toString(), '1.05', 'value is rounded to 1.05');
+  t.is(c(1000.01).format(), '1,000.00', 'value is rounded to 1000.00');
+  t.is(c(10000.01).format(), '10,000.00', 'value is rounded to 10000.00');
+  t.is(c(100000.01).format(), '100,000.00', 'value is rounded to 100000.00');
+  t.is(c(1000000.01).format(), '1,000,000.00', 'value is rounded to 1000000.00');
+});
+
+test('should round up to nearest value when using increments', t => {
+  let c = value => currency(value, { increment: .05 });
+
+  t.is(c(1.03).toString(), '1.05', 'value is rounded to 1.05');
+  t.is(c(1.04).toString(), '1.05', 'value is rounded to 1.05');
+  t.is(c(1.08).toString(), '1.10', 'value is rounded to 1.10');
+  t.is(c(1.09).toString(), '1.10', 'value is rounded to 1.10');
+  t.is(c(1000.09).format(), '1,000.10', 'value is rounded to 1000.10');
+  t.is(c(10000.09).format(), '10,000.10', 'value is rounded to 10000.10');
+  t.is(c(100000.09).format(), '100,000.10', 'value is rounded to 100000.10');
+  t.is(c(1000000.09).format(), '1,000,000.10', 'value is rounded to 1000000.10');
+});
+
+test('should handle negative rounding when using increments', t => {
+  let c = value => currency(value, { increment: .05 });
+
+  t.is(c(-1.01).toString(), '-1.00', 'value is rounded to -1.00');
+  t.is(c(-1.02).toString(), '-1.00', 'value is rounded to -1.00');
+  t.is(c(-1.03).toString(), '-1.05', 'value is rounded to -1.05');
+  t.is(c(-1.04).toString(), '-1.05', 'value is rounded to -1.05');
+  t.is(c(-1.06).toString(), '-1.05', 'value is rounded to -1.05');
+  t.is(c(-1.07).toString(), '-1.05', 'value is rounded to -1.05');
+  t.is(c(-1.08).toString(), '-1.10', 'value is rounded to -1.10');
+  t.is(c(-1.09).toString(), '-1.10', 'value is rounded to -1.10');
 });
 
 test('should round only the final value to nearest increment', t => {
