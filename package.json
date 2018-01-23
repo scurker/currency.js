@@ -1,7 +1,7 @@
 {
   "name": "currency.js",
   "homepage": "http://scurker.github.io/currency.js",
-  "version": "1.1.0-beta.1",
+  "version": "1.1.0-beta.2",
   "description": "A javascript library for handling currency values.",
   "main": "dist/currency.js",
   "module": "dist/currency.es.js",
@@ -54,22 +54,22 @@
   "devDependencies": {
     "@scurker/eslint-config": "^1.1.0",
     "ava": "^0.24.0",
-    "babel-cli": "^6.24.1",
+    "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-assign": "^6.22.0",
     "babel-preset-env": "^1.6.1",
-    "babel-register": "^6.24.1",
-    "eslint": "^4.3.0",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.16.0",
     "flow-bin": "^0.63.1",
     "google-closure-compiler": "^20180101.0.0",
     "grunt": "~1.0.1",
     "grunt-contrib-concat": "~1.0.1",
     "grunt-sync-pkg": "~0.1.2",
     "matchdep": "^2.0.0",
-    "npm-run-all": "^4.0.2",
-    "nyc": "^11.1.0",
+    "npm-run-all": "^4.1.2",
+    "nyc": "^11.4.1",
     "rollup": "^0.55.0",
-    "rollup-plugin-babel": "^3.0.1",
-    "typescript": "^2.4.2"
+    "rollup-plugin-babel": "^3.0.3",
+    "typescript": "^2.6.2"
   },
   "ava": {
     "babel": "inherit",
