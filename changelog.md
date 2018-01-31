@@ -1,6 +1,6 @@
 **1.0.8**
 
-* Changed module `export default currency` to `export = currency` for Typescript definition. ([#88](https://github.com/scurker/currency.js/issues/88) thanks [@arturnt]](https://github.com/arturnt))
+* Changed module `export default currency` to `export = currency` for Typescript definition. ([#88](https://github.com/scurker/currency.js/issues/88) thanks [@arturnt](https://github.com/arturnt))
 
 **1.0.6**
 
