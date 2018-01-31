@@ -36,5 +36,5 @@ declare const currency : currency.Constructor;
 export = currency;
 
 declare module 'currency.js' {
-  export default currency;
+  export = currency;
 }

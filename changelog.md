@@ -1,6 +1,10 @@
+**1.0.8**
+
+* Changed module `export default currency` to `export = currency` for Typescript definition. ([#88](https://github.com/scurker/currency.js/issues/88) thanks [@arturnt](https://github.com/arturnt))
+
 **1.0.6**
 
-* Fixed travis deployments. )[#79](https://github.com/scurker/currency.js/issues/79))
+* Fixed travis deployments. ([#79](https://github.com/scurker/currency.js/issues/79))
 
 **1.0.5**
 
