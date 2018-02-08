@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>currency.js</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700">
+  <link rel="canonical" href="https://scurker.github.io/currency.js/">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+  <style>
+    body {
+      font-family: "Source Sans Pro", sans-serif;
+      background-color: #efefef;
+      height: 100%;
+      padding: 2em;
+    }
+
+    main {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    footer {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      font-size: .9em;
+      border-top: 1px solid #ccc;
+    }
+
+    @media (min-width: 49em) {
+      main {
+        width: 45em;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    header {
+      border: 1px solid #ccc;
+      background-color: #fff;
+      padding: 1em;
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      background: none;
+      cursor: pointer;
+      padding: 1em 2em;
+      background-color: #fd5;
+      color: #001c37;
+      border-radius: .25em;
+      transition: ease-in-out background-color 150ms;
+    }
+
+    .btn:hover {
+      background-color: #da0;
+    }
+
+    header .btn {
+      margin-top: 1em;
+    }
+
+    header p {
+      margin-top: .5em;
+    }
+
+    pre {
+      padding: .5em 0;
+      white-space: pre-wrap;
+    }
+
+    code {
+      background-color: #ccd8c3;
+      color: #251;
+      display: inline-block;
+      padding: .2em .4em;
+      border-radius: .25em;
+      font-weight: 700;
+      font-size: .8em;
+    }
+
+    pre > code {
+      padding: 1em;
+      display: block;
+      background-color: #333;
+      color: #c5c8c6;
+      font-weight: 400;
+    }
+
+    .comment {
+      color: #969896;
+      font-style: italic;
+    }
+
+    .keyword,
+    .literal {
+      color: #b294b6;
+    }
+
+    .function {
+      color: #c66;
+    }
+
+    .number {
+      color: #f0c674;
+    }
+
+    .string {
+      color: #b5bd68;
+    }
+
+    .center {
+      text-align: center;
+    }
+  </style>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+  <img src="https://user-images.githubusercontent.com/1062039/31397824-9dfa15f0-adac-11e7-9869-fb20746e90c1.png" alt="currency logo">
+  <h1>currency.js</h1>
+  <p>A small, lightweight javascript library for working with currency values.</p>
+  <a class="btn" href="https://unpkg.com/currency.js/dist/currency.min.js">Download currency.js</a>
+  <p><strong>v1.1.0-beta.2</strong> <em>(1.1 kB)</em></p>
+  <aside class="center">
+    <a class="github-button" href="https://github.com/scurker/currency.js" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star scurker/currency.js on GitHub">Star</a>
+  </aside>
+</header>
+<section><h2 id="usage">Usage</h2>
+<p><em>currency.js</em> was built to work around common floating point issues in javascript with a flexible api.</p>
+<p>When working with currencies, decimals only need to be precise up to the smallest cent value while avoiding common floating point errors when performing basic arithmetic. <em>currency.js</em> resolves this issue by working with integers behind the scenes, so you don&#39;t have to be concerned about decimal precision.</p>
+<p>For more details on why Javascript has issues with floating point numbers, there&#39;s an excellent talk by Bartek Szopka on <a href="http://www.youtube.com/watch?v=MqHDDtVYJRI">everything you never wanted to know about Javascript numbers</a> explaining why Javascript and other IEEE 754 implementations have floating point issues.</p>
+<p><em>currency.js</em> will work with a range of inputs, including <code>strings</code>, <code>numbers</code>, <code>decimals</code>, or another <code>currency</code> object.</p>
+<pre><code class="lang-js"><span class="comment">// Numbers</span>
+currency(<span class="number">1</span>); <span class="comment">// =&gt; "1.00"</span>
+currency(<span class="number">123</span>); <span class="comment">// =&gt; "123.00"</span>
+
+<span class="comment">// Decimals</span>
+currency(<span class="number">1.00</span>); <span class="comment">// =&gt; "1.00"</span>
+currency(<span class="number">1.23</span>); <span class="comment">// =&gt; "1.23"</span>
+
+<span class="comment">// Strings</span>
+currency(<span class="string">"1.23"</span>); <span class="comment">// =&gt; "1.23"</span>
+currency(<span class="string">"$12.30"</span>); <span class="comment">// =&gt; "12.23"</span>
+currency(<span class="string">"£1,234,567.89"</span>); <span class="comment">// =&gt; "1,234,567.89"</span>
+
+<span class="comment">// Currency</span>
+<span class="keyword">let</span> c1 = currency(<span class="number">1.23</span>);
+<span class="keyword">let</span> c2 = currency(<span class="number">4.56</span>);
+currency(<span class="number">7.89</span>).add(c1).add(c2); <span class="comment">// =&gt; "13.68"</span>
+</code></pre>
+<p>Currency values are handled transparently behind the scenes, so you don&#39;t have to worry about those pesky floating point issues!</p>
+<pre><code class="lang-js"><span class="number">2.51</span> + <span class="number">.01</span>;                   <span class="comment">// =&gt; 2.5199999999999996</span>
+currency(<span class="number">2.51</span>).add(<span class="number">.01</span>);      <span class="comment">// =&gt; 2.52</span>
+
+<span class="number">2.52</span> - <span class="number">.01</span>;                   <span class="comment">// 2.5100000000000002</span>
+currency(<span class="number">2.52</span>).subtract(<span class="number">.01</span>); <span class="comment">// 2.51</span>
+</code></pre>
+<p>Since <em>currency.js</em> handles values internally as integers, there is a limit to the precision that can be stored before encountering precision errors. This should be okay for most reasonable values of currencies. As long as your currencies are less than 2<sup>52</sup>sup&gt; (in cents) or <code>90,071,992,547,409.91</code>, you should not see any problems.</p>
+<p><em>currency.js</em> also works with a variety of strings. This makes it easy to work into your UI without having do do string to number conversion or vice versa.</p>
+<pre><code class="lang-js"><span class="keyword">var</span> c = currency(<span class="string">"$1,234.56"</span>).add(<span class="string">"890.12"</span>); <span class="comment">// 2124.68</span>
+c.format(); <span class="comment">// 2,124.68</span>
+
+<span class="comment">// Negative values</span>
+currency(<span class="string">"-$5,000"</span>).add(<span class="number">1234.56</span>);  <span class="comment">// -3765.44</span>
+currency(<span class="string">"($5,000)"</span>).add(<span class="number">1234.56</span>); <span class="comment">// -3765.44</span>
+</code></pre>
+<p>By default, currency resolves to a <code>string</code> value.</p>
+<pre><code class="lang-js"><span class="comment">// Sets the first input to the resolved currency value</span>
+<span class="built_in">document</span>.getElementsByTagName(<span class="string">"input"</span>)[<span class="number">0</span>].value = currency(<span class="number">1234.56</span>).add(<span class="number">6.44</span>); <span class="comment">// 1241.00</span>
+</code></pre>
+<p>If you need access to the raw numbers, the value is stored as both an <code>integer</code> and a <code>string</code>, which you can access with <code>.intValue</code> or <code>.value</code>;</p>
+<pre><code class="lang-js"><span class="comment">// Get the internal values</span>
+currency(<span class="number">123.45</span>).add(<span class="number">.1</span>).value; <span class="comment">// =&gt; 123.46</span>
+currency(<span class="number">123.45</span>).add(<span class="number">.1</span>).intValue; <span class="comment">// =&gt; 12346</span>
+</code></pre>
+</section>
+<section><h2 id="options">Options</h2>
+<p>You can customize the formatting and parsing of <code>currency.js</code> with an optional options object. These values default to US centric currency values, but they can be overridden based on your locale.</p>
+<h3 id="symbol-default-">symbol <em>default</em>: <code>&quot;$&quot;</code></h3>
+<p>When <code>formatWithSymbol</code> is set to <code>true</code>, this currency symbol will be used when calling <code>currency.format()</code>.</p>
+<pre><code class="lang-js">currency(<span class="number">1.23</span>, { <span class="attr">formatWithSymbol</span>: <span class="literal">true</span> }).format(); <span class="comment">// =&gt; "$1.23"</span>
+</code></pre>
+<h3 id="separator-default-">separator <em>default</em>: <code>&quot;,&quot;</code></h3>
+<p>Separator between the number groupings when calling <code>currency.format()</code>.</p>
+<pre><code class="lang-js">currency(<span class="number">1234.56</span>, { <span class="attr">symbol</span>: <span class="string">','</span> }).format(); <span class="comment">// =&gt; "1,234.56"</span>
+currency(<span class="number">1234.56</span>, { <span class="attr">symbol</span>: <span class="string">' '</span> }).format(); <span class="comment">// =&gt; "1 234.56"</span>
+</code></pre>
+<h3 id="decimal-default-">decimal <em>default</em>: <code>&quot;.&quot;</code></h3>
+<pre><code class="lang-js">currency(<span class="number">1.23</span>, { <span class="attr">decimal</span>: <span class="string">'.'</span> }).format(); <span class="comment">// =&gt; "1.23"</span>
+currency(<span class="number">1.23</span>, { <span class="attr">decimal</span>: <span class="string">','</span> }).format(); <span class="comment">// =&gt; "1,23"</span>
+</code></pre>
+<h3 id="precision-default-2-">precision <em>default</em>: <code>2</code></h3>
+<p>Number of decimal places to store as cents.</p>
+<pre><code class="lang-js">currency(<span class="number">1.234</span>, { <span class="attr">precision</span>: <span class="number">2</span> }); <span class="comment">// =&gt; "1.23"</span>
+currency(<span class="number">1.234</span>, { <span class="attr">precision</span>: <span class="number">3</span> }); <span class="comment">// =&gt; "1.234"</span>
+</code></pre>
+<h3 id="formatwithsymbol-default-false-">formatWithSymbol <em>default</em>: <code>false</code></h3>
+<p>Includes the <code>symbol</code> option when calling <code>currency.format()</code>.</p>
+<pre><code class="lang-js">currency(<span class="number">1.23</span>, { <span class="attr">formatWithSymbol</span>: <span class="literal">true</span> }).format(); <span class="comment">// =&gt; "$1.23"</span>
+currency(<span class="number">1.23</span>, { <span class="attr">formatWithSymbol</span>: <span class="literal">false</span> }).format(); <span class="comment">// =&gt; "1.23"</span>
+</code></pre>
+<h3 id="erroroninvalid-default-false-">errorOnInvalid <em>default</em>: <code>false</code></h3>
+<p>If an invalid value such as <code>null</code> or <code>undefined</code> is passed in, <code>currency</code> will throw an error.</p>
+<pre><code class="lang-js">currency(<span class="literal">undefined</span>, { <span class="attr">errorOnInvalid</span>: <span class="literal">true</span> }); <span class="comment">// throws an error</span>
+</code></pre>
+<h3 id="increment-default-null-">increment <em>default</em>: <code>null</code></h3>
+<p>When implementing a currency that implements rounding, setting the <code>increment</code> value will allow you to set the closest increment to round the display value to.</p>
+<pre><code class="lang-js"><span class="keyword">var</span> currencyRounding = <span class="function"><span class="params">value</span> =&gt;</span> currency(value, { <span class="attr">increment</span>: <span class="number">.05</span> });
+currencyRounding(<span class="number">1.09</span>); <span class="comment">// =&gt; { intValue: 109, value: 1.09 }</span>
+currencyRounding(<span class="number">1.09</span>).format(); <span class="comment">// =&gt; "1.10"</span>
+currencyRounding(<span class="number">1.06</span>); <span class="comment">// =&gt; { intValue: 106, value: 1.06 }</span>
+currencyRounding(<span class="number">1.06</span>).format(); <span class="comment">// =&gt; "1.05"</span>
+</code></pre>
+<h3 id="usevedic-default-false-">useVedic <em>default</em>: <code>false</code></h3>
+<p>When using a currency that implements the <a href="https://en.wikipedia.org/wiki/Indian_numbering_system">Indian Numbering System</a>, setting <code>useVedic</code> will format values with the correct groupings, i.e. <code>10,00,000.00</code>.</p>
+<pre><code class="lang-js">currency(<span class="number">1234567.89</span>, { <span class="attr">useVedic</span>: <span class="literal">true</span> }).format(); <span class="comment">// =&gt; "12,34,567.89"</span>
+</code></pre>
+</section>
+<section><h2 id="methods">Methods</h2>
+<p><ul><li><a href="#add">add</a></li><li><a href="#subtract">subtract</a></li><li><a href="#multiply">multiply</a></li><li><a href="#divide">divide</a></li><li><a href="#distribute">distribute</a></li><li><a href="#format">format</a></li><li><a href="#dollars">dollars</a></li><li><a href="#cents">cents</a></li></ul></p>
+<h3 id="add">add</h3>
+<p><code>currency.add( value )</code></p>
+<p>Adds a <code>string</code>, <code>number</code>, or <code>currency</code> value to the current currency instance.</p>
+<pre><code class="lang-js">currency(<span class="number">123.45</span>).add(<span class="number">.01</span>); <span class="comment">// =&gt; "123.46"</span>
+</code></pre>
+<h3 id="subtract">subtract</h3>
+<p><code>currency.subtract( value )</code></p>
+<p>Subtracts a <code>string</code>, <code>number</code>, or <code>currency</code> value to the current currency instance.</p>
+<pre><code class="lang-js">currency(<span class="number">123.45</span>).subtract(<span class="number">.01</span>); <span class="comment">// =&gt; "123.44"</span>
+</code></pre>
+<h3 id="multiply">multiply</h3>
+<p><code>currency.multiply( number )</code></p>
+<p>Multiplies the current currency instance by <code>number</code>.</p>
+<pre><code class="lang-js">currency(<span class="number">123.45</span>).multiply(<span class="number">2</span>); <span class="comment">// =&gt; "246.90"</span>
+</code></pre>
+<h3 id="divide">divide</h3>
+<p><code>currency.divide( number )</code></p>
+<p>Divides the current currency instance by <code>number</code>.</p>
+<pre><code class="lang-js">currency(<span class="number">123.45</span>).divide(<span class="number">2</span>); <span class="comment">// =&gt; "61.73"</span>
+</code></pre>
+<h3 id="distribute">distribute</h3>
+<p><code>currency.distribute( number )</code></p>
+<p>Distribute takes the currency value, and tries to distribute the amount evenly. Any extra cents left over from the distribution will be stacked onto the first sets of entries.</p>
+<pre><code class="lang-js">currency(<span class="number">12.35</span>).distribute(<span class="number">3</span>); <span class="comment">// =&gt; [4.12, 4.12, 4.11]</span>
+currency(<span class="number">12.00</span>).distribute(<span class="number">3</span>); <span class="comment">// =&gt; [4.00, 4.00, 4.00]</span>
+</code></pre>
+<h3 id="format">format</h3>
+<p><code>currency.format([ boolean ])</code></p>
+<p>A simple formatter that returns a human friendly currency format.</p>
+<pre><code class="lang-js">currency(<span class="number">1000.00</span>).format(); <span class="comment">// =&gt; "1,000.00"</span>
+currency(<span class="string">"1,234,567/90"</span>).add(<span class="string">"200,000"</span>).format(); <span class="comment">// =&gt; "1,434,567.89"</span>
+</code></pre>
+<p>The default formatter can be overridden by passing in options as a second parameter.</p>
+<pre><code class="lang-js"><span class="keyword">var</span> euro = <span class="function"><span class="params">value</span> =&gt;</span> currency(value, { <span class="attr">separator</span>: <span class="string">' '</span>, <span class="attr">decimal</span>: <span class="string">','</span> });
+
+<span class="comment">// ...</span>
+
+euro(<span class="number">1000.00</span>).format(); <span class="comment">// =&gt; "1 000,00"</span>
+euro(<span class="number">1234567.89</span>).add(<span class="string">"200 000"</span>).format(); <span class="comment">// =&gt; "1 434 567,89"</span>
+</code></pre>
+<p>You can also include the currently set <code>symbol</code> option in a couple of different ways. By default it&#39;s always turned off, but you can turn it on for all instances of the object via options, or by passing in a boolean operator to the <code>format()</code> function.</p>
+<pre><code class="lang-js"><span class="keyword">var</span> money = <span class="function"><span class="params">value</span> =&gt;</span> currency(value, { <span class="attr">formatWithSymbol</span>: <span class="literal">true</span> });
+
+money(<span class="number">1000.00</span>).format(); <span class="comment">// =&gt; "$1,000.00"</span>
+money(<span class="number">1000.00</span>).format(<span class="literal">false</span>); <span class="comment">// =&gt; "1,000.00"</span>
+</code></pre>
+<h3 id="dollars">dollars</h3>
+<p><code>currency.dollars</code></p>
+<p>Returns the dollar value of the currency.</p>
+<pre><code class="lang-js">currency(<span class="number">123.45</span>).dollars(); <span class="comment">// =&gt; 123</span>
+currency(<span class="string">"0.99"</span>).dollars(); <span class="comment">// =&gt; 0</span>
+</code></pre>
+<h3 id="cents">cents</h3>
+<p><code>currency.cents</code></p>
+<p>Returns the cent value of the currency.</p>
+<pre><code class="lang-js">currency(<span class="number">123.45</span>).cents(); <span class="comment">// =&gt; 45</span>
+currency(<span class="string">"0.99"</span>).cents(); <span class="comment">// =&gt; 99</span>
+</code></pre>
+</section>
+<section><h2 id="internationalization-i18n-and-formatting">Internationalization (i18n) and Formatting</h2>
+<p><em>currency.js</em> defaults to a US locale, but is flexible enough to work with any type of format. Since each currency instance is immutable, you can create multiple instances to work with any number of different international formats.</p>
+<pre><code class="lang-js"><span class="keyword">const</span> USD = <span class="function"><span class="params">value</span> =&gt;</span> currency(value);
+<span class="keyword">const</span> JPY = <span class="function"><span class="params">value</span> =&gt;</span> currency(value, { <span class="attr">precision</span>: <span class="number">0</span>, <span class="attr">symbol</span>: <span class="string">'¥'</span> });
+<span class="keyword">const</span> EURO = <span class="function"><span class="params">value</span> =&gt;</span> currency(value, { <span class="attr">symbol</span>: <span class="string">'€'</span>, <span class="attr">decimal</span>: <span class="string">','</span>, <span class="attr">separator</span>: <span class="string">'.'</span> });
+
+USD(<span class="number">1234.567</span>).format(<span class="literal">true</span>); <span class="comment">// =&gt; "$1,234.57"</span>
+JPY(<span class="number">1234.567</span>).format(<span class="literal">true</span>); <span class="comment">// =&gt; "¥1,235"</span>
+EURO(<span class="number">1234.567</span>).format(<span class="literal">true</span>); <span class="comment">// =&gt; "€1.234,57"</span>
+</code></pre>
+</section>
+<section><h2 id="addons">Addons</h2>
+<h3 id="-babel-plugin-transform-currency-operators-https-github-com-scurker-babel-plugin-transform-currency-operators-"><a href="https://github.com/scurker/babel-plugin-transform-currency-operators">babel-plugin-transform-currency-operators</a></h3>
+<p>An experimental babel plugin for transforming currency operators: <code>currency(1.23) + 4.56</code> to <code>currency(1.23).add(4.56)</code>.</p>
+</section>
+    <section>
+      <h2>Issues/Feedback</h2>
+      Found a problem? Have an idea? File an issue on <a href="https://github.com/scurker/currency.js/issues">GitHub</a>.
+    </section>
+    <footer>
+      <a href="https://github.com/scurker/currency.js/blob/master/license">MIT Licensed</a> · Made by <a href="https://twitter.com/scurker">@scurker</a>
+<aside>
+    </footer>
+  </main>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41109714-1', 'scurker.github.io');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
