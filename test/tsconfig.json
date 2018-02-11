@@ -3,5 +3,9 @@
     "target": "es5",
     "module": "commonjs",
     "allowSyntheticDefaultImports": true
-  }
+  },
+  "files": [
+    "test.ts",
+    "../dist/currency.d.ts"
+  ]
 }
