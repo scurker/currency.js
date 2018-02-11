@@ -19,7 +19,7 @@ function concatFiles(files, metalsmith, done) {
   setImmediate(done);
 
   const regexMatch = /^(\d+)-/i
-      , fileNames = Object.keys(files).filter(name => regexMatch.test(name)).sort()
+      , fileNames = Object.keys(files).filter(name => regexMatch.test(name)).sort();
 
   let combined = fileNames
     .map(name => ({ name, file: files[name] }))
@@ -41,7 +41,9 @@ function tableOfContents(files) {
     let file = files[name]
       , toc = '';
 
-    if(!file.toc) return;
+    if(!file.toc) {
+      return;
+    }
 
     let $ = cheerio.load(file.contents.toString())
       , sections = $('h3[id]');
@@ -91,6 +93,8 @@ async function hbs(files, metalsmith) {
     .use(concatFiles)
     .use(layout)
     .build(err => {
-      if(err) throw err;
+      if(err) {
+        throw err;
+      }
     });
 })();
