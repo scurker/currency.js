@@ -25,7 +25,7 @@
     "test": "npm-run-all test:typescript test:flow test:ava",
     "test:ava": "BABEL_ENV=test ava ./test/test.js",
     "test:typescript": "tsc -p ./test --noEmit",
-    "test:flow": "touch .flowconfig && flow"
+    "test:flow": "flow"
   },
   "repository": {
     "type": "git",

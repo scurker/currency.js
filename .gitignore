@@ -6,5 +6,4 @@ reports/
 dist/
 coverage/
 .nyc_output
-.flowconfig
 *.log
