@@ -72,7 +72,7 @@ function parse(value, opts, useRounding = true) {
     v = v || 0;
   } else {
     if(errorOnInvalid) {
-      throw Error("Invalid Input");
+      throw Error('Invalid Input');
     }
     v = 0;
   }

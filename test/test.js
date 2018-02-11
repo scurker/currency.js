@@ -248,7 +248,7 @@ test('should format value using international', t => {
 });
 
 test('should format vedic groupings', t => {
-  let c = value => currency(value, { useVedic: true })
+  let c = value => currency(value, { useVedic: true });
 
   t.is(c(1.23).format(), '1.23', 'value is "1.23"');
   t.is(c(1000.00).format(), '1,000.00', 'value is "1,000"');
@@ -278,6 +278,7 @@ test('should format with international symbol', t => {
 });
 
 test('should return 0.00 currency with invalid input', t => {
+  // eslint-disable-next-line no-undefined
   var value = currency(undefined);
   t.is(value.value, 0, 'value is "0.00"');
 });
@@ -351,5 +352,6 @@ test('should allow arbitrary rounding increments', t => {
 });
 
 test('should throw exception with invalid input', t => {
+  // eslint-disable-next-line no-undefined
   t.throws(function() { currency(undefined, { errorOnInvalid: true }); }, Error, 'Threw exception');
 });
