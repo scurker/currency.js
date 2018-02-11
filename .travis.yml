@@ -14,7 +14,7 @@ cache:
   - node_modules
 after_success:
   - npm run coverage
-  - ./node_modules/.bin/nyc report --reporter=text-lcov | coveralls
+  - npm run coverage:report
 deploy:
   skip_cleanup: true
   provider: npm

@@ -16,6 +16,7 @@
   "scripts": {
     "clean": "rm -rf dist/*",
     "coverage": "BABEL_ENV=test nyc ava ./test/test.js",
+    "coverage:report": "nyc report --reporter=text-lcov | coveralls",
     "copy-typescript-definition": "cp -f src/currency.d.ts dist",
     "copy-flow-definition": "cp -f src/currency.js.flow dist",
     "lint": "eslint .",
