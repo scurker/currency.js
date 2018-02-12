@@ -5,6 +5,6 @@ bower_components/
 reports/
 dist/
 coverage/
+docs/build/*
 .nyc_output
-.flowconfig
 *.log

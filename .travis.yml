@@ -5,8 +5,8 @@ node_js:
 before_install:
 - npm install -g grunt-cli coveralls
 script:
-- npm run lint
 - npm run build
+- npm run lint
 - npm run test
 sudo: false
 cache:
@@ -14,14 +14,21 @@ cache:
   - node_modules
 after_success:
   - npm run coverage
-  - ./node_modules/.bin/nyc report --reporter=text-lcov | coveralls
+  - npm run coverage:report
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then npm run build:docs; fi
 deploy:
-  skip_cleanup: true
-  provider: npm
-  email:
-    secure: E5X6CQNG5Qj32TVZv6OJRFtaXZKSBd9fR/u20yWZik1BCpGNzQ9A42+xXkjliHWwu7n2Xh482iaqgiv00NWVzPMaycFVJrF7SPHDl08SH6p/R5DvgLQV79ISBtEwHxzDC3hrJOeVFknZMKaGo+TUQXiL7CYVnHMxHqlTDNJKh6g=
-  api_key:
-    secure: NJogJXmMUaBUV2T9gdeNph+mMy72ZKh2yyeqywkLWejfUuISo93LI6Zbe6Irs9ouXlF2olcFMqWxOjxc//UoCICizwq/LQUd4X6mB2/Kob2joSqKQG1VAnqNj6dkTAYaNPXrf/FSoW5GljwCjss/lBioSOfIHQhn6omGI9Ecf7E=
-  on:
-    tags: true
-    repo: scurker/currency.js
+  - provider: npm
+    skip_cleanup: true
+    email:
+      secure: E5X6CQNG5Qj32TVZv6OJRFtaXZKSBd9fR/u20yWZik1BCpGNzQ9A42+xXkjliHWwu7n2Xh482iaqgiv00NWVzPMaycFVJrF7SPHDl08SH6p/R5DvgLQV79ISBtEwHxzDC3hrJOeVFknZMKaGo+TUQXiL7CYVnHMxHqlTDNJKh6g=
+    api_key:
+      secure: NJogJXmMUaBUV2T9gdeNph+mMy72ZKh2yyeqywkLWejfUuISo93LI6Zbe6Irs9ouXlF2olcFMqWxOjxc//UoCICizwq/LQUd4X6mB2/Kob2joSqKQG1VAnqNj6dkTAYaNPXrf/FSoW5GljwCjss/lBioSOfIHQhn6omGI9Ecf7E=
+    on:
+      tags: true
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GH_TOKEN
+    keep_history: true
+    local_dir: docs/build
+    on:
+      branch: master

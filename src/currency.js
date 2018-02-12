@@ -7,12 +7,13 @@ const defaults = {
   precision: 2
 };
 
+const round = v => Math.round(v);
 const pow = p => Math.pow(10, p);
+const rounding = (value, increment) => round(value / increment) * increment;
 
-const regex = {
-  groupedNumbers: /(\d)(?=(\d{3})+\b)/g,
-  lastDecimal: /\.(\d+)$/
-};
+const lastDecimalRegex = /\.(\d+)$/;
+const groupRegex = /(\d)(?=(\d{3})+\b)/g;
+const vedicRegex = /(\d)(?=(\d\d)+\d\b)/g;
 
 /**
  * Create a new instance of currency.js
@@ -33,12 +34,23 @@ function currency(value, opts) {
   that.intValue = v;
   that.value = v / precision;
 
+  // Set default incremental value
+  settings.increment = settings.increment || (1 / precision);
+
+  // Support vedic numbering systems
+  // see: https://en.wikipedia.org/wiki/Indian_numbering_system
+  if(settings.useVedic) {
+    settings.groups = vedicRegex;
+  } else {
+    settings.groups = groupRegex;
+  }
+
   // Intended for internal usage only - subject to change
   this._settings = settings;
   this._precision = precision;
 }
 
-function parse(value, opts, round = true) {
+function parse(value, opts, useRounding = true) {
   let v = 0
     , { decimal, errorOnInvalid, precision: decimals } = opts
     , precision = pow(decimals);
@@ -60,12 +72,12 @@ function parse(value, opts, round = true) {
     v = v || 0;
   } else {
     if(errorOnInvalid) {
-      throw Error("Invalid Input");
+      throw Error('Invalid Input');
     }
     v = 0;
   }
 
-  return round ? Math.round(v) : v;
+  return useRounding ? round(v) : v;
 }
 
 currency.prototype = {
@@ -157,15 +169,15 @@ currency.prototype = {
    * @returns {string}
    */
   format(useSymbol) {
-    let { formatWithSymbol, symbol, separator, decimal } = this._settings;
+    let { formatWithSymbol, symbol, separator, decimal, groups } = this._settings;
 
     // set symbol formatting
     typeof(useSymbol) === 'undefined' && (useSymbol = formatWithSymbol);
 
     return ((useSymbol ? symbol : '') + this)
-      .replace(regex.groupedNumbers, '$1' + separator)
+      .replace(groups, '$1' + separator)
       // replace only the last decimal
-      .replace(regex.lastDecimal, decimal + '$1');
+      .replace(lastDecimalRegex, decimal + '$1');
   },
 
   /**
@@ -174,7 +186,7 @@ currency.prototype = {
    */
   toString() {
     let { intValue, _precision, _settings } = this;
-    return (intValue / _precision).toFixed(_settings.precision);
+    return rounding(intValue / _precision, _settings.increment).toFixed(_settings.precision);
   },
 
   /**

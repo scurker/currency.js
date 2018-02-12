@@ -1,11 +1,12 @@
 {
+  "extends": ["@scurker"],
   "env": {
     "node": true,
     "browser": true,
     "es6": true
   },
   "parserOptions": {
-    "sourceType": "module"
-  },
-  "extends": ["eslint:recommended"]
+    "sourceType": "module",
+    "ecmaVersion": 8
+  }
 }
