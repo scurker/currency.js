@@ -25,6 +25,7 @@ deploy:
       secure: NJogJXmMUaBUV2T9gdeNph+mMy72ZKh2yyeqywkLWejfUuISo93LI6Zbe6Irs9ouXlF2olcFMqWxOjxc//UoCICizwq/LQUd4X6mB2/Kob2joSqKQG1VAnqNj6dkTAYaNPXrf/FSoW5GljwCjss/lBioSOfIHQhn6omGI9Ecf7E=
     on:
       tags: true
+      node: 'node'
   - provider: pages
     skip_cleanup: true
     github_token: $GH_TOKEN
@@ -32,3 +33,4 @@ deploy:
     local_dir: docs/build
     on:
       branch: master
+      node: 'node'
