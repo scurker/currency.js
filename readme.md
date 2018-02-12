@@ -106,6 +106,12 @@ Includes the `symbol` option when calling `currency.format()`.
 `errorOnInvalid` *default*: `false`<br/>
 If an invalid value such as `null` or `undefined` is passed in, will throw an error.
 
+`increment` *default*: `null`<br/>
+When implementing a currency that implements rounding, setting the increment value will allow you to set the closest increment to round the display value to. `currency(1.48, { increment: .05 }); // => 1.50`
+
+`useVedic` *default*: `false`<br/>
+Formats number groupings using the Indian Numbering System, i.e. `10,00,000.00`
+
 > View more examples and full documentation at [scurker.github.io/currency.js](http://scurker.github.io/currency.js).
 
 ### v1.0.0 breaking changes

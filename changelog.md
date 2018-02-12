@@ -1,3 +1,9 @@
+**1.1.0**
+
+* `useVedic` option added for displaying groupings using the Indian Numbering System. ([#74](https://github.com/scurker/currency.js/issues/74))
+* `increment` option added for incremental rounding on display. ([#70](https://github.com/scurker/currency.js/issues/70))
+* Documentation updated to be built from source; should help keep documentation in sync.
+
 **1.0.8**
 
 * Changed module `export default currency` to `export = currency` for Typescript definition. ([#88](https://github.com/scurker/currency.js/issues/88) thanks [@arturnt](https://github.com/arturnt))
