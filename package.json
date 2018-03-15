@@ -81,7 +81,7 @@
     "npm-run-all": "^4.1.2",
     "nyc": "^11.4.1",
     "pretty-bytes": "^4.0.2",
-    "rollup": "^0.56.0",
+    "rollup": "^0.57.0",
     "rollup-plugin-babel": "^3.0.3",
     "typescript": "^2.7.1"
   },
