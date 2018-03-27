@@ -1,3 +1,7 @@
+**1.1.1**
+
+* Fixed negative distribution values. ([#99](https://github.com/scurker/currency.js/pull/99)) thanks [@andrewkatz](https://github.com/andrewkatz)
+
 **1.1.0**
 
 * `useVedic` option added for displaying groupings using the Indian Numbering System. ([#74](https://github.com/scurker/currency.js/issues/74))
