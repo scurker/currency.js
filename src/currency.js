@@ -138,7 +138,7 @@ currency.prototype = {
       let item = currency(split / _precision, _settings);
 
       // Add any left over pennies
-      pennies-- > 0 && (item = item.value >= 0 ? item.add(1 / _precision) : item.subtract(1 / _precision));
+      pennies-- > 0 && (item = intValue >= 0 ? item.add(1 / _precision) : item.subtract(1 / _precision));
 
       distribution.push(item);
     }

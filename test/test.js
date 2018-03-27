@@ -145,6 +145,20 @@ test('should create non-equal distribution with pennies', t => {
   t.is(total, 1.01, 'sum of values matches our original amount');
 });
 
+test('should create non-equal distribution with a negative penny', t => {
+  var values = currency(-0.01).distribute(2);
+
+  t.is(parseFloat(values[0]), -0.01, 'first value is -0.01');
+  t.is(parseFloat(values[1]), 0, 'second value is 0');
+
+  var total = 0;
+  for(var i = 0; i < values.length; i++) {
+    total += parseFloat(values[i]);
+  }
+
+  t.is(total, -0.01, 'sum of values matches our original amount');
+});
+
 test('should get dollar value', t => {
   var value = currency(1.23);
 
