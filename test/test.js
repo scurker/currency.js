@@ -79,6 +79,26 @@ test('should subtract floating point', t => {
   t.not(parseFloat(value), 2.52-.01, 'currency(2.52).subtract(.01) does not equal 2.5100000000000002');
 });
 
+test('should round half up', t => {
+  var value1 = currency(17.955)
+    , value2 = currency(17.855)
+    , value3 = currency(17.455);
+
+  t.is(value1.value, 17.96, 'currency(17.955) rounds half up to 17.96');
+  t.is(value2.value, 17.86, 'currency(17.855) rounds half up to 17.86');
+  t.is(value3.value, 17.46, 'currency(17.955) rounds half up to 17.46');
+});
+
+test('should round negative values half up', t => {
+  var value1 = currency(-17.955)
+    , value2 = currency(-17.855)
+    , value3 = currency(-17.455);
+
+  t.is(value1.value, -17.95, 'currency(-17.955) rounds half up to -17.95');
+  t.is(value2.value, -17.85, 'currency(-17.855) rounds half up to -17.85');
+  t.is(value3.value, -17.45, 'currency(-17.955) rounds half up to -17.45');
+});
+
 test('currency multiplication', t => {
   var value = currency(1.23).multiply(2);
   var floatingValue = currency(.1).multiply(.2);
@@ -95,7 +115,7 @@ test('currency multiplication with precision', t => {
 
 test('currency division', t => {
   var value = currency(9.87).divide(2);
-  t.is(parseFloat(value), 4.93, 'currency(9.87).divide(2) is 4.93');
+  t.is(parseFloat(value), 4.94, 'currency(9.87).divide(2) is 4.94');
 });
 
 test('currency division with precision', t => {
