@@ -53,22 +53,19 @@ function currency(value, opts) {
 function parse(value, opts, useRounding = true) {
   let v = 0
     , { decimal, errorOnInvalid, precision: decimals } = opts
-    , precision = pow(decimals);
+    , precision = pow(decimals)
+    , isNumber = typeof value === 'number';
 
-  if (typeof value === 'number') {
-    v = value * precision;
-  } else if (value instanceof currency) {
-    v = value.value * precision;
-  } else if (typeof(value) === 'string') {
+  if (isNumber || value instanceof currency) {
+    v = ((isNumber ? value : value.value) * precision).toFixed(1);
+  } else if (typeof value === 'string') {
     let regex = new RegExp('[^-\\d' + decimal + ']', 'g')
       , decimalString = new RegExp('\\' + decimal, 'g');
-    v = parseFloat(
-          value
-            .replace(/\((.*)\)/, '-$1')   // allow negative e.g. (1.99)
-            .replace(regex, '')           // replace any non numeric values
-            .replace(decimalString, '.')  // convert any decimal values
-            * precision                   // scale number to integer value
-        );
+    v = value
+          .replace(/\((.*)\)/, '-$1')   // allow negative e.g. (1.99)
+          .replace(regex, '')           // replace any non numeric values
+          .replace(decimalString, '.')  // convert any decimal values
+          * precision;                  // scale number to integer value
     v = v || 0;
   } else {
     if(errorOnInvalid) {
