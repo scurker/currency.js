@@ -245,12 +245,14 @@ test('should stringify json', t => {
 test('should format value using defaults', t => {
   var value1 = currency(1.23).format()
     , value2 = currency(1234.56).format()
-    , value3 = currency(1234567.89).format();
+    , value3 = currency(1234567.89).format()
+    , value4 = currency(1234567.8912, { precision: 4 }).format();
 
   t.is(typeof value1, 'string', 'value is string');
   t.is(value1, '1.23', 'value is "1.23"');
   t.is(value2, '1,234.56', 'value is "1,234.45"');
   t.is(value3, '1,234,567.89', 'value is "1,234,567.89"');
+  t.is(value4, '1,234,567.8912', 'value is "1,234,567.8912"');
 });
 
 test('should format value using international', t => {
@@ -262,12 +264,14 @@ test('should format value using international', t => {
 });
 
 test('should format vedic groupings', t => {
-  let c = value => currency(value, { useVedic: true });
+  let c = value => currency(value, { useVedic: true })
+    , c4 = value => currency(value, { useVedic: true, precision: 4 });
 
   t.is(c(1.23).format(), '1.23', 'value is "1.23"');
   t.is(c(1000.00).format(), '1,000.00', 'value is "1,000"');
   t.is(c(100000.00).format(), '1,00,000.00', 'value is "1,00,000,00"');
   t.is(c(1000000.00).format(), '10,00,000.00', 'value is "10,00,000,00"');
+  t.is(c4(1234567.8912).format(), '12,34,567.8912', 'value is "12,34,567.8912"');
 });
 
 test('should parse international values', t => {
