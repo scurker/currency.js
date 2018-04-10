@@ -79,6 +79,26 @@ test('should subtract floating point', t => {
   t.not(parseFloat(value), 2.52-.01, 'currency(2.52).subtract(.01) does not equal 2.5100000000000002');
 });
 
+test('should round half up', t => {
+  var value1 = currency(17.955)
+    , value2 = currency(17.855)
+    , value3 = currency(17.455);
+
+  t.is(value1.value, 17.96, 'currency(17.955) rounds half up to 17.96');
+  t.is(value2.value, 17.86, 'currency(17.855) rounds half up to 17.86');
+  t.is(value3.value, 17.46, 'currency(17.955) rounds half up to 17.46');
+});
+
+test('should round negative values half up', t => {
+  var value1 = currency(-17.955)
+    , value2 = currency(-17.855)
+    , value3 = currency(-17.455);
+
+  t.is(value1.value, -17.95, 'currency(-17.955) rounds half up to -17.95');
+  t.is(value2.value, -17.85, 'currency(-17.855) rounds half up to -17.85');
+  t.is(value3.value, -17.45, 'currency(-17.955) rounds half up to -17.45');
+});
+
 test('currency multiplication', t => {
   var value = currency(1.23).multiply(2);
   var floatingValue = currency(.1).multiply(.2);
@@ -95,7 +115,7 @@ test('currency multiplication with precision', t => {
 
 test('currency division', t => {
   var value = currency(9.87).divide(2);
-  t.is(parseFloat(value), 4.93, 'currency(9.87).divide(2) is 4.93');
+  t.is(parseFloat(value), 4.94, 'currency(9.87).divide(2) is 4.94');
 });
 
 test('currency division with precision', t => {
@@ -245,12 +265,14 @@ test('should stringify json', t => {
 test('should format value using defaults', t => {
   var value1 = currency(1.23).format()
     , value2 = currency(1234.56).format()
-    , value3 = currency(1234567.89).format();
+    , value3 = currency(1234567.89).format()
+    , value4 = currency(1234567.8912, { precision: 4 }).format();
 
   t.is(typeof value1, 'string', 'value is string');
   t.is(value1, '1.23', 'value is "1.23"');
   t.is(value2, '1,234.56', 'value is "1,234.45"');
   t.is(value3, '1,234,567.89', 'value is "1,234,567.89"');
+  t.is(value4, '1,234,567.8912', 'value is "1,234,567.8912"');
 });
 
 test('should format value using international', t => {
@@ -262,12 +284,14 @@ test('should format value using international', t => {
 });
 
 test('should format vedic groupings', t => {
-  let c = value => currency(value, { useVedic: true });
+  let c = value => currency(value, { useVedic: true })
+    , c4 = value => currency(value, { useVedic: true, precision: 4 });
 
   t.is(c(1.23).format(), '1.23', 'value is "1.23"');
   t.is(c(1000.00).format(), '1,000.00', 'value is "1,000"');
   t.is(c(100000.00).format(), '1,00,000.00', 'value is "1,00,000,00"');
   t.is(c(1000000.00).format(), '10,00,000.00', 'value is "10,00,000,00"');
+  t.is(c4(1234567.8912).format(), '12,34,567.8912', 'value is "12,34,567.8912"');
 });
 
 test('should parse international values', t => {
