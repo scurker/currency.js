@@ -1,3 +1,8 @@
+**1.1.2**
+
+* Fixed rounding not always being consistent with half cent values and high precision. ([#102](https://github.com/scurker/currency.js/pull/102)) thanks [@philippetrepanier](https://github.com/philippetrepanier)
+* Fixed comma separator appearing in decimals when formatting. ([#104](https://github.com/scurker/currency.js/pull/104)) thanks [@lanceli](https://github.com/lanceli)
+
 **1.1.1**
 
 * Fixed negative distribution values. ([#99](https://github.com/scurker/currency.js/pull/99)) thanks [@andrewkatz](https://github.com/andrewkatz)
