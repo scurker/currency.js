@@ -11,9 +11,8 @@ const round = v => Math.round(v);
 const pow = p => Math.pow(10, p);
 const rounding = (value, increment) => round(value / increment) * increment;
 
-const lastDecimalRegex = /\.(\d+)$/;
-const groupRegex = /(\d)(?=(\d{3})+\.)/g;
-const vedicRegex = /(\d)(?=(\d\d)+\d\.)/g;
+const groupRegex = /(\d)(?=(\d{3})+\b)/g;
+const vedicRegex = /(\d)(?=(\d\d)+\d\b)/g;
 
 /**
  * Create a new instance of currency.js
@@ -171,10 +170,11 @@ currency.prototype = {
     // set symbol formatting
     typeof(useSymbol) === 'undefined' && (useSymbol = formatWithSymbol);
 
-    return ((useSymbol ? symbol : '') + this)
-      .replace(groups, '$1' + separator)
-      // replace only the last decimal
-      .replace(lastDecimalRegex, decimal + '$1');
+    let values = ((useSymbol ? symbol : '') + this).split('.')
+      , dollars = values[0]
+      , cents = values[1];
+
+    return `${dollars.replace(groups, '$1' + separator)}${cents ? decimal + cents : ''}`;
   },
 
   /**
