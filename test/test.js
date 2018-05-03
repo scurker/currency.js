@@ -11,7 +11,7 @@ test('should be immutable', t => {
 
 test('should be instance of currency', t => {
   var value = currency(1);
-  t.true(value instanceof currency, 'value is instance of currency');
+  t.true(value instanceof currency, 'value is not instance of currency');
 });
 
 test('should allow numbers', t => {
@@ -135,7 +135,7 @@ test('should parse negative values', t => {
 
   t.is(parseFloat(neg), -1.23, 'currency(-1.23) is -1.23');
   t.is(parseFloat(pos.subtract(2.01)), -0.78, 'currency(1.23).subtract(2.01) is -0.78');
-  t.is(parseFloat(distribute[0]), -0.31, 'currency(-1.23).distribute(4), first distributed value is -0.31');
+  t.is(parseFloat(distribute[0]), -0.31, 'currency(-1.23).distribute(4), first distributed value is not -0.31');
   t.is(total, -1.23, 'currency(-1.23).distribute(4) sum is -1.23');
 });
 
@@ -154,8 +154,8 @@ test('should create equal distribution', t => {
 test('should create non-equal distribution with pennies', t => {
   var values = currency(1.01).distribute(4);
 
-  t.is(parseFloat(values[0]), 0.26, 'first value is 0.26');
-  t.is(parseFloat(values[1]), 0.25, 'next value is 0.25');
+  t.is(parseFloat(values[0]), 0.26, 'first value is not 0.26');
+  t.is(parseFloat(values[1]), 0.25, 'next value is not 0.25');
 
   var total = 0;
   for(var i = 0; i < values.length; i++) {
@@ -168,8 +168,8 @@ test('should create non-equal distribution with pennies', t => {
 test('should create non-equal distribution with a negative penny', t => {
   var values = currency(-0.01).distribute(2);
 
-  t.is(parseFloat(values[0]), -0.01, 'first value is -0.01');
-  t.is(parseFloat(values[1]), 0, 'second value is 0');
+  t.is(parseFloat(values[0]), -0.01, 'first value is not -0.01');
+  t.is(parseFloat(values[1]), 0, 'second value is not 0');
 
   var total = 0;
   for(var i = 0; i < values.length; i++) {
@@ -236,20 +236,20 @@ test('should default rounding when parsing', t => {
     , multiply = currency(10.00)
     , divide = currency(0.01);
 
-  t.is(round1.value, 1.23, 'value is rounded to nearest cent');
-  t.is(round2.value, 5.68, 'value is rounded to nearest cent');
-  t.is(multiply.multiply(.001).value, .01, 'multiply value is not rounded');
-  t.is(divide.divide(.001).value, 10, 'divide value is not rounded');
+  t.is(round1.value, 1.23, 'value is not rounded to nearest cent');
+  t.is(round2.value, 5.68, 'value is not rounded to nearest cent');
+  t.is(multiply.multiply(.001).value, .01, 'multiply value is not not rounded');
+  t.is(divide.divide(.001).value, 10, 'divide value is not not rounded');
 });
 
 test('should have int value and real value', t => {
   var value1 = currency(2.51).add(.01)
     , value2 = currency(2.52).subtract(.01);
 
-  t.is(value1.value, 2.52, 'real value is 2.52');
-  t.is(value1.intValue, 252, 'int value is 252');
-  t.is(value2.value, 2.51, 'real value is 2.51');
-  t.is(value2.intValue, 251, 'int value is 251');
+  t.is(value1.value, 2.52, 'real value is not 2.52');
+  t.is(value1.intValue, 252, 'int value is not 252');
+  t.is(value2.value, 2.51, 'real value is not 2.51');
+  t.is(value2.intValue, 251, 'int value is not 251');
 });
 
 test('should stringify json', t => {
@@ -257,123 +257,130 @@ test('should stringify json', t => {
     , value2 = currency(2.51).add(.01)
     , value3 = currency(2.52).subtract(.02);
 
-  t.is(JSON.stringify({ 'value': value1 }), '{"value":1.23}', 'value is 1.23');
-  t.is(JSON.stringify({ 'value': value2 }), '{"value":2.52}', 'value is 2.52');
-  t.is(JSON.stringify({ 'value': value3 }), '{"value":2.5}', 'value is 2.50');
+  t.is(JSON.stringify({ 'value': value1 }), '{"value":1.23}', 'value is not 1.23');
+  t.is(JSON.stringify({ 'value': value2 }), '{"value":2.52}', 'value is not 2.52');
+  t.is(JSON.stringify({ 'value': value3 }), '{"value":2.5}', 'value is not 2.50');
 });
 
 test('should format value using defaults', t => {
-  var value1 = currency(1.23).format()
-    , value2 = currency(1234.56).format()
-    , value3 = currency(1234567.89).format()
-    , value4 = currency(1234567.8912, { precision: 4 }).format();
+  var value1 = currency(1.23)
+    , value2 = currency(1234.56)
+    , value3 = currency(1234567.89)
+    , value4 = currency(1234567.8912, { precision: 4 })
+    , value5 = currency(1234567, { precision: 0 });
 
-  t.is(typeof value1, 'string', 'value is string');
-  t.is(value1, '1.23', 'value is "1.23"');
-  t.is(value2, '1,234.56', 'value is "1,234.45"');
-  t.is(value3, '1,234,567.89', 'value is "1,234,567.89"');
-  t.is(value4, '1,234,567.8912', 'value is "1,234,567.8912"');
+  t.is(typeof value1.format(), 'string', 'value is not string');
+  t.is(value1.format(), '1.23', 'value is not "1.23"');
+  t.is(value2.format(), '1,234.56', 'value is not "1,234.45"');
+  t.is(value3.format(), '1,234,567.89', 'value is not "1,234,567.89"');
+  t.is(value4.format(), '1,234,567.8912', 'value is not "1,234,567.8912"');
+  t.is(value5.format(), '1,234,567', 'value is not "1,234,567"');
+  t.is(value1.multiply(-1).format(), '-1.23', 'value is not "-1.23"');
+  t.is(value2.multiply(-1).format(), '-1,234.56', 'value is not "-1,234.45"');
+  t.is(value3.multiply(-1).format(), '-1,234,567.89', 'value is not "-1,234,567.89"');
+  t.is(value4.multiply(-1).format(), '-1,234,567.8912', 'value is not "-1,234,567.8912"');
+  t.is(value5.multiply(-1).format(), '-1,234,567', 'value is not "-1,234,567"');
 });
 
 test('should format value using international', t => {
   let c = value => currency(value, { separator: '.', decimal: ',' });
 
-  t.is(c(1.23).format(), '1,23', 'value is "1,23"');
-  t.is(c(1000.00).format(), '1.000,00', 'value is "1.000,00"');
-  t.is(c(1000000.00).format(), '1.000.000,00', 'value is "1.000.000,00"');
+  t.is(c(1.23).format(), '1,23', 'value is not "1,23"');
+  t.is(c(1000.00).format(), '1.000,00', 'value is not "1.000,00"');
+  t.is(c(1000000.00).format(), '1.000.000,00', 'value is not "1.000.000,00"');
 });
 
 test('should format vedic groupings', t => {
   let c = value => currency(value, { useVedic: true })
     , c4 = value => currency(value, { useVedic: true, precision: 4 });
 
-  t.is(c(1.23).format(), '1.23', 'value is "1.23"');
-  t.is(c(1000.00).format(), '1,000.00', 'value is "1,000"');
-  t.is(c(100000.00).format(), '1,00,000.00', 'value is "1,00,000,00"');
-  t.is(c(1000000.00).format(), '10,00,000.00', 'value is "10,00,000,00"');
-  t.is(c4(1234567.8912).format(), '12,34,567.8912', 'value is "12,34,567.8912"');
+  t.is(c(1.23).format(), '1.23', 'value is not "1.23"');
+  t.is(c(1000.00).format(), '1,000.00', 'value is not "1,000"');
+  t.is(c(100000.00).format(), '1,00,000.00', 'value is not "1,00,000,00"');
+  t.is(c(1000000.00).format(), '10,00,000.00', 'value is not "10,00,000,00"');
+  t.is(c4(1234567.8912).format(), '12,34,567.8912', 'value is not "12,34,567.8912"');
 });
 
 test('should parse international values', t => {
   let c = value => currency(value, { separator: '.', decimal: ',' });
 
-  t.is(c('1,23').value, 1.23, 'value is "1.23"');
-  t.is(c('1.000,00').value, 1000.00, 'value is "1,000.00"');
-  t.is(c('1.000.000,00').value, 1000000.00, 'value is "1,000,000.00"');
+  t.is(c('1,23').value, 1.23, 'value is not "1.23"');
+  t.is(c('1.000,00').value, 1000.00, 'value is not "1,000.00"');
+  t.is(c('1.000.000,00').value, 1000000.00, 'value is not "1,000,000.00"');
 });
 
 test('should format with symbol', t => {
-  t.is(currency(1.23).format(true), '$1.23', 'value is "$1.23"');
+  t.is(currency(1.23).format(true), '$1.23', 'value is not "$1.23"');
 });
 
 test('should format without symbol', t => {
-  t.is(currency(1.23).format(false), '1.23', 'value is "1.23"');
+  t.is(currency(1.23).format(false), '1.23', 'value is not "1.23"');
 });
 
 test('should format with international symbol', t => {
-  t.is(currency(1.23, { symbol: '£' }).format(true), '£1.23', 'value is "£1.23"');
-  t.is(currency(1.23, { symbol: '¥' }).format(true), '¥1.23', 'value is "¥1.23"');
+  t.is(currency(1.23, { symbol: '£' }).format(true), '£1.23', 'value is not "£1.23"');
+  t.is(currency(1.23, { symbol: '¥' }).format(true), '¥1.23', 'value is not "¥1.23"');
 });
 
 test('should return 0.00 currency with invalid input', t => {
   // eslint-disable-next-line no-undefined
   var value = currency(undefined);
-  t.is(value.value, 0, 'value is "0.00"');
+  t.is(value.value, 0, 'value is not "0.00"');
 });
 
 test('should round down to nearest value when using increments', t => {
   let c = value => currency(value, { increment: .05 });
 
-  t.is(c(1.01).toString(), '1.00', 'value is rounded to 1.00');
-  t.is(c(1.02).toString(), '1.00', 'value is rounded to 1.00');
-  t.is(c(1.06).toString(), '1.05', 'value is rounded to 1.05');
-  t.is(c(1.07).toString(), '1.05', 'value is rounded to 1.05');
-  t.is(c(1000.01).format(), '1,000.00', 'value is rounded to 1000.00');
-  t.is(c(10000.01).format(), '10,000.00', 'value is rounded to 10000.00');
-  t.is(c(100000.01).format(), '100,000.00', 'value is rounded to 100000.00');
-  t.is(c(1000000.01).format(), '1,000,000.00', 'value is rounded to 1000000.00');
+  t.is(c(1.01).toString(), '1.00', 'value is not rounded to 1.00');
+  t.is(c(1.02).toString(), '1.00', 'value is not rounded to 1.00');
+  t.is(c(1.06).toString(), '1.05', 'value is not rounded to 1.05');
+  t.is(c(1.07).toString(), '1.05', 'value is not rounded to 1.05');
+  t.is(c(1000.01).toString(), '1000.00', 'value is not rounded to 1000.00');
+  t.is(c(10000.01).toString(), '10000.00', 'value is not rounded to 10000.00');
+  t.is(c(100000.01).toString(), '100000.00', 'value is not rounded to 100000.00');
+  t.is(c(1000000.01).toString(), '1000000.00', 'value is not rounded to 1000000.00');
 });
 
 test('should round up to nearest value when using increments', t => {
   let c = value => currency(value, { increment: .05 });
 
-  t.is(c(1.03).toString(), '1.05', 'value is rounded to 1.05');
-  t.is(c(1.04).toString(), '1.05', 'value is rounded to 1.05');
-  t.is(c(1.08).toString(), '1.10', 'value is rounded to 1.10');
-  t.is(c(1.09).toString(), '1.10', 'value is rounded to 1.10');
-  t.is(c(1000.09).format(), '1,000.10', 'value is rounded to 1000.10');
-  t.is(c(10000.09).format(), '10,000.10', 'value is rounded to 10000.10');
-  t.is(c(100000.09).format(), '100,000.10', 'value is rounded to 100000.10');
-  t.is(c(1000000.09).format(), '1,000,000.10', 'value is rounded to 1000000.10');
+  t.is(c(1.03).toString(), '1.05', 'value is not rounded to 1.05');
+  t.is(c(1.04).toString(), '1.05', 'value is not rounded to 1.05');
+  t.is(c(1.08).toString(), '1.10', 'value is not rounded to 1.10');
+  t.is(c(1.09).toString(), '1.10', 'value is not rounded to 1.10');
+  t.is(c(1000.09).toString(), '1000.10', 'value is not rounded to 1000.10');
+  t.is(c(10000.09).toString(), '10000.10', 'value is not rounded to 10000.10');
+  t.is(c(100000.09).toString(), '100000.10', 'value is not rounded to 100000.10');
+  t.is(c(1000000.09).toString(), '1000000.10', 'value is not rounded to 1000000.10');
 });
 
 test('should handle negative rounding when using increments', t => {
   let c = value => currency(value, { increment: .05 });
 
-  t.is(c(-1.01).toString(), '-1.00', 'value is rounded to -1.00');
-  t.is(c(-1.02).toString(), '-1.00', 'value is rounded to -1.00');
-  t.is(c(-1.03).toString(), '-1.05', 'value is rounded to -1.05');
-  t.is(c(-1.04).toString(), '-1.05', 'value is rounded to -1.05');
-  t.is(c(-1.06).toString(), '-1.05', 'value is rounded to -1.05');
-  t.is(c(-1.07).toString(), '-1.05', 'value is rounded to -1.05');
-  t.is(c(-1.08).toString(), '-1.10', 'value is rounded to -1.10');
-  t.is(c(-1.09).toString(), '-1.10', 'value is rounded to -1.10');
+  t.is(c(-1.01).toString(), '-1.00', 'value is not rounded to -1.00');
+  t.is(c(-1.02).toString(), '-1.00', 'value is not rounded to -1.00');
+  t.is(c(-1.03).toString(), '-1.05', 'value is not rounded to -1.05');
+  t.is(c(-1.04).toString(), '-1.05', 'value is not rounded to -1.05');
+  t.is(c(-1.06).toString(), '-1.05', 'value is not rounded to -1.05');
+  t.is(c(-1.07).toString(), '-1.05', 'value is not rounded to -1.05');
+  t.is(c(-1.08).toString(), '-1.10', 'value is not rounded to -1.10');
+  t.is(c(-1.09).toString(), '-1.10', 'value is not rounded to -1.10');
 });
 
 test('should round only the final value to nearest increment', t => {
   let c = value => currency(value, { increment: .05 });
 
-  t.is(c(1.00).add(.01).add(.01).add(.01).toString(), '1.05', 'value is rounded to 1.05');
-  t.is(c(1.00).subtract(.01).subtract(.01).subtract(.01).toString(), '0.95', 'value is rounded to 0.95');
+  t.is(c(1.00).add(.01).add(.01).add(.01).toString(), '1.05', 'value is not rounded to 1.05');
+  t.is(c(1.00).subtract(.01).subtract(.01).subtract(.01).toString(), '0.95', 'value is not rounded to 0.95');
 });
 
 test('should not modify internal values when rounding', t => {
   let c = value => currency(value, { increment: .05 });
 
-  t.is(c(1.00).add(.01).intValue, 101, 'intValue is to 101');
-  t.is(c(1.00).add(.01).value, 1.01, 'value is to 1.01');
-  t.is(c(1.00).add(.04).intValue, 104, 'intValue is to 104');
-  t.is(c(1.00).add(.04).value, 1.04, 'value is to 1.04');
+  t.is(c(1.00).add(.01).intValue, 101, 'intValue is not to 101');
+  t.is(c(1.00).add(.01).value, 1.01, 'value is not to 1.01');
+  t.is(c(1.00).add(.04).intValue, 104, 'intValue is not to 104');
+  t.is(c(1.00).add(.04).value, 1.04, 'value is not to 1.04');
 });
 
 test('should allow arbitrary rounding increments', t => {
@@ -381,12 +388,12 @@ test('should allow arbitrary rounding increments', t => {
   let c2 = value => currency(value, { increment: .25 });
   let c3 = value => currency(value, { increment: 5, precision: 0 });
 
-  t.is(c1(1.06).toString(), '1.10', 'value is rounded to 1.10');
-  t.is(c1(-1.06).toString(), '-1.10', 'value is rounded to -1.10');
-  t.is(c2(1.17).toString(), '1.25', 'value is rounded to 1.25');
-  t.is(c2(-1.17).toString(), '-1.25', 'value is rounded to -1.25');
-  t.is(c3(117).toString(), '115', 'value is rounded to 120');
-  t.is(c3(-117).toString(), '-115', 'value is rounded to 120');
+  t.is(c1(1.06).toString(), '1.10', 'value is not rounded to 1.10');
+  t.is(c1(-1.06).toString(), '-1.10', 'value is not rounded to -1.10');
+  t.is(c2(1.17).toString(), '1.25', 'value is not rounded to 1.25');
+  t.is(c2(-1.17).toString(), '-1.25', 'value is not rounded to -1.25');
+  t.is(c3(117).toString(), '115', 'value is not rounded to 120');
+  t.is(c3(-117).toString(), '-115', 'value is not rounded to 120');
 });
 
 test('should throw exception with invalid input', t => {
