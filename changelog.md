@@ -1,3 +1,7 @@
+**1.1.3**
+
+* Fixed grouping separator for numbers with 0 precision. ([#109](https://github.com/scurker/currency.js/issues/109)) thanks [@hameedraha](https://github.com/hameedraha)
+
 **1.1.2**
 
 * Fixed rounding not always being consistent with half cent values and high precision. ([#102](https://github.com/scurker/currency.js/pull/102)) thanks [@philippetrepanier](https://github.com/philippetrepanier)
