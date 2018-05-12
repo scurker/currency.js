@@ -12,7 +12,11 @@ declare namespace currency {
     errorOnInvalid?: boolean,
     precision?: number,
     increment?: number,
-    useVedic?: boolean
+    useVedic?: boolean,
+    sign?: {
+        position?: string,
+        showPositive?: boolean
+    }
   }
 }
 

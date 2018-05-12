@@ -2,52 +2,52 @@ import test from 'ava';
 import currency from '../src/currency';
 
 test('should be immutable', t => {
-  var value = currency(1),
-    // eslint-disable-next-line no-unused-vars
+  const value = currency(1),
+    // eslint-disable-next-line no-unused-consts
     newValue = value.add(0.25);
 
   t.is(parseFloat(value), 1, 'original value not modified');
 });
 
 test('should be instance of currency', t => {
-  var value = currency(1);
+  const value = currency(1);
   t.true(value instanceof currency, 'value is not instance of currency');
 });
 
 test('should allow numbers', t => {
-  var intVal = currency(1.23);
+  const intVal = currency(1.23);
   t.is(parseFloat(intVal), 1.23, 'currency("1.23") is 1.23');
 });
 
 test('should allow strings', t => {
-  var strVal = currency('1.23');
+  const strVal = currency('1.23');
   t.is(parseFloat(strVal), 1.23, 'currency("1.23") is 1.23');
 });
 
 test('should allow currency', t => {
-  var curVal = currency(currency('1.23'));
+  const curVal = currency(currency('1.23'));
   t.is(parseFloat(curVal), 1.23, 'currency(currency("1.23")) is 1.23');
 });
 
 test('should accept strings with symbols', t => {
-  var str1 = currency('$1234.56'),
+  const str1 = currency('$1234.56'),
       str2 = currency('£78.90');
   t.is(parseFloat(str1), 1234.56, 'currency("$1234.56") is 1234.56');
   t.is(parseFloat(str2), 78.90, 'currency("£78.90") is 78.90');
 });
 
 test('should allow comma delimited strings', t => {
-  var str = currency('1,234,567.89');
+  const str = currency('1,234,567.89');
   t.is(parseFloat(str), 1234567.89, 'currency("1,234,567.89") is 1234567.89');
 });
 
 test('should strip invalid characters', t => {
-  var str = currency('a1b2c3');
+  const str = currency('a1b2c3');
   t.is(parseFloat(str), 123, 'currency("a1b2c3") is 123');
 });
 
 test('should allow negative strings', t => {
-  var str1 = currency('(5.24)'),
+  const str1 = currency('(5.24)'),
       str2 = currency('-12.34');
   t.is(parseFloat(str1), -5.24, 'currency("(5.24)") is -5.24');
   t.is(parseFloat(str2), -12.34, 'currency("-12.34") is -12.34');
@@ -66,21 +66,21 @@ test('should return intValue', t => {
 });
 
 test('should add floating point value', t => {
-  var value = currency(2.51).add(.01);
+  const value = currency(2.51).add(.01);
 
   t.is(parseFloat(value), 2.52, 'currency(2.51).add(.01) equals decimal value 2.52');
   t.not(parseFloat(value), 2.51+.01, 'currency(2.51).add(.01) does not equal 2.5199999999999996');
 });
 
 test('should subtract floating point', t => {
-  var value = currency(2.52).subtract(.01);
+  const value = currency(2.52).subtract(.01);
 
   t.is(parseFloat(value), 2.51, 'currency(2.52).subtract(.01) equals decimal value 2.51');
   t.not(parseFloat(value), 2.52-.01, 'currency(2.52).subtract(.01) does not equal 2.5100000000000002');
 });
 
 test('should round half up', t => {
-  var value1 = currency(17.955)
+  const value1 = currency(17.955)
     , value2 = currency(17.855)
     , value3 = currency(17.455);
 
@@ -90,7 +90,7 @@ test('should round half up', t => {
 });
 
 test('should round negative values half up', t => {
-  var value1 = currency(-17.955)
+  const value1 = currency(-17.955)
     , value2 = currency(-17.855)
     , value3 = currency(-17.455);
 
@@ -100,8 +100,8 @@ test('should round negative values half up', t => {
 });
 
 test('currency multiplication', t => {
-  var value = currency(1.23).multiply(2);
-  var floatingValue = currency(.1).multiply(.2);
+  const value = currency(1.23).multiply(2);
+  const floatingValue = currency(.1).multiply(.2);
 
   t.is(parseFloat(value), 2.46, 'currency(1.23).multiply(2) is 2.46');
   t.is(parseFloat(floatingValue), .02, 'currency(.1).multiply(.2) equals 0.02');
@@ -109,27 +109,27 @@ test('currency multiplication', t => {
 });
 
 test('currency multiplication with precision', t => {
-  var value = currency(1.369, { precision: 3 }).multiply(3);
+  const value = currency(1.369, { precision: 3 }).multiply(3);
   t.is(parseFloat(value), 4.107, 'currency(1.369).multiply(3) is 4.107');
 });
 
 test('currency division', t => {
-  var value = currency(9.87).divide(2);
+  const value = currency(9.87).divide(2);
   t.is(parseFloat(value), 4.94, 'currency(9.87).divide(2) is 4.94');
 });
 
 test('currency division with precision', t => {
-  var value = currency(4.107, { precision: 3 }).divide(3);
+  const value = currency(4.107, { precision: 3 }).divide(3);
   t.is(parseFloat(value), 1.369, 'currency(4.107).divide(3) is 1.369');
 });
 
 test('should parse negative values', t => {
-  var pos = currency(1.23),
+  const pos = currency(1.23),
       neg = currency(-1.23),
       distribute = neg.distribute(4);
 
-  var total = 0;
-  for(var i = 0; i < distribute.length; i++) {
+  let total = 0;
+  for(let i = 0; i < distribute.length; i++) {
     total += parseFloat(distribute[i]);
   }
 
@@ -140,10 +140,10 @@ test('should parse negative values', t => {
 });
 
 test('should create equal distribution', t => {
-  var values = currency(1.00).distribute(4);
+  const values = currency(1.00).distribute(4);
 
-  var realValues = [];
-  for(var i = 0; i < values.length; i++) {
+  const realValues = [];
+  for(let i = 0; i < values.length; i++) {
     realValues.push(parseFloat(values[i]));
   }
 
@@ -152,13 +152,13 @@ test('should create equal distribution', t => {
 });
 
 test('should create non-equal distribution with pennies', t => {
-  var values = currency(1.01).distribute(4);
+  const values = currency(1.01).distribute(4);
 
   t.is(parseFloat(values[0]), 0.26, 'first value is not 0.26');
   t.is(parseFloat(values[1]), 0.25, 'next value is not 0.25');
 
-  var total = 0;
-  for(var i = 0; i < values.length; i++) {
+  let total = 0;
+  for(let i = 0; i < values.length; i++) {
     total += parseFloat(values[i]);
   }
 
@@ -166,13 +166,13 @@ test('should create non-equal distribution with pennies', t => {
 });
 
 test('should create non-equal distribution with a negative penny', t => {
-  var values = currency(-0.01).distribute(2);
+  const values = currency(-0.01).distribute(2);
 
   t.is(parseFloat(values[0]), -0.01, 'first value is not -0.01');
   t.is(parseFloat(values[1]), 0, 'second value is not 0');
 
-  var total = 0;
-  for(var i = 0; i < values.length; i++) {
+  let total = 0;
+  for(let i = 0; i < values.length; i++) {
     total += parseFloat(values[i]);
   }
 
@@ -180,7 +180,7 @@ test('should create non-equal distribution with a negative penny', t => {
 });
 
 test('should get dollar value', t => {
-  var value = currency(1.23);
+  const value = currency(1.23);
 
   t.is(value.add(2).dollars(), 3, 'is dollar amount');
   t.is(value.add(.8).dollars(), 2, 'is dollar amount');
@@ -188,15 +188,15 @@ test('should get dollar value', t => {
 });
 
 test('should get cent value', t => {
-  var value = currency(1.23);
+  const value = currency(1.23);
 
   t.is(value.cents(), 23, 'is cent amount');
   t.is(value.add(.31).cents(), 54, 'is cent amount');
 });
 
 test('should support different precision values', t => {
-  let c1 = currency(1.234, { precision: 3 });
-  let c2 = currency(1.234, { symbol: '¥', precision: 0 });
+  const c1 = currency(1.234, { precision: 3 });
+  const c2 = currency(1.234, { symbol: '¥', precision: 0 });
 
   t.is(c1.value, 1.234);
   t.is(c2.value, 1);
@@ -215,23 +215,23 @@ test('should support different precision values', t => {
 });
 
 test('should use source precision for arithmetic with different precisions', t => {
-  let c1 = currency(1.23);
-  let c2 = currency(1.239, { precision: 3 });
+  const c1 = currency(1.23);
+  const c2 = currency(1.239, { precision: 3 });
 
   t.is(c1.add(c2).value, 2.47);
   t.is(c2.add(c1).value, 2.469);
 });
 
 test('should use source formatting for mixed currency formats', t => {
-  let c1 = currency('1,234.56');
-  let c2 = currency('1 234,56', { separator: ' ', decimal: ',' });
+  const c1 = currency('1,234.56');
+  const c2 = currency('1 234,56', { separator: ' ', decimal: ',' });
 
   t.is(c1.add(c2).format(), '2,469.12');
   t.is(c2.add(c1).format(), '2 469,12');
 });
 
 test('should default rounding when parsing', t => {
-  var round1 = currency(1.234)
+  const round1 = currency(1.234)
     , round2 = currency(5.6789)
     , multiply = currency(10.00)
     , divide = currency(0.01);
@@ -243,7 +243,7 @@ test('should default rounding when parsing', t => {
 });
 
 test('should have int value and real value', t => {
-  var value1 = currency(2.51).add(.01)
+  const value1 = currency(2.51).add(.01)
     , value2 = currency(2.52).subtract(.01);
 
   t.is(value1.value, 2.52, 'real value is not 2.52');
@@ -253,7 +253,7 @@ test('should have int value and real value', t => {
 });
 
 test('should stringify json', t => {
-  var value1 = currency(1.23)
+  const value1 = currency(1.23)
     , value2 = currency(2.51).add(.01)
     , value3 = currency(2.52).subtract(.02);
 
@@ -263,7 +263,7 @@ test('should stringify json', t => {
 });
 
 test('should format value using defaults', t => {
-  var value1 = currency(1.23)
+  const value1 = currency(1.23)
     , value2 = currency(1234.56)
     , value3 = currency(1234567.89)
     , value4 = currency(1234567.8912, { precision: 4 })
@@ -283,7 +283,7 @@ test('should format value using defaults', t => {
 });
 
 test('should format value using international', t => {
-  let c = value => currency(value, { separator: '.', decimal: ',' });
+  const c = value => currency(value, { separator: '.', decimal: ',' });
 
   t.is(c(1.23).format(), '1,23', 'value is not "1,23"');
   t.is(c(1000.00).format(), '1.000,00', 'value is not "1.000,00"');
@@ -291,7 +291,7 @@ test('should format value using international', t => {
 });
 
 test('should format vedic groupings', t => {
-  let c = value => currency(value, { useVedic: true })
+  const c = value => currency(value, { useVedic: true })
     , c4 = value => currency(value, { useVedic: true, precision: 4 });
 
   t.is(c(1.23).format(), '1.23', 'value is not "1.23"');
@@ -302,7 +302,7 @@ test('should format vedic groupings', t => {
 });
 
 test('should parse international values', t => {
-  let c = value => currency(value, { separator: '.', decimal: ',' });
+  const c = value => currency(value, { separator: '.', decimal: ',' });
 
   t.is(c('1,23').value, 1.23, 'value is not "1.23"');
   t.is(c('1.000,00').value, 1000.00, 'value is not "1,000.00"');
@@ -324,12 +324,12 @@ test('should format with international symbol', t => {
 
 test('should return 0.00 currency with invalid input', t => {
   // eslint-disable-next-line no-undefined
-  var value = currency(undefined);
+  const value = currency(undefined);
   t.is(value.value, 0, 'value is not "0.00"');
 });
 
 test('should round down to nearest value when using increments', t => {
-  let c = value => currency(value, { increment: .05 });
+  const c = value => currency(value, { increment: .05 });
 
   t.is(c(1.01).toString(), '1.00', 'value is not rounded to 1.00');
   t.is(c(1.02).toString(), '1.00', 'value is not rounded to 1.00');
@@ -342,7 +342,7 @@ test('should round down to nearest value when using increments', t => {
 });
 
 test('should round up to nearest value when using increments', t => {
-  let c = value => currency(value, { increment: .05 });
+  const c = value => currency(value, { increment: .05 });
 
   t.is(c(1.03).toString(), '1.05', 'value is not rounded to 1.05');
   t.is(c(1.04).toString(), '1.05', 'value is not rounded to 1.05');
@@ -355,7 +355,7 @@ test('should round up to nearest value when using increments', t => {
 });
 
 test('should handle negative rounding when using increments', t => {
-  let c = value => currency(value, { increment: .05 });
+  const c = value => currency(value, { increment: .05 });
 
   t.is(c(-1.01).toString(), '-1.00', 'value is not rounded to -1.00');
   t.is(c(-1.02).toString(), '-1.00', 'value is not rounded to -1.00');
@@ -368,14 +368,14 @@ test('should handle negative rounding when using increments', t => {
 });
 
 test('should round only the final value to nearest increment', t => {
-  let c = value => currency(value, { increment: .05 });
+  const c = value => currency(value, { increment: .05 });
 
   t.is(c(1.00).add(.01).add(.01).add(.01).toString(), '1.05', 'value is not rounded to 1.05');
   t.is(c(1.00).subtract(.01).subtract(.01).subtract(.01).toString(), '0.95', 'value is not rounded to 0.95');
 });
 
 test('should not modify internal values when rounding', t => {
-  let c = value => currency(value, { increment: .05 });
+  const c = value => currency(value, { increment: .05 });
 
   t.is(c(1.00).add(.01).intValue, 101, 'intValue is not to 101');
   t.is(c(1.00).add(.01).value, 1.01, 'value is not to 1.01');
@@ -384,9 +384,9 @@ test('should not modify internal values when rounding', t => {
 });
 
 test('should allow arbitrary rounding increments', t => {
-  let c1 = value => currency(value, { increment: .1 });
-  let c2 = value => currency(value, { increment: .25 });
-  let c3 = value => currency(value, { increment: 5, precision: 0 });
+  const c1 = value => currency(value, { increment: .1 });
+  const c2 = value => currency(value, { increment: .25 });
+  const c3 = value => currency(value, { increment: 5, precision: 0 });
 
   t.is(c1(1.06).toString(), '1.10', 'value is not rounded to 1.10');
   t.is(c1(-1.06).toString(), '-1.10', 'value is not rounded to -1.10');
@@ -399,4 +399,41 @@ test('should allow arbitrary rounding increments', t => {
 test('should throw exception with invalid input', t => {
   // eslint-disable-next-line no-undefined
   t.throws(function() { currency(undefined, { errorOnInvalid: true }); }, Error, 'Threw exception');
+});
+
+test('should show negative sing in a correct place', t => {
+  const c1 = value => currency(value, { formatWithSymbol: true, sign: { position: 'start' }});
+  const c2 = value => currency(value, { formatWithSymbol: true, sign: { position: 'between' }});
+  const c3 = value => currency(value, { formatWithSymbol: true, sign: { position: 'end' }});
+
+  t.is(c1(-1.06).format(), '-$1.06', 'sign is not placed at the start of the string');
+  t.is(c2(-1.06).format(), '$-1.06', 'sign is not placed between simbol and value');
+  t.is(c3(-1.06).format(), '$1.06-', 'sign is not placed at the end of the string');
+});
+
+test('should be able to re-format result in a custom way', t => {
+  const customProcess = ({ symbol, result, isPositive }) => (
+    isPositive ? `+${symbol + result}` : `(${symbol + result})`
+  );
+
+  const c1 = value => currency(value).format(true, customProcess);
+  const c2 = value => currency(value, { postProcess: customProcess });
+
+  t.is(c1(10000.06), '+$10,000.06', 'positive value isn\'t formated in a custom way');
+  t.is(c1(-10000.06), '($10,000.06)', 'negative value isn\'t formated in a custom way');
+
+  t.is(c2(1000.06).format(), '+1,000.06', 'positive value isn\'t formated in a custom way');
+  t.is(c2(-1000.06).format(), '(1,000.06)', 'negative value isn\'t formated in a custom way');
+});
+
+test('should show positive sing in correct place', t => {
+  const c1 = value => currency(value, { precision: 0, sign: { showPositive: true }});
+  const c2 = value => currency(value, { formatWithSymbol: true, sign: { position: 'start', showPositive: true  }});
+  const c3 = value => currency(value, { formatWithSymbol: true, sign: { position: 'between', showPositive: true  }});
+  const c4 = value => currency(value, { formatWithSymbol: true, sign: { position: 'end', showPositive: true  }});
+
+  t.is(c1(100).format(), '+100', 'sign is not placed at the start of the string');
+  t.is(c2(100).format(), '+$100.00', 'sign is not placed at the start of the string');
+  t.is(c3(100).format(), '$+100.00', 'sign is not placed between simbol and value');
+  t.is(c4(100).format(), '$100.00+', 'sign is not placed at the end of the string');
 });

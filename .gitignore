@@ -8,3 +8,4 @@ coverage/
 docs/build/*
 .nyc_output
 *.log
+.idea
