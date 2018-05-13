@@ -80,7 +80,7 @@
     "metalsmith-markdown": "^0.2.2",
     "npm-run-all": "^4.1.2",
     "nyc": "^11.7.1",
-    "pretty-bytes": "^4.0.2",
+    "pretty-bytes": "^5.0.0",
     "rollup": "^0.58.0",
     "rollup-plugin-babel": "^3.0.4",
     "typescript": "^2.8.3"
