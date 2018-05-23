@@ -15,8 +15,8 @@ currency(1.23, { formatWithSymbol: true }).format(); // => "$1.23"
 Separator between the number groupings when calling `currency.format()`.
 
 ```js
-currency(1234.56, { symbol: ',' }).format(); // => "1,234.56"
-currency(1234.56, { symbol: ' ' }).format(); // => "1 234.56"
+currency(1234.56, { separator: ',' }).format(); // => "1,234.56"
+currency(1234.56, { separator: ' ' }).format(); // => "1 234.56"
 ```
 
 ### decimal *default*: `"."`
