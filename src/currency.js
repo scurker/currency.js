@@ -63,7 +63,7 @@ function parse(value, opts, useRounding = true) {
     , isNumber = typeof value === 'number';
 
   if (isNumber || value instanceof currency) {
-    v = ((isNumber ? value : value.value) * precision).toFixed(1);
+    v = ((isNumber ? value : value.value) * precision);
   } else if (typeof value === 'string') {
     let regex = new RegExp('[^-\\d' + decimal + ']', 'g')
       , decimalString = new RegExp('\\' + decimal, 'g');
@@ -79,6 +79,9 @@ function parse(value, opts, useRounding = true) {
     }
     v = 0;
   }
+
+  // Handle additional decimal for proper rounding
+  v = v.toFixed(1);
 
   return useRounding ? round(v) : v;
 }

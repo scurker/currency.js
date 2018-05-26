@@ -1,3 +1,7 @@
+**1.1.4**
+
+* Fixed rounding for string values. ([#116](https://github.com/scurker/currency.js/issues/116)) thanks [@pdcmoreira](https://github.com/pdcmoreira)
+
 **1.1.3**
 
 * Fixed grouping separator for numbers with 0 precision. ([#109](https://github.com/scurker/currency.js/issues/109)) thanks [@hameedraha](https://github.com/hameedraha)

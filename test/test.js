@@ -82,21 +82,33 @@ test('should subtract floating point', t => {
 test('should round half up', t => {
   const value1 = currency(17.955)
     , value2 = currency(17.855)
-    , value3 = currency(17.455);
+    , value3 = currency(17.455)
+    , stringValue1 = currency('17.955')
+    , stringValue2 = currency('17.855')
+    , stringValue3 = currency('17.455');
 
   t.is(value1.value, 17.96, 'currency(17.955) rounds half up to 17.96');
   t.is(value2.value, 17.86, 'currency(17.855) rounds half up to 17.86');
   t.is(value3.value, 17.46, 'currency(17.955) rounds half up to 17.46');
+  t.is(stringValue1.value, 17.96, 'currency("17.955") rounds half up to 17.96');
+  t.is(stringValue2.value, 17.86, 'currency("17.855") rounds half up to 17.86');
+  t.is(stringValue3.value, 17.46, 'currency("17.955") rounds half up to 17.46');
 });
 
 test('should round negative values half up', t => {
   const value1 = currency(-17.955)
     , value2 = currency(-17.855)
-    , value3 = currency(-17.455);
+    , value3 = currency(-17.455)
+    , stringValue1 = currency('-17.955')
+    , stringValue2 = currency('-17.855')
+    , stringValue3 = currency('-17.455');
 
   t.is(value1.value, -17.95, 'currency(-17.955) rounds half up to -17.95');
   t.is(value2.value, -17.85, 'currency(-17.855) rounds half up to -17.85');
   t.is(value3.value, -17.45, 'currency(-17.955) rounds half up to -17.45');
+  t.is(stringValue1.value, -17.95, 'currency("-17.955") rounds half up to -17.95');
+  t.is(stringValue2.value, -17.85, 'currency("-17.855") rounds half up to -17.85');
+  t.is(stringValue3.value, -17.45, 'currency("-17.955") rounds half up to -17.45');
 });
 
 test('currency multiplication', t => {
