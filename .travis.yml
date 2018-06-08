@@ -4,6 +4,8 @@ node_js:
 - '6'
 before_install:
 - npm install -g grunt-cli coveralls
+install:
+- npm install # don't use npm ci yet
 script:
 - npm run build
 - npm run lint
