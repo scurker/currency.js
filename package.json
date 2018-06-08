@@ -65,7 +65,7 @@
     "babel-register": "^6.26.0",
     "cheerio": "^1.0.0-rc.2",
     "eslint": "^4.19.1",
-    "flow-bin": "^0.73.0",
+    "flow-bin": "^0.74.0",
     "google-closure-compiler": "^20180506.0.0",
     "grunt": "^1.0.2",
     "grunt-contrib-concat": "~1.0.1",
