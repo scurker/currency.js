@@ -1,7 +1,6 @@
-import { readFileSync } from 'fs';
+import pkg from '../package.json';
 import babel from 'rollup-plugin-babel';
-
-const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
+import banner from './banner';
 
 export default {
   input: 'src/currency.js',
@@ -13,11 +12,13 @@ export default {
   output: [
     {
       format: 'es',
-      file: pkg.module
+      file: pkg.module,
+      banner
     },
     {
       format: 'cjs',
-      file: pkg.main
+      file: pkg.main,
+      banner
     }
   ]
 };

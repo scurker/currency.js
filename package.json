@@ -14,7 +14,7 @@
     "test": "test"
   },
   "scripts": {
-    "build": "npm-run-all clean transpile copy-typescript-definition copy-flow-definition && grunt build",
+    "build": "npm-run-all clean transpile copy-typescript-definition copy-flow-definition",
     "build:docs": "npm-run-all clean:docs compile:docs minify:docs",
     "clean": "rm -rf dist/*",
     "clean:docs": "rm -rf docs/build",
@@ -66,10 +66,7 @@
     "cheerio": "^1.0.0-rc.2",
     "eslint": "^5.0.1",
     "flow-bin": "^0.75.0",
-    "google-closure-compiler": "^20180610.0.2",
-    "grunt": "^1.0.3",
-    "grunt-contrib-concat": "~1.0.1",
-    "grunt-sync-pkg": "~0.1.2",
+    "google-closure-compiler-js": "^20180610.0.0",
     "gzip-size": "^4.1.0",
     "handlebars": "^4.0.11",
     "highlight.js": "^9.12.0",
