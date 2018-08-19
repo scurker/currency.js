@@ -7,7 +7,6 @@
 [![Build Status](https://travis-ci.org/scurker/currency.js.svg?branch=master)](https://travis-ci.org/scurker/currency.js)
 [![Coverage Status](https://coveralls.io/repos/scurker/currency.js/badge.svg?branch=master&service=github)](https://coveralls.io/github/scurker/currency.js?branch=master)
 [![npm](https://img.shields.io/npm/v/currency.js.svg?style=flat)](https://www.npmjs.com/package/currency.js)
-![bower](https://img.shields.io/bower/v/currency.js.svg)
 [![gzip size](http://img.badgesize.io/https://unpkg.com/currency.js/dist/currency.min.js?compression=gzip)](https://unpkg.com/currency.js/dist/currency.min.js)
 
 </div>
@@ -148,6 +147,14 @@ GAS(1234.56).format(true); // "$1,234.560"
 ## Add-ons
 
 * [babel-plugin-transform-currency-operators](https://github.com/scurker/babel-plugin-transform-currency-operators): An experimental babel plugin for transforming currency operations `currency(1.23) + 4.56` to `currency(1.23).add(4.56)`.
+
+## Other Libraries
+
+Maybe currency.js isn't the right fit for your needs. Maybe one of these other fine libraries will be a better fit?
+
+* [accounting.js](https://github.com/openexchangerates/accounting.js)
+* [dinero.js](https://github.com/sarahdayan/dinero.js)
+* [walletjs](https://github.com/dleitee/walletjs)
 
 ## License
 
