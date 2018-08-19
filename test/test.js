@@ -341,7 +341,7 @@ test('should format using negative patterns', t => {
   t.is(value3.format(), '$ (1,234,567.89)', 'value is not "$ (,234,567.89)"');
   t.is(value4.format(), '$ (1,234,567.8912)', 'value is not "$ (,234,567.8912)"');
   t.is(value5.format(), '$ (1,234,567)', 'value is not "$ (1,234,567)"');
-})
+});
 
 test('should parse international values', t => {
   let c = value => currency(value, { separator: '.', decimal: ',' });
