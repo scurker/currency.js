@@ -150,7 +150,7 @@ GAS(1234.56).format(true); // "$1,234.560"
 
 ## Other Libraries
 
-Maybe currency.js isn't the right fit for your needs. Check out one of these other fine libraries will be a better fit?
+Maybe currency.js isn't the right fit for your needs. Check out some of these other fine libraries:
 
 * [accounting.js](https://github.com/openexchangerates/accounting.js)
 * [dinero.js](https://github.com/sarahdayan/dinero.js)
