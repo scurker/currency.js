@@ -10,7 +10,9 @@ declare type $currency$opts = {
   errorOnInvalid?: boolean,
   precision?: number,
   increment?: number,
-  useVedic?: boolean
+  useVedic?: boolean,
+  pattern?: string,
+  negativePattern?: string
 }
 
 declare interface $currency {

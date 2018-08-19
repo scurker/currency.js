@@ -24,7 +24,9 @@ currency(1.23, {
   errorOnInvalid: true,
   precision: 2,
   increment: .05,
-  useVedic: false
+  useVedic: false,
+  pattern: '!#',
+  negativePattern: '-!#'
 });
 
 // add
