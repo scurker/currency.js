@@ -4,7 +4,12 @@ const defaults = {
   decimal: '.',
   formatWithSymbol: false,
   errorOnInvalid: false,
-  precision: 2
+  precision: 2,
+  postProcess: null,
+  sign: {
+    position: 'between', // Possible options: between, start, end
+    showPositive: false
+  }
 };
 
 const round = v => Math.round(v);
@@ -29,6 +34,8 @@ function currency(value, opts) {
   let settings = Object.assign({}, defaults, opts)
     , precision = pow(settings.precision)
     , v = parse(value, settings);
+
+  settings.sign = Object.assign({}, defaults.sign, settings.sign);
 
   that.intValue = v;
   that.value = v / precision;
@@ -163,21 +170,57 @@ currency.prototype = {
   },
 
   /**
+   * Put sign and symbol in required place.
+   * @desc You can override this function by passing new function as the second argument to "format" method.
+   * @param {string} symbol - currency symbol. Could be an empty string.
+   * @param {string} result - pre-formatted currency value without symbol and sign. Please note, it's always be positive!
+   * @param {object} signOptions - options for sign
+   * @param {string} signOptions.position - describe position where sign should be placed. Possible values: "between", "start", "end".
+   * @param {boolean} signOptions.showPositive - show sign "+" or not.
+   * @param {boolean} isPositive - Indicates whether result is positive.
+   * @return {string} - Formatted result as a string
+   * @private
+   */
+  _postProcess({ symbol, result, signOptions, isPositive }) {
+    const
+      positiveSign = signOptions.showPositive ? '+' : '',
+      sign = isPositive ? positiveSign : '-',
+      cases = {
+        'between': () => symbol + sign + result,
+        'start':  () => sign + symbol + result,
+        'end': () => symbol + result + sign,
+      };
+
+    return cases[signOptions.position]();
+  },
+
+  /**
    * Formats the value as a string according to the formatting settings.
    * @param {boolean} useSymbol - format with currency symbol
+   * @param {function} processFunc - function that overrides default post-processing step.
+   * Could be useful when you want to get currency in some absolutely different format, like "($100)" for negative values.
    * @returns {string}
    */
-  format(useSymbol) {
-    let { formatWithSymbol, symbol, separator, decimal, groups } = this._settings;
+  format(useSymbol, processFunc) {
+    const { formatWithSymbol, symbol, separator, decimal, groups, sign, postProcess } = this._settings
+      , [dollars, cents] = this.toString().split('.')
+      , isPositive = dollars[0] !== '-'
+      , positiveDollarsVal =isPositive ? dollars : dollars.slice(1);
 
     // set symbol formatting
     typeof(useSymbol) === 'undefined' && (useSymbol = formatWithSymbol);
 
-    let values = ((useSymbol ? symbol : '') + this).split('.')
-      , dollars = values[0]
-      , cents = values[1];
+    const head = positiveDollarsVal.replace(groups, '$1' + separator)
+      , tail = cents ? decimal + cents : ''
+      , process = processFunc || postProcess || this._postProcess
+      , config = {
+          symbol: (useSymbol ? symbol : ''),
+          result: head + tail,
+          signOptions: sign,
+          isPositive,
+        };
 
-    return `${dollars.replace(groups, '$1' + separator)}${cents ? decimal + cents : ''}`;
+    return process.call(this, config);
   },
 
   /**
