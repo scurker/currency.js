@@ -44,6 +44,28 @@ currency(1.23, { formatWithSymbol: true }).format(); // => "$1.23"
 currency(1.23, { formatWithSymbol: false }).format(); // => "1.23"
 ```
 
+### pattern *default*: `!#`
+
+Allows you to customize the format pattern using `!` as replacement for the currency symbol and `#` as replacement for the currency amount.
+
+```js
+currency(1.23, {
+  pattern: `# !`,
+  formatWithSymbol: true
+}).format(); // => "1.23 $"
+```
+
+### negativePattern *default*: `-!#`
+
+Allows you to customize the negative format pattern using `!` as replacement for the currency symbol and `#` as replacement for the currency amount.
+
+```js
+currency(-1.23, {
+  pattern: `(!#)`,
+  formatWithSymbol: true
+}).format(); // => "($1.23)"
+```
+
 ### errorOnInvalid *default*: `false`
 
 If an invalid value such as `null` or `undefined` is passed in, `currency` will throw an error.
