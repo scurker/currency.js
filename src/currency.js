@@ -4,7 +4,9 @@ const defaults = {
   decimal: '.',
   formatWithSymbol: false,
   errorOnInvalid: false,
-  precision: 2
+  precision: 2,
+  pattern: '!#',
+  negativePattern: '-!#'
 };
 
 const round = v => Math.round(v);
@@ -168,16 +170,17 @@ currency.prototype = {
    * @returns {string}
    */
   format(useSymbol) {
-    let { formatWithSymbol, symbol, separator, decimal, groups } = this._settings;
+    let { pattern, negativePattern, formatWithSymbol, symbol, separator, decimal, groups } = this._settings
+      , values = (this + '').replace(/^-/, '').split('.')
+      , dollars = values[0]
+      , cents = values[1];
 
     // set symbol formatting
     typeof(useSymbol) === 'undefined' && (useSymbol = formatWithSymbol);
 
-    let values = ((useSymbol ? symbol : '') + this).split('.')
-      , dollars = values[0]
-      , cents = values[1];
-
-    return `${dollars.replace(groups, '$1' + separator)}${cents ? decimal + cents : ''}`;
+    return (this.value >= 0 ? pattern : negativePattern)
+      .replace('!', useSymbol ? symbol : '')
+      .replace('#', `${dollars.replace(groups, '$1' + separator)}${cents ? decimal + cents : ''}`);
   },
 
   /**

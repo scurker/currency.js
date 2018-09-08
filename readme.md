@@ -102,6 +102,12 @@ Number of decimal places to store as cents.
 `formatWithSymbol` *default*: `false`<br/>
 Includes the `symbol` option when calling `currency.format()`.
 
+`pattern` *default*: `!#`<br/>
+Allows you to customize the format pattern using `!` as replacement for the currency symbol and `#` as replacement for the currency amount.
+
+`negativePattern` *default*: `-!#`<br/>
+Allows you to customize the negative format pattern using `!` as replacement for the currency symbol and `#` as replacement for the currency amount.
+
 `errorOnInvalid` *default*: `false`<br/>
 If an invalid value such as `null` or `undefined` is passed in, will throw an error.
 

@@ -313,6 +313,36 @@ test('should format vedic groupings', t => {
   t.is(c4(1234567.8912).format(), '12,34,567.8912', 'value is not "12,34,567.8912"');
 });
 
+test('should format using patterns', t => {
+  let c = (value, opts) => currency(value, Object.assign({}, { formatWithSymbol: true, pattern: '# !'}, opts))
+    , value1 = c(1.23)
+    , value2 = c(1234.56)
+    , value3 = c(1234567.89)
+    , value4 = c(1234567.8912, { precision: 4 })
+    , value5 = c(1234567, { precision: 0 });
+
+  t.is(value1.format(), '1.23 $', 'value is not "1.23 $"');
+  t.is(value2.format(), '1,234.56 $', 'value is not "1,234.56 $"');
+  t.is(value3.format(), '1,234,567.89 $', 'value is not "1,234,567.89 $"');
+  t.is(value4.format(), '1,234,567.8912 $', 'value is not "1,234,567.8912 $"');
+  t.is(value5.format(), '1,234,567 $', 'value is not "1,234,567 $"');
+});
+
+test('should format using negative patterns', t => {
+  let c = (value, opts) => currency(value, Object.assign({}, { formatWithSymbol: true, negativePattern: '! (#)'}, opts))
+    , value1 = c(-1.23)
+    , value2 = c(-1234.56)
+    , value3 = c(-1234567.89)
+    , value4 = c(-1234567.8912, { precision: 4 })
+    , value5 = c(-1234567, { precision: 0 });
+
+  t.is(value1.format(), '$ (1.23)', 'value is not "$ (1.23)"');
+  t.is(value2.format(), '$ (1,234.56)', 'value is not "$ (1,234.56)"');
+  t.is(value3.format(), '$ (1,234,567.89)', 'value is not "$ (1,234,567.89)"');
+  t.is(value4.format(), '$ (1,234,567.8912)', 'value is not "$ (1,234,567.8912)"');
+  t.is(value5.format(), '$ (1,234,567)', 'value is not "$ (1,234,567)"');
+});
+
 test('should parse international values', t => {
   let c = value => currency(value, { separator: '.', decimal: ',' });
 
