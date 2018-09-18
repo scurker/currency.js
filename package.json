@@ -18,7 +18,7 @@
     "build:docs": "npm-run-all clean:docs compile:docs minify:docs",
     "clean": "rm -rf dist/*",
     "clean:docs": "rm -rf docs/build",
-    "compile:docs": "npx babel-node --presets=env ./docs/src/build-docs.js",
+    "compile:docs": "npx babel-node --presets=@babel/preset-env ./docs/src/build-docs.js",
     "coverage": "BABEL_ENV=test nyc ava ./test/test.js",
     "coverage:report": "nyc report --reporter=text-lcov | coveralls",
     "copy-typescript-definition": "cp -f src/currency.d.ts dist",
