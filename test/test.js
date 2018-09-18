@@ -1,5 +1,5 @@
 import test from 'ava';
-import currency from '../src/currency';
+import currency from '../dist/currency';
 
 test('should be immutable', t => {
   var value = currency(1),

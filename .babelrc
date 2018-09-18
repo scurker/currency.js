@@ -1,6 +1,6 @@
 {
   "presets": [
-    ["babel-preset-env", {
+    ["@babel/preset-env", {
       targets: {
         browsers: ['last 2 versions'],
         node: 4
@@ -14,7 +14,7 @@
   "env": {
     "test": {
       "presets": [
-        ["babel-preset-env", {
+        ["@babel/preset-env", {
           targets: {
             node: 'current'
           }

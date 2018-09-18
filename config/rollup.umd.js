@@ -9,8 +9,7 @@ export default [{
   input,
   plugins: [
     babel({
-      exclude: 'node_modules/**',
-      plugins: ['transform-object-assign']
+      exclude: 'node_modules/**'
     })
   ],
   output: [
@@ -23,11 +22,10 @@ export default [{
   ]
 },
 {
-  input: 'src/currency.js',
+  input,
   plugins: [
     babel({
-      exclude: 'node_modules/**',
-      plugins: ['transform-object-assign']
+      exclude: 'node_modules/**'
     }),
     closure({
       compilationLevel: 'SIMPLE',
