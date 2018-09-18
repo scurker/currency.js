@@ -3,7 +3,7 @@ node_js:
 - 'node'
 - '6'
 before_install:
-- npm install -g grunt-cli coveralls
+- npm install -g coveralls
 install:
 - npm install # don't use npm ci yet
 script:
