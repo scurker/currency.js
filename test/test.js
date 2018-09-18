@@ -243,7 +243,7 @@ test('should use source formatting for mixed currency formats', t => {
 });
 
 test('should default rounding when parsing', t => {
-  var round1 = currency(1.234)
+  var round1 = currency(1.2349)
     , round2 = currency(5.6789)
     , multiply = currency(10.00)
     , divide = currency(0.01);
