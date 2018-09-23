@@ -438,6 +438,14 @@ test('should allow arbitrary rounding increments', t => {
   t.is(c3(-117).toString(), '-115', 'value is not rounded to 120');
 });
 
+test('should handle max safe integer', t => {
+  let max1 = currency(90071992547409.91)
+    , max2 = currency(-90071992547409.91);
+
+  t.true(max1.intValue === 9007199254740991, 'currency does not handle Number.MAX_SAFE_INTEGER correctly');
+  t.true(max2.intValue === -9007199254740991, 'currency does not handle Number.MAX_SAFE_INTEGER correctly');
+});
+
 test('should throw exception with invalid input', t => {
   // eslint-disable-next-line no-undefined
   t.throws(function() { currency(undefined, { errorOnInvalid: true }); }, Error, 'Threw exception');
