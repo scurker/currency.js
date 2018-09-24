@@ -75,8 +75,8 @@ function parse(value, opts, useRounding = true) {
     v = 0;
   }
 
-  // Handle additional decimal for proper rounding
-  v = v.toFixed(1);
+  // Handle additional decimal for proper rounding.
+  v = v.toFixed(2);
 
   return useRounding ? round(v) : v;
 }
