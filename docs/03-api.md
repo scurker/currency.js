@@ -2,9 +2,29 @@
 toc: true
 ---
 
-## Methods
-
 {{{ toc }}}
+
+## Properties
+
+### value
+
+`currency.value`
+
+Returns the decimal value of the currency.
+
+```js
+currency("123.45").add(.01).value; // => 123.46
+```
+
+### intValue
+
+Returns the integer value of the currency.
+
+```js
+currency("123.45").add(.01).intValue; // => 12346
+```
+
+## Methods
 
 ### add
 
