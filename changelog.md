@@ -1,3 +1,8 @@
+**1.2.0**
+
+* Adjusted internal precision to better account for some edge case precision issues. ([#133](https://github.com/scurker/currency.js/issues/133)) thanks [@tvainika](https://github.com/tvainika)
+* Added new formatting options, `pattern` and `negativePattern` allowing for greater flexibility of currency formats. ([#95](https://github.com/scurker/currency.js/issues/95))
+
 **1.1.4**
 
 * Fixed rounding for string values. ([#116](https://github.com/scurker/currency.js/issues/116)) thanks [@pdcmoreira](https://github.com/pdcmoreira)
