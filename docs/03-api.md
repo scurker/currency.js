@@ -20,6 +20,8 @@ currency("123.45").add(.01).value; // => 123.46
 
 ### intValue
 
+`currency.intValue`
+
 Returns the integer value of the currency.
 
 ```js
