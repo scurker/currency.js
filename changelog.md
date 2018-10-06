@@ -1,3 +1,7 @@
+**1.2.1**
+
+* Updated flow definition for breaking changes in flow `0.82.x`. ([#149](https://github.com/scurker/currency.js/issues/133)) thanks [@amccloud](https://github.com/amccloud)
+
 **1.2.0**
 
 * Adjusted internal precision to better account for some edge case precision issues. ([#133](https://github.com/scurker/currency.js/issues/133)) thanks [@tvainika](https://github.com/tvainika)
