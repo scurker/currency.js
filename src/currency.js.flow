@@ -1,6 +1,5 @@
 // @flow
-
-declare type $currency$any = number | string | typeof currency;
+declare type $currency$any = number | string | currency;
 
 declare type $currency$opts = {
   symbol?: string,
@@ -15,13 +14,14 @@ declare type $currency$opts = {
   negativePattern?: string
 }
 
-declare interface $currency {
-  (value: $currency$any, opts?: $currency$opts): typeof currency,
-  add(number: $currency$any): typeof currency;
-  subtract(number: $currency$any): typeof currency;
-  multiply(number: $currency$any): typeof currency;
-  divide(number: $currency$any): typeof currency;
-  distribute(count: number): Array<typeof currency>;
+declare class currency {
+  static (value: $currency$any, opts?: $currency$opts): currency,
+  constructor(value: $currency$any, opts?: $currency$opts): currency,
+  add(number: $currency$any): currency;
+  subtract(number: $currency$any): currency;
+  multiply(number: $currency$any): currency;
+  divide(number: $currency$any): currency;
+  distribute(count: number): Array<currency>;
   dollars(): number;
   cents(): number;
   format(useSymbol?: boolean): string;
@@ -31,5 +31,4 @@ declare interface $currency {
   +value: number;
 }
 
-declare function currency(value: $currency$any, opts?: $currency$opts): $currency;
 declare module.exports: typeof currency;
