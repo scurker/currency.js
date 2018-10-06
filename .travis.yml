@@ -1,11 +1,11 @@
 language: node_js
 node_js:
-- 'node'
+- node
 - '6'
 before_install:
 - npm install -g coveralls
 install:
-- npm install # don't use npm ci yet
+- npm install
 script:
 - npm run build
 - npm run lint
@@ -15,34 +15,34 @@ cache:
   directories:
   - node_modules
 after_success:
-  - npm run coverage
-  - npm run coverage:report
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then npm run build:docs; fi
+- npm run coverage
+- npm run coverage:report
+- if [ "$TRAVIS_BRANCH" = "master" ]; then npm run build:docs; fi
 deploy:
-  - provider: npm
-    skip_cleanup: true
-    email:
-      secure: E5X6CQNG5Qj32TVZv6OJRFtaXZKSBd9fR/u20yWZik1BCpGNzQ9A42+xXkjliHWwu7n2Xh482iaqgiv00NWVzPMaycFVJrF7SPHDl08SH6p/R5DvgLQV79ISBtEwHxzDC3hrJOeVFknZMKaGo+TUQXiL7CYVnHMxHqlTDNJKh6g=
-    api_key:
-      secure: NJogJXmMUaBUV2T9gdeNph+mMy72ZKh2yyeqywkLWejfUuISo93LI6Zbe6Irs9ouXlF2olcFMqWxOjxc//UoCICizwq/LQUd4X6mB2/Kob2joSqKQG1VAnqNj6dkTAYaNPXrf/FSoW5GljwCjss/lBioSOfIHQhn6omGI9Ecf7E=
-    on:
-      tags: true
-      node: 'node'
-  - provider: npm
-    skip_cleanup: true
-    email:
-      secure: E5X6CQNG5Qj32TVZv6OJRFtaXZKSBd9fR/u20yWZik1BCpGNzQ9A42+xXkjliHWwu7n2Xh482iaqgiv00NWVzPMaycFVJrF7SPHDl08SH6p/R5DvgLQV79ISBtEwHxzDC3hrJOeVFknZMKaGo+TUQXiL7CYVnHMxHqlTDNJKh6g=
-    api_key:
-      secure: NJogJXmMUaBUV2T9gdeNph+mMy72ZKh2yyeqywkLWejfUuISo93LI6Zbe6Irs9ouXlF2olcFMqWxOjxc//UoCICizwq/LQUd4X6mB2/Kob2joSqKQG1VAnqNj6dkTAYaNPXrf/FSoW5GljwCjss/lBioSOfIHQhn6omGI9Ecf7E=
-    on:
-      tags: true
-      node: 'node'
-    tag: 'next'
-  - provider: pages
-    skip_cleanup: true
-    github_token: $GH_TOKEN
-    keep_history: true
-    local_dir: docs/build
-    on:
-      branch: master
-      node: 'node'
+- provider: npm
+  skip_cleanup: true
+  email:
+    secure: E5X6CQNG5Qj32TVZv6OJRFtaXZKSBd9fR/u20yWZik1BCpGNzQ9A42+xXkjliHWwu7n2Xh482iaqgiv00NWVzPMaycFVJrF7SPHDl08SH6p/R5DvgLQV79ISBtEwHxzDC3hrJOeVFknZMKaGo+TUQXiL7CYVnHMxHqlTDNJKh6g=
+  api_key:
+    secure: DHFV8/HGCiij447eaqLFYqA/24Xxp9MDxB6bLCsKv15/05jP8izOi5mblFupdFsG1LoLXIfyLLM8BwuLzCO9R8lOHL+qe4FkpAu4telE9CXO8t85jm59/E71+NBdabST0YJM8XtahuA9faKBaCMmO04OeghK0+BVvnv5B87bkGs=
+  on:
+    tags: true
+    node: node
+- provider: npm
+  skip_cleanup: true
+  email:
+    secure: E5X6CQNG5Qj32TVZv6OJRFtaXZKSBd9fR/u20yWZik1BCpGNzQ9A42+xXkjliHWwu7n2Xh482iaqgiv00NWVzPMaycFVJrF7SPHDl08SH6p/R5DvgLQV79ISBtEwHxzDC3hrJOeVFknZMKaGo+TUQXiL7CYVnHMxHqlTDNJKh6g=
+  api_key:
+    secure: DHFV8/HGCiij447eaqLFYqA/24Xxp9MDxB6bLCsKv15/05jP8izOi5mblFupdFsG1LoLXIfyLLM8BwuLzCO9R8lOHL+qe4FkpAu4telE9CXO8t85jm59/E71+NBdabST0YJM8XtahuA9faKBaCMmO04OeghK0+BVvnv5B87bkGs=
+  on:
+    tags: true
+    node: node
+  tag: next
+- provider: pages
+  skip_cleanup: true
+  github_token: "$GH_TOKEN"
+  keep_history: true
+  local_dir: docs/build
+  on:
+    branch: master
+    node: node
