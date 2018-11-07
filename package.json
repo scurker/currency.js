@@ -69,7 +69,7 @@
     "cheerio": "^1.0.0-rc.2",
     "eslint": "^5.6.0",
     "flow-bin": "^0.85.0",
-    "google-closure-compiler-js": "^20180610.0.0",
+    "google-closure-compiler-js": "^20181028.0.0",
     "gzip-size": "^5.0.0",
     "handlebars": "^4.0.12",
     "highlight.js": "^9.12.0",

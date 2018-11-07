@@ -1,4 +1,4 @@
-const compile = require('google-closure-compiler-js').compile;
+const compile = require('google-closure-compiler-js');
 
 export default function(flags = {}) {
   return {
