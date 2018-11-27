@@ -9,6 +9,7 @@ import metalsmith from 'metalsmith';
 import ignore from 'metalsmith-ignore';
 import markdown from 'metalsmith-markdown';
 import handlebars from 'handlebars';
+import minimatch from 'minimatch';
 import pkg from '../../package.json';
 
 // Configure Highlight.js
@@ -61,7 +62,9 @@ async function layout(files, metadata) {
   let layout = await promisify(fs.readFile)(path.resolve(__dirname, './layouts/index.hbs'))
     , compiledLayout = handlebars.compile(layout.toString());
 
-  Object.keys(files).forEach(name => files[name].contents = new Buffer(compiledLayout(Object.assign({}, metadata, { contents: files[name].contents }))));
+  Object.keys(files)
+    .filter(file => minimatch(file, '*.html'))
+    .forEach(name => files[name].contents = new Buffer(compiledLayout(Object.assign({}, metadata, { contents: files[name].contents }))));
 }
 
 async function hbs(files, metalsmith) {
