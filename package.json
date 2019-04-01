@@ -73,7 +73,7 @@
     "gzip-size": "^5.0.0",
     "handlebars": "^4.0.12",
     "highlight.js": "^9.12.0",
-    "html-minifier": "^3.5.20",
+    "html-minifier": "^4.0.0",
     "matchdep": "^2.0.0",
     "metalsmith": "^2.3.0",
     "metalsmith-ignore": "^1.0.0",
