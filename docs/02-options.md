@@ -61,7 +61,7 @@ Allows you to customize the negative format pattern using `!` as replacement for
 
 ```js
 currency(-1.23, {
-  pattern: `(!#)`,
+  negativePattern: `(!#)`,
   formatWithSymbol: true
 }).format(); // => "($1.23)"
 ```
