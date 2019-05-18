@@ -38,7 +38,7 @@ currency(2.51).add(.01);      // => 2.52
 currency(2.52).subtract(.01); // 2.51
 ```
 
-Since *currency.js* handles values internally as integers, there is a limit to the precision that can be stored before encountering precision errors. This should be okay for most reasonable values of currencies. As long as your currencies are less than 2<sup>52</sup>sup> (in cents) or `90,071,992,547,409.91`, you should not see any problems.
+Since *currency.js* handles values internally as integers, there is a limit to the precision that can be stored before encountering precision errors. This should be okay for most reasonable values of currencies. As long as your currencies are less than 2<sup>52</sup> (in cents) or `90,071,992,547,409.91`, you should not see any problems.
 
 *currency.js* also works with a variety of strings. This makes it easy to work into your UI without having do do string to number conversion or vice versa.
 
