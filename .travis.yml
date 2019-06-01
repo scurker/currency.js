@@ -22,16 +22,14 @@ deploy:
 - provider: npm
   skip_cleanup: true
   api_key: "$NPM_TOKEN"
-  email:
-    secure: E5X6CQNG5Qj32TVZv6OJRFtaXZKSBd9fR/u20yWZik1BCpGNzQ9A42+xXkjliHWwu7n2Xh482iaqgiv00NWVzPMaycFVJrF7SPHDl08SH6p/R5DvgLQV79ISBtEwHxzDC3hrJOeVFknZMKaGo+TUQXiL7CYVnHMxHqlTDNJKh6g=
+  email: "$NPM_EMAIL"
   on:
     tags: true
     node: node
 - provider: npm
   skip_cleanup: true
   api_key: "$NPM_TOKEN"
-  email:
-    secure: E5X6CQNG5Qj32TVZv6OJRFtaXZKSBd9fR/u20yWZik1BCpGNzQ9A42+xXkjliHWwu7n2Xh482iaqgiv00NWVzPMaycFVJrF7SPHDl08SH6p/R5DvgLQV79ISBtEwHxzDC3hrJOeVFknZMKaGo+TUQXiL7CYVnHMxHqlTDNJKh6g=
+  email: "$NPM_EMAIL"
   on:
     branch: master
     node: node
