@@ -18,7 +18,7 @@ after_success:
 - if [ "$TRAVIS_BRANCH" = "master" ]; then npm run build:docs; fi
 before_deploy:
   - if [ "$TRAVIS_BRANCH" = "master" ]; then
-    npm version "$(npm view currency.js@latest version)-${TRAVIS_COMMIT:0:8}" --allow-same-version;
+    npm version "$(npm view currency.js@latest version)-${TRAVIS_COMMIT:0:8}" --allow-same-version --no-git-tag-version;
     fi
 deploy:
 - provider: npm
