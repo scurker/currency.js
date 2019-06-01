@@ -17,9 +17,8 @@ after_success:
 - npm run coverage:report
 - if [ "$TRAVIS_BRANCH" = "master" ]; then npm run build:docs; fi
 before_deploy:
-  - |
-    if [ "$TRAVIS_BRANCH" = "master" ];
-      then npm version "$(npm view currency.js@latest version)-${TRAVIS_COMMIT:0:8}" --allow-same-version;
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then
+    npm version "$(npm view currency.js@latest version)-${TRAVIS_COMMIT:0:8}" --allow-same-version;
     fi
 deploy:
 - provider: npm
