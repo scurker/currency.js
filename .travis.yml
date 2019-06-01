@@ -25,6 +25,8 @@ deploy:
   skip_cleanup: true
   email:
     secure: E5X6CQNG5Qj32TVZv6OJRFtaXZKSBd9fR/u20yWZik1BCpGNzQ9A42+xXkjliHWwu7n2Xh482iaqgiv00NWVzPMaycFVJrF7SPHDl08SH6p/R5DvgLQV79ISBtEwHxzDC3hrJOeVFknZMKaGo+TUQXiL7CYVnHMxHqlTDNJKh6g=
+  api_key:
+    secure: DHFV8/HGCiij447eaqLFYqA/24Xxp9MDxB6bLCsKv15/05jP8izOi5mblFupdFsG1LoLXIfyLLM8BwuLzCO9R8lOHL+qe4FkpAu4telE9CXO8t85jm59/E71+NBdabST0YJM8XtahuA9faKBaCMmO04OeghK0+BVvnv5B87bkGs=
   on:
     tags: true
     node: node
@@ -32,6 +34,8 @@ deploy:
   skip_cleanup: true
   email:
     secure: E5X6CQNG5Qj32TVZv6OJRFtaXZKSBd9fR/u20yWZik1BCpGNzQ9A42+xXkjliHWwu7n2Xh482iaqgiv00NWVzPMaycFVJrF7SPHDl08SH6p/R5DvgLQV79ISBtEwHxzDC3hrJOeVFknZMKaGo+TUQXiL7CYVnHMxHqlTDNJKh6g=
+  api_key:
+    secure: DHFV8/HGCiij447eaqLFYqA/24Xxp9MDxB6bLCsKv15/05jP8izOi5mblFupdFsG1LoLXIfyLLM8BwuLzCO9R8lOHL+qe4FkpAu4telE9CXO8t85jm59/E71+NBdabST0YJM8XtahuA9faKBaCMmO04OeghK0+BVvnv5B87bkGs=
   on:
     branch: master
     node: node
