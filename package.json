@@ -65,7 +65,7 @@
     "@babel/preset-flow": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@scurker/eslint-config": "^1.1.4",
-    "ava": "^1.0.0-beta.8",
+    "ava": "^2.0.0",
     "cheerio": "^1.0.0-rc.2",
     "eslint": "^5.6.0",
     "flow-bin": "^0.100.0",
