@@ -18,7 +18,7 @@ after_success:
 - if [ "$TRAVIS_BRANCH" = "master" ]; then npm run build:docs; fi
 before_deploy:
   - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then npm version "$(npm view currency.js@latest version)-${TRAVIS_COMMIT:0:8}" fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then npm version "$(npm view currency.js@latest version)-${TRAVIS_COMMIT:0:8}"; fi
 deploy:
 - provider: npm
   skip_cleanup: true
