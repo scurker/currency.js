@@ -45,6 +45,12 @@ Via cdn:
 <script src="https://unpkg.com/currency.js@~1.2.0/dist/currency.min.js"></script>
 ```
 
+Need the latest cutting edge? All commits on master are tagged with `next` on npm:
+
+```sh
+npm install --save currency.js@next
+```
+
 ### Usage
 
 Currency will accept numbers, strings, or the currency object itself as values.
