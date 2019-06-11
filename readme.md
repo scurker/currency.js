@@ -25,6 +25,13 @@ currency(2.52).subtract(.01); // 2.51
 
 This should work for most *reasonable* values of currencies. As long as your currency values are less than 2<sup>53</sup> (in cents) or 90,071,992,547,409.91 you should be okay.
 
+### Features
+
+* *0 dependencies!*
+* Immutable
+* Flexible formatting options
+* Handles *any* type of currency input, strings, numbers, or another currency instance
+
 ### Installation
 
 With [npm](https://www.npmjs.com/):
