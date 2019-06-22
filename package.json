@@ -67,7 +67,7 @@
     "@scurker/eslint-config": "^1.1.5",
     "ava": "^2.0.0",
     "cheerio": "^1.0.0-rc.2",
-    "eslint": "^5.16.0",
+    "eslint": "^6.0.0",
     "flow-bin": "^0.101.0",
     "google-closure-compiler-js": "^20190528.0.0",
     "gzip-size": "^5.1.1",
