@@ -27,6 +27,8 @@
     "minify:docs": "html-minifier --input-dir ./docs/build --output-dir ./docs/build --file-ext html --collapse-whitespace --decode-entities --minify-css --minify-js",
     "prepare": "npm run build",
     "pretest:js": "npm run transpile:es",
+    "pretest:typescript": "npm run copy-typescript-definition",
+    "pretest:flow": "npm run copy-flow-definition",
     "transpile:es": "rollup -c ./config/rollup.config.js",
     "transpile:umd": "rollup -c ./config/rollup.umd.js",
     "transpile": "npm-run-all transpile:*",
@@ -86,6 +88,7 @@
     "pretty-bytes": "^5.3.0",
     "rollup": "^1.17.0",
     "rollup-plugin-babel": "^4.3.3",
+    "sinon": "^7.3.2",
     "typescript": "^3.5.3"
   },
   "nyc": {

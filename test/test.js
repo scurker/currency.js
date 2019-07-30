@@ -1,4 +1,5 @@
 import test from 'ava';
+import { stub } from 'sinon';
 import currency from '../dist/currency';
 
 test('should be immutable', t => {
@@ -220,8 +221,8 @@ test('should support different precision values', t => {
   t.is(c2.subtract(4.567).value, -4);
   t.is(c1.cents(), 234);
   t.is(c2.cents(), 0);
-  t.is(c1.format(true), '$1.234');
-  t.is(c2.format(true), '¥1');
+  t.is(c1.format(), '$1.234');
+  t.is(c2.format(), '¥1');
   t.deepEqual(c1.distribute(4).map(x => x.value), [.309, .309, .308, .308]);
   t.deepEqual(c2.distribute(4).map(x => x.value), [1, 0, 0, 0]);
 });
@@ -238,8 +239,8 @@ test('should use source formatting for mixed currency formats', t => {
   let c1 = currency('1,234.56');
   let c2 = currency('1 234,56', { separator: ' ', decimal: ',' });
 
-  t.is(c1.add(c2).format(), '2,469.12');
-  t.is(c2.add(c1).format(), '2 469,12');
+  t.is(c1.add(c2).format(), '$2,469.12');
+  t.is(c2.add(c1).format(), '$2 469,12');
 });
 
 test('should default rounding when parsing', t => {
@@ -282,35 +283,35 @@ test('should format value using defaults', t => {
     , value5 = currency(1234567, { precision: 0 });
 
   t.is(typeof value1.format(), 'string', 'value is not string');
-  t.is(value1.format(), '1.23', 'value is not "1.23"');
-  t.is(value2.format(), '1,234.56', 'value is not "1,234.45"');
-  t.is(value3.format(), '1,234,567.89', 'value is not "1,234,567.89"');
-  t.is(value4.format(), '1,234,567.8912', 'value is not "1,234,567.8912"');
-  t.is(value5.format(), '1,234,567', 'value is not "1,234,567"');
-  t.is(value1.multiply(-1).format(), '-1.23', 'value is not "-1.23"');
-  t.is(value2.multiply(-1).format(), '-1,234.56', 'value is not "-1,234.45"');
-  t.is(value3.multiply(-1).format(), '-1,234,567.89', 'value is not "-1,234,567.89"');
-  t.is(value4.multiply(-1).format(), '-1,234,567.8912', 'value is not "-1,234,567.8912"');
-  t.is(value5.multiply(-1).format(), '-1,234,567', 'value is not "-1,234,567"');
+  t.is(value1.format(), '$1.23', 'value is not "$1.23"');
+  t.is(value2.format(), '$1,234.56', 'value is not "$1,234.45"');
+  t.is(value3.format(), '$1,234,567.89', 'value is not "$1,234,567.89"');
+  t.is(value4.format(), '$1,234,567.8912', 'value is not "$1,234,567.8912"');
+  t.is(value5.format(), '$1,234,567', 'value is not "$1,234,567"');
+  t.is(value1.multiply(-1).format(), '-$1.23', 'value is not "-$1.23"');
+  t.is(value2.multiply(-1).format(), '-$1,234.56', 'value is not "-$1,234.45"');
+  t.is(value3.multiply(-1).format(), '-$1,234,567.89', 'value is not "-$1,234,567.89"');
+  t.is(value4.multiply(-1).format(), '-$1,234,567.8912', 'value is not "-$1,234,567.8912"');
+  t.is(value5.multiply(-1).format(), '-$1,234,567', 'value is not "-$1,234,567"');
 });
 
 test('should format value using international', t => {
   let c = value => currency(value, { separator: '.', decimal: ',' });
 
-  t.is(c(1.23).format(), '1,23', 'value is not "1,23"');
-  t.is(c(1000.00).format(), '1.000,00', 'value is not "1.000,00"');
-  t.is(c(1000000.00).format(), '1.000.000,00', 'value is not "1.000.000,00"');
+  t.is(c(1.23).format(), '$1,23', 'value is not "$1,23"');
+  t.is(c(1000.00).format(), '$1.000,00', 'value is not "$1.000,00"');
+  t.is(c(1000000.00).format(), '$1.000.000,00', 'value is not "$1.000.000,00"');
 });
 
 test('should format vedic groupings', t => {
   let c = value => currency(value, { useVedic: true })
     , c4 = value => currency(value, { useVedic: true, precision: 4 });
 
-  t.is(c(1.23).format(), '1.23', 'value is not "1.23"');
-  t.is(c(1000.00).format(), '1,000.00', 'value is not "1,000"');
-  t.is(c(100000.00).format(), '1,00,000.00', 'value is not "1,00,000,00"');
-  t.is(c(1000000.00).format(), '10,00,000.00', 'value is not "10,00,000,00"');
-  t.is(c4(1234567.8912).format(), '12,34,567.8912', 'value is not "12,34,567.8912"');
+  t.is(c(1.23).format(), '$1.23', 'value is not "$1.23"');
+  t.is(c(1000.00).format(), '$1,000.00', 'value is not "$1,000"');
+  t.is(c(100000.00).format(), '$1,00,000.00', 'value is not "$1,00,000,00"');
+  t.is(c(1000000.00).format(), '$10,00,000.00', 'value is not "$10,00,000,00"');
+  t.is(c4(1234567.8912).format(), '$12,34,567.8912', 'value is not "$12,34,567.8912"');
 });
 
 test('should format using patterns', t => {
@@ -352,16 +353,25 @@ test('should parse international values', t => {
 });
 
 test('should format with symbol', t => {
-  t.is(currency(1.23).format(true), '$1.23', 'value is not "$1.23"');
+  t.is(currency(1.23).format({ pattern: '!#' }), '$1.23', 'value is not "$1.23"');
 });
 
 test('should format without symbol', t => {
-  t.is(currency(1.23).format(false), '1.23', 'value is not "1.23"');
+  t.is(currency(1.23).format({ pattern: '#' }), '1.23', 'value is not "1.23"');
 });
 
 test('should format with international symbol', t => {
-  t.is(currency(1.23, { symbol: '£' }).format(true), '£1.23', 'value is not "£1.23"');
-  t.is(currency(1.23, { symbol: '¥' }).format(true), '¥1.23', 'value is not "¥1.23"');
+  t.is(currency(1.23, { symbol: '£' }).format(), '£1.23', 'value is not "£1.23"');
+  t.is(currency(1.23, { symbol: '¥' }).format(), '¥1.23', 'value is not "¥1.23"');
+});
+
+test('should allow custom function for formatting', t => {
+  const format = stub().returns('1.23');
+  const opts = { symbol: '£' };
+  const val = currency(1234.56, opts).format(format);
+  t.true(format.called);
+  t.true(format.calledWithMatch({ value: 1234.56 }, { symbol: '£' }));
+  t.is(val, '1.23');
 });
 
 test('should return 0.00 currency with invalid input', t => {

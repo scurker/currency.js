@@ -2,11 +2,11 @@ const defaults = {
   symbol: '$',
   separator: ',',
   decimal: '.',
-  formatWithSymbol: false,
   errorOnInvalid: false,
   precision: 2,
   pattern: '!#',
-  negativePattern: '-!#'
+  negativePattern: '-!#',
+  format
 };
 
 const round = v => Math.round(v);
@@ -79,6 +79,22 @@ function parse(value, opts, useRounding = true) {
   v = v.toFixed(4);
 
   return useRounding ? round(v) : v;
+}
+
+/**
+ * Formats a currency object
+ * @param currency
+ * @param {object} [opts]
+ */
+function format(currency, settings) {
+  let { pattern, negativePattern, symbol, separator, decimal, groups } = settings
+    , split = ('' + currency).replace(/^-/, '').split('.')
+    , dollars = split[0]
+    , cents = split[1];
+
+  return (currency.value >= 0 ? pattern : negativePattern)
+    .replace('!', symbol)
+    .replace('#', dollars.replace(groups, '$1' + separator) + (cents ? decimal + cents : ''));
 }
 
 currency.prototype = {
@@ -169,18 +185,14 @@ currency.prototype = {
    * @param {boolean} useSymbol - format with currency symbol
    * @returns {string}
    */
-  format(useSymbol) {
-    let { pattern, negativePattern, formatWithSymbol, symbol, separator, decimal, groups } = this._settings
-      , values = (this + '').replace(/^-/, '').split('.')
-      , dollars = values[0]
-      , cents = values[1];
+  format(options) {
+    let { _settings } = this;
 
-    // set symbol formatting
-    typeof(useSymbol) === 'undefined' && (useSymbol = formatWithSymbol);
+    if(typeof options === 'function') {
+      return options(this, _settings);
+    }
 
-    return (this.value >= 0 ? pattern : negativePattern)
-      .replace('!', useSymbol ? symbol : '')
-      .replace('#', `${dollars.replace(groups, '$1' + separator)}${cents ? decimal + cents : ''}`);
+    return _settings.format(this, Object.assign({}, _settings, options));
   },
 
   /**
