@@ -1,5 +1,4 @@
 import test from 'ava';
-import { stub } from 'sinon';
 import currency from '../dist/currency';
 
 test('should be immutable', t => {
@@ -361,17 +360,38 @@ test('should format without symbol', t => {
 });
 
 test('should format with international symbol', t => {
-  t.is(currency(1.23, { symbol: '£' }).format(), '£1.23', 'value is not "£1.23"');
-  t.is(currency(1.23, { symbol: '¥' }).format(), '¥1.23', 'value is not "¥1.23"');
+  t.is(currency(1.23).format({ symbol: '£' }), '£1.23', 'value is not "£1.23"');
+  t.is(currency(1.23).format({ symbol: '¥' }), '¥1.23', 'value is not "¥1.23"');
 });
 
-test('should allow custom function for formatting', t => {
-  const format = stub().returns('1.23');
-  const opts = { symbol: '£' };
-  const val = currency(1234.56, opts).format(format);
-  t.true(format.called);
-  t.true(format.calledWithMatch({ value: 1234.56 }, { symbol: '£' }));
+test('should use a function for formatting', t => {
+  let called = false;
+
+  const format = () => {
+    called = true;
+    return '1.23';
+  };
+
+  const val = currency(1234.56).format(format);
+  t.true(called);
   t.is(val, '1.23');
+});
+
+test('should pass options when using a function for formatting', t => {
+  let calledArgs;
+
+  const format = (...args) => {
+    calledArgs = args;
+  };
+
+  currency(1234.56, { symbol: '£' }).format(format);
+  let [ currencyArg, optsArg ] = calledArgs;
+  t.is(currencyArg.value, 1234.56);
+  t.is(optsArg.symbol, '£');
+});
+
+test('should override defaults options when formatting with options', t => {
+  t.is(currency(1.23, { symbol: '$' }).format({ symbol: '£' }), '£1.23', 'value is not "£1.23"');
 });
 
 test('should return 0.00 currency with invalid input', t => {
