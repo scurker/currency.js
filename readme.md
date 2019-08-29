@@ -1,4 +1,4 @@
-<div align="center" markdown="1">
+e<div align="center" markdown="1">
 
 ![currency.js logo](https://user-images.githubusercontent.com/1062039/31397824-9dfa15f0-adac-11e7-9869-fb20746e90c1.png)
 
@@ -174,6 +174,7 @@ Maybe currency.js isn't the right fit for your needs. Check out some of these ot
 * [accounting.js](https://github.com/openexchangerates/accounting.js)
 * [dinero.js](https://github.com/sarahdayan/dinero.js)
 * [walletjs](https://github.com/dleitee/walletjs)
+* [cashify](https://github.com/xxczaki/cashify)
 
 ## License
 
