@@ -83,33 +83,24 @@ currency(12.00).distribute(3); // => [4.00, 4.00, 4.00]
 
 ### format
 
-`currency.format([ boolean ])`
+`currency.format([ function | options ])`
 
 A simple formatter that returns a human friendly currency format.
 
 ```js
-currency(1000.00).format(); // => "1,000.00"
-currency("1,234,567/90").add("200,000").format(); // => "1,434,567.89"
+currency(1000.00).format(); // => "$1,000.00"
+currency("1,234,567/90").add("200,000").format(); // => "$1,434,567.89"
 ```
 
 The default formatter can be overridden by passing in options as a second parameter.
 
 ```js
-var euro = value => currency(value, { separator: ' ', decimal: ',' });
+var euro = value => currency(value, { separator: ' ', decimal: ',', format: ... });
 
 // ...
 
 euro(1000.00).format(); // => "1 000,00"
 euro(1234567.89).add("200 000").format(); // => "1 434 567,89"
-```
-
-You can also include the currently set `symbol` option in a couple of different ways. By default it's always turned off, but you can turn it on for all instances of the object via options, or by passing in a boolean operator to the `format()` function.
-
-```js
-var money = value => currency(value, { formatWithSymbol: true });
-
-money(1000.00).format(); // => "$1,000.00"
-money(1000.00).format(false); // => "1,000.00"
 ```
 
 ### dollars
