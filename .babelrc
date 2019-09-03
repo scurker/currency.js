@@ -9,7 +9,7 @@
     }]
   ],
   "plugins": [
-    "./config/rename-internal"
+
   ],
   "env": {
     "test": {

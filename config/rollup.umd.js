@@ -5,39 +5,71 @@ import closure from './closure';
 
 const input = 'src/currency.js';
 
-export default [{
-  input,
-  plugins: [
-    babel({
-      exclude: 'node_modules/**'
-    })
-  ],
-  output: [
-    {
-      format: 'umd',
-      file: 'dist/currency.umd.js',
-      name: 'currency',
-      banner
-    }
-  ]
-},
-{
-  input,
-  plugins: [
-    babel({
-      exclude: 'node_modules/**'
-    }),
-    closure({
-      compilationLevel: 'SIMPLE',
-      rewritePolyfills: false
-    })
-  ],
-  output: [
-    {
-      format: 'umd',
-      file: pkg.browser,
-      name: 'currency',
-      banner
-    }
-  ]
-}];
+const plugins = [
+  babel({
+    exclude: 'node_modules/**'
+  })
+];
+
+export default [
+  {
+    input,
+    plugins,
+    output: [
+      {
+        format: 'umd',
+        file: 'dist/currency.umd.js',
+        name: 'currency',
+        banner
+      }
+    ]
+  },
+  {
+    input: 'src/currency.intl.js',
+    plugins,
+    output: [
+      {
+        format: 'umd',
+        file: 'intl/currency.umd.js',
+        name: 'currency',
+        banner
+      }
+    ]
+  },
+  {
+    input,
+    plugins: [
+      ...plugins,
+      closure({
+        compilationLevel: 'SIMPLE',
+        rewritePolyfills: false
+      })
+    ],
+    output: [
+      {
+        format: 'umd',
+        file: pkg.browser,
+        name: 'currency',
+        banner
+      }
+    ]
+  },
+  {
+    input: 'src/currency.intl.js',
+    plugins: [
+      ...plugins,
+      closure({
+        compilationLevel: 'SIMPLE',
+        rewritePolyfills: false
+      })
+    ],
+    output: [
+      {
+        format: 'umd',
+        file: 'intl/currency.min.js',
+        name: 'currency',
+        banner
+      }
+    ]
+  }
+];

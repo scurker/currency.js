@@ -1,7 +1,9 @@
 // @flow
 import currency from '../src/currency.js';
+// import currencyIntl from 'currency.js/intl';
 
 const currencyInstance: currency = currency(1.23);
+// const currencyIntlInstance: currencyIntl = currencyIntl(1.23);
 
 // default uses
 new currency(1.23);

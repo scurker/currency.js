@@ -1,0 +1,8 @@
+{
+  "name": "currency-js-intl",
+  "private": true,
+  "main": "intl/currency.js",
+  "module": "intl/currency.es.js",
+  "browser": "intl/currency.min.js",
+  "types": "../dist/currency.d.ts",
+}

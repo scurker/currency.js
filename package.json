@@ -14,8 +14,9 @@
     "test": "test"
   },
   "scripts": {
-    "build": "npm-run-all clean transpile copy-typescript-definition copy-flow-definition",
+    "build": "npm-run-all clean transpile copy-typescript-definition copy-flow-definition copy-intl-package",
     "build:docs": "npm-run-all clean:docs compile:docs minify:docs",
+    "bundlesize": "bundlesize --config config/bundlesize.json",
     "clean": "rm -rf dist/*",
     "clean:docs": "rm -rf docs/build",
     "compile:docs": "npx babel-node --presets=@babel/preset-env ./docs/src/build-docs.js",
@@ -23,6 +24,7 @@
     "coverage:report": "nyc report --reporter=text-lcov | coveralls",
     "copy-typescript-definition": "cp -f src/currency.d.ts dist",
     "copy-flow-definition": "cp -f src/currency.js.flow dist",
+    "copy-intl-package": "cp -f src/intl.package.json intl/package.json",
     "lint": "eslint .",
     "minify:docs": "html-minifier --input-dir ./docs/build --output-dir ./docs/build --file-ext html --collapse-whitespace --decode-entities --minify-css --minify-js",
     "prepare": "npm run build",
@@ -33,7 +35,7 @@
     "transpile:umd": "rollup -c ./config/rollup.umd.js",
     "transpile": "npm-run-all transpile:*",
     "test": "npm-run-all test:typescript test:flow test:js",
-    "test:js": "BABEL_ENV=test ava ./test/test.js",
+    "test:js": "BABEL_ENV=test ava ./test/test.js ./test/test.intl.js --verbose",
     "test:typescript": "tsc -p ./test --noEmit",
     "test:flow": "flow"
   },
@@ -42,7 +44,8 @@
     "url": "git://github.com/scurker/currency.js.git"
   },
   "files": [
-    "dist"
+    "dist",
+    "intl"
   ],
   "typings": "./dist/currency.d.ts",
   "keywords": [
@@ -70,6 +73,7 @@
     "@babel/register": "^7.5.5",
     "@scurker/eslint-config": "^1.1.5",
     "ava": "^2.2.0",
+    "bundlesize": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
     "eslint": "^6.1.0",
     "flow-bin": "^0.104.0",

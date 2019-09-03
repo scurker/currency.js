@@ -1,0 +1,6 @@
+{
+  "files": [
+    { "path": "./dist/currency.min.js" },
+    { "path": "./intl/currency.min.js" }
+  ]
+}

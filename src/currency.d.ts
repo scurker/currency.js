@@ -5,6 +5,10 @@ declare namespace currency {
     (value: currency.Any, opts?: currency.Options): currency,
     new (value: currency.Any, opts?: currency.Options): currency
   }
+  interface IntlConstructor {
+    (value: currency.Any, opts?: currency.IntlOptions): currencyIntl,
+    new (value: currency.Any, opts?: currency.IntlOptions): currencyIntl
+  }
   interface Options {
     symbol?: string,
     separator?: string,
@@ -16,6 +20,10 @@ declare namespace currency {
     pattern?: string,
     negativePattern?: string,
     format?: currency.Format
+  }
+  interface IntlOptions extends Options {
+    locale?: string;
+    currency?: string;
   }
 }
 
@@ -34,8 +42,17 @@ declare interface currency {
   readonly value: number;
 }
 
+declare interface currencyIntl extends currency {
+  format(opts?: currency.IntlOptions | currency.Format): string;
+}
+
 declare const currency : currency.Constructor;
+declare const currencyIntl : currency.IntlConstructor;
 
 declare module 'currency.js' {
   export = currency;
+}
+
+declare module 'currency.js/intl' {
+  export = currencyIntl;
 }

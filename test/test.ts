@@ -1,4 +1,5 @@
 import currency from 'currency.js';
+import currencyIntl from 'currency.js/intl';
 import * as namedCurrency from 'currency.js';
 import interopCurrency = require('currency.js');
 
@@ -14,6 +15,14 @@ currency(1.23);
 currency('1.23');
 currency(currencyInstance);
 
+// intl uses
+new currencyIntl(1.23);
+new currencyIntl('1.23');
+new currencyIntl(currencyInstance);
+currencyIntl(1.23);
+currencyIntl('1.23');
+currencyIntl(currencyInstance);
+
 // options
 currency(1.23, {});
 currency(1.23, {
@@ -28,6 +37,10 @@ currency(1.23, {
   negativePattern: '-!#',
   format: (currency: currency, options: currency.Options) => '1.23'
 });
+
+// intl options
+currencyIntl(1.23, { locale: 'en-us', currency: 'USD' })
+currencyIntl(1.23).format({ locale: 'en-us', currency: 'USD' })
 
 // add
 currencyInstance.add(1.23);

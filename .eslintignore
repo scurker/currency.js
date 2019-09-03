@@ -1,3 +1,4 @@
 dist/
+intl/
 coverage/
 *.flow.js

@@ -4,6 +4,7 @@ node_modules/
 bower_components/
 reports/
 dist/
+intl/
 coverage/
 docs/build/*
 .nyc_output
