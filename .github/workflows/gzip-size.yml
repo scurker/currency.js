@@ -1,0 +1,12 @@
+name: gzip size
+
+on: [pull_request]
+
+jobs:
+  gzip_size:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: preactjs/gzip-size-action@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
