@@ -15,7 +15,8 @@ declare namespace currency {
     useVedic?: boolean,
     pattern?: string,
     negativePattern?: string,
-    format?: currency.Format
+    format?: currency.Format,
+    fromCents?: boolean
   }
 }
 

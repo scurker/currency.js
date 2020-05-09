@@ -13,7 +13,8 @@ declare type $currency$opts = {
   useVedic?: boolean,
   pattern?: string,
   negativePattern?: string,
-  format?: formatFunction
+  format?: formatFunction,
+  fromCents?: boolean
 }
 
 declare class currency {

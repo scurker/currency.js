@@ -72,6 +72,15 @@ var value = currency("123.45");
 currency(value);    // 123.45
 ```
 
+Currency accepts decimal values (i.e. `1.23`) with a default precision of 2, but can accept a minor currency unit (e.g. cents in a dollar). This will respect the precision option when parsing.
+
+```javascript
+currency(123, { fromCents: true });               // 1.23
+currency('123', { fromCents: true });             // 1.23
+currency(123, { fromCents: true, precision: 0 }); // 123
+currency(123, { fromCents: true, precision: 3 }); // 0.123
+```
+
 There's various arithmetic methods that help take the guesswork out of trying to resolve floating point problems.
 
 ```javascript
@@ -129,6 +138,9 @@ When implementing a currency that implements rounding, setting the increment val
 
 `useVedic` *default*: `false`<br/>
 Formats number groupings using the Indian Numbering System, i.e. `10,00,000.00`
+
+`fromCents` *default*: `false`<br/>
+Parse the amount value as a minor currency unit (e.g. cents in a dollar) instead of dollars.
 
 > View more examples and full documentation at [scurker.github.io/currency.js](http://scurker.github.io/currency.js).
 
