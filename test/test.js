@@ -480,3 +480,71 @@ test('should throw exception with invalid input', t => {
   // eslint-disable-next-line no-undefined
   t.throws(function() { currency(undefined, { errorOnInvalid: true }); }, Error, 'Threw exception');
 });
+
+test('should allow creation from cents', t => {
+  let c1 = value => currency(value, { fromCents: true, precision: 2 });
+  let c2 = value => currency(value, { fromCents: true, precision: 0 });
+  let c3 = value => currency(value, { fromCents: true, precision: 3 });
+
+  t.is(c1(500).toString(), '5.00', 'value is not parsed from cents to 5.00');
+  t.is(c1(500.678).toString(), '5.00', 'value does not truncate decimals when parsed from cents');
+  t.is(c1('455').toString(), '4.55', 'value is not parsed from a string to cents');
+  t.is(c2(500).toString(), '500', 'value is not parsed from cents to 5.00');
+  t.is(c2(500.678).toString(), '500', 'value does not truncate decimals when parsed from cents');
+  t.is(c2('455').toString(), '455', 'value is not parsed from a string to cents');
+  t.is(c3(500).toString(), '0.500', 'value is not parsed from cents to 5.00');
+  t.is(c3(500.678).toString(), '0.500', 'value does not truncate decimals when parsed from cents');
+  t.is(c3('455').toString(), '0.455', 'value is not parsed from a string to cents');
+});
+
+test('should parse cents from a number when using fromCents option', t => {
+  let c1 = currency(123, { fromCents: true });
+  let c2 = currency(123, { fromCents: true, precision: 0 });
+  let c3 = currency(123, { fromCents: true, precision: 3 });
+
+  t.is(c1.value, 1.23);
+  t.is(c1.intValue, 123);
+  t.is(c2.value, 123);
+  t.is(c2.intValue, 123);
+  t.is(c3.value, 0.123);
+  t.is(c3.intValue, 123);
+});
+
+test('should truncate decimals from a number when using fromCents option', t => {
+  let c1 = currency(123.34, { fromCents: true });
+  let c2 = currency(123.12, { fromCents: true, precision: 0 });
+  let c3 = currency(123.987, { fromCents: true, precision: 3 });
+
+  t.is(c1.value, 1.23);
+  t.is(c1.intValue, 123);
+  t.is(c2.value, 123);
+  t.is(c2.intValue, 123);
+  t.is(c3.value, 0.123);
+  t.is(c3.intValue, 123);
+});
+
+test('should parse cents from a string when using fromCents option', t => {
+  let c1 = currency('123', { fromCents: true });
+  let c2 = currency('123', { fromCents: true, precision: 0 });
+  let c3 = currency('123', { fromCents: true, precision: 3 });
+
+  t.is(c1.value, 1.23);
+  t.is(c1.intValue, 123);
+  t.is(c2.value, 123);
+  t.is(c2.intValue, 123);
+  t.is(c3.value, 0.123);
+  t.is(c3.intValue, 123);
+});
+
+test('should truncate decimals from a string when using fromCents option', t => {
+  let c1 = currency('123.34', { fromCents: true });
+  let c2 = currency('123.12', { fromCents: true, precision: 0 });
+  let c3 = currency('123.987', { fromCents: true, precision: 3 });
+
+  t.is(c1.value, 1.23);
+  t.is(c1.intValue, 123);
+  t.is(c2.value, 123);
+  t.is(c2.intValue, 123);
+  t.is(c3.value, 0.123);
+  t.is(c3.intValue, 123);
+});
