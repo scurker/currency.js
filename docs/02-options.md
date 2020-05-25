@@ -64,6 +64,17 @@ function format(currency, options) {
 currency(1234.56, { format }).format(); // => "1234.56"
 ```
 
+### fromCents *default*: `false`
+
+Currency accepts decimal values (i.e. `1.23`) with a default precision of 2, but can accept a minor currency unit (e.g. cents in a dollar). This will respect the precision option when parsing.
+
+```javascript
+currency(123456, { fromCents: true });               // => "1234.56"
+currency('123456', { fromCents: true });             // => "1234.56"
+currency(123456, { fromCents: true, precision: 0 }); // => "123456"
+currency(123456, { fromCents: true, precision: 3 }); // => "123.456"
+```
+
 ### errorOnInvalid *default*: `false`
 
 If an invalid value such as `null` or `undefined` is passed in, `currency` will throw an error.
