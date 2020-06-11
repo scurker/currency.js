@@ -62,6 +62,6 @@ If you need access to the raw numbers, the value is stored as both an `integer` 
 
 ```js
 // Get the internal values
-currency(123.45).add(.1).value; // => 123.46
-currency(123.45).add(.1).intValue; // => 12346
+currency(123.45).add(.1).value; // => 123.55
+currency(123.45).add(.1).intValue; // => 12355
 ```
