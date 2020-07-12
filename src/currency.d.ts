@@ -1,5 +1,6 @@
 declare namespace currency {
   type Any = number | string | currency;
+  type Format = (currency?: currency, opts?: Options) => string;
   interface Constructor {
     (value: currency.Any, opts?: currency.Options): currency,
     new (value: currency.Any, opts?: currency.Options): currency
@@ -8,13 +9,14 @@ declare namespace currency {
     symbol?: string,
     separator?: string,
     decimal?: string,
-    formatWithSymbol?: boolean,
     errorOnInvalid?: boolean,
     precision?: number,
     increment?: number,
     useVedic?: boolean,
     pattern?: string,
     negativePattern?: string,
+    format?: currency.Format,
+    fromCents?: boolean
   }
 }
 
@@ -26,7 +28,7 @@ declare interface currency {
   distribute(count: number): Array<currency>;
   dollars(): number;
   cents(): number;
-  format(useSymbol?: boolean): string;
+  format(opts?: currency.Options | currency.Format): string;
   toString(): string;
   toJSON(): number;
   readonly intValue: number;

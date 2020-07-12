@@ -72,6 +72,15 @@ var value = currency("123.45");
 currency(value);    // 123.45
 ```
 
+Currency accepts decimal values (i.e. `1.23`) with a default precision of 2, but can accept a minor currency unit (e.g. cents in a dollar). This will respect the precision option when parsing.
+
+```javascript
+currency(123, { fromCents: true });               // 1.23
+currency('123', { fromCents: true });             // 1.23
+currency(123, { fromCents: true, precision: 0 }); // 123
+currency(123, { fromCents: true, precision: 3 }); // 0.123
+```
+
 There's various arithmetic methods that help take the guesswork out of trying to resolve floating point problems.
 
 ```javascript
@@ -84,16 +93,16 @@ currency(1.12).distribute(5);     // [0.23, 0.23, 0.22, 0.22, 0.22]
 There's even a built in formatter that will automatically place comma delimiters in the right place.
 
 ```javascript
-currency("2,573,693.75").add("100,275.50").format();  // "2,673,969.25"
-currency("1,237.72").subtract(300).format();          // "937.72"
+currency("2,573,693.75").add("100,275.50").format();  // "$2,673,969.25"
+currency("1,237.72").subtract(300).format();          // "$937.72"
 ```
 
 You can also change the format, localizing the decimal and/or delimiter to your locale.
 
 ```javascript
-var euro = value => currency(value, { separator: ".", decimal: "," });
-euro("2.573.693,75").add("100.275,50").format();  // "2.673.969,25"
-euro("1.237,72").subtract(300).format();          // "937,72"
+var euro = value => currency(value, { symbol: "€", separator: ".", decimal: "," });
+euro("2.573.693,75").add("100.275,50").format();  // "€2.673.969,25"
+euro("1.237,72").subtract(300).format();          // "€937,72"
 ```
 
 ### Options
@@ -112,14 +121,14 @@ Decimal used when calling `currency.format()`.
 `precision` *default*: `2`<br/>
 Number of decimal places to store as cents.
 
-`formatWithSymbol` *default*: `false`<br/>
-Includes the `symbol` option when calling `currency.format()`.
-
 `pattern` *default*: `!#`<br/>
 Allows you to customize the format pattern using `!` as replacement for the currency symbol and `#` as replacement for the currency amount.
 
 `negativePattern` *default*: `-!#`<br/>
 Allows you to customize the negative format pattern using `!` as replacement for the currency symbol and `#` as replacement for the currency amount.
+
+`format` *default* `null`
+Allows you to customize the format of the currency when calling `currency.format()`. `format` passes in the `currency` object as well as the `options` object to the function and expects a string to be returned. Use this when the provided formatting options do not meet your needs.
 
 `errorOnInvalid` *default*: `false`<br/>
 If an invalid value such as `null` or `undefined` is passed in, will throw an error.
@@ -130,25 +139,15 @@ When implementing a currency that implements rounding, setting the increment val
 `useVedic` *default*: `false`<br/>
 Formats number groupings using the Indian Numbering System, i.e. `10,00,000.00`
 
+`fromCents` *default*: `false`<br/>
+Parse the amount value as a minor currency unit (e.g. cents in a dollar) instead of dollars.
+
 > View more examples and full documentation at [scurker.github.io/currency.js](http://scurker.github.io/currency.js).
 
-### v1.0.0 breaking changes
-
-In all version prior to `v1.0.0`, currency options were global. These global options were removed in `v1.0.0` and now are passed to each instance of currency.js as the second param. This allows you to set options without any unintended side effects.
-
-#### v0.4.x
+### Internationalization Examples
 
 ```js
-currency.settings.separator = " ";
-currency.settings.decimal = ",";
-currency.settings.symbol = "€";
-currency.settings.formatWithSymbol = true;
-```
-
-#### v1.x
-
-```js
-currency(1.23, { separator: " ", decimal: ",", symbol: "€", formatWithSymbol: true })
+currency(1.23, { separator: " ", decimal: ",", symbol: "€" });
 ```
 
 If you need to work with multiple currency values, the easiest way is to setup factory functions with your required currency settings.
@@ -158,9 +157,9 @@ const USD = value => currency(value, { symbol: "$", precision: 2 });
 const JPY = value => currency(value, { symbol: "¥", precision: 0 });
 const GAS = value => currency(value, { precision: 3 });
 
-USD(1234.56).format(true); // "$1,234.56"
-JPY(1234.56).format(true); // "¥1,235"
-GAS(1234.56).format(true); // "$1,234.560"
+USD(1234.56).format(); // "$1,234.56"
+JPY(1234.56).format(); // "¥1,235"
+GAS(1234.56).format(); // "$1,234.560"
 ```
 
 ## Add-ons

@@ -2,11 +2,12 @@ const defaults = {
   symbol: '$',
   separator: ',',
   decimal: '.',
-  formatWithSymbol: false,
   errorOnInvalid: false,
   precision: 2,
   pattern: '!#',
-  negativePattern: '-!#'
+  negativePattern: '-!#',
+  format,
+  fromCents: false
 };
 
 const round = v => Math.round(v);
@@ -53,20 +54,19 @@ function currency(value, opts) {
 
 function parse(value, opts, useRounding = true) {
   let v = 0
-    , { decimal, errorOnInvalid, precision: decimals } = opts
+    , { decimal, errorOnInvalid, precision: decimals, fromCents } = opts
     , precision = pow(decimals)
     , isNumber = typeof value === 'number';
 
   if (isNumber || value instanceof currency) {
-    v = ((isNumber ? value : value.value) * precision);
+    v = (isNumber ? value : value.value);
   } else if (typeof value === 'string') {
     let regex = new RegExp('[^-\\d' + decimal + ']', 'g')
       , decimalString = new RegExp('\\' + decimal, 'g');
     v = value
-          .replace(/\((.*)\)/, '-$1')   // allow negative e.g. (1.99)
-          .replace(regex, '')           // replace any non numeric values
-          .replace(decimalString, '.')  // convert any decimal values
-          * precision;                  // scale number to integer value
+          .replace(/\((.*)\)/, '-$1')    // allow negative e.g. (1.99)
+          .replace(regex, '')            // replace any non numeric values
+          .replace(decimalString, '.');  // convert any decimal values
     v = v || 0;
   } else {
     if(errorOnInvalid) {
@@ -75,10 +75,31 @@ function parse(value, opts, useRounding = true) {
     v = 0;
   }
 
-  // Handle additional decimal for proper rounding.
-  v = v.toFixed(4);
+  if (fromCents) {
+    v = Math.trunc(v);               // Remove decimals. Invalid for cents.
+  } else {
+    v *= precision;                  // scale number to integer value
+    v = v.toFixed(4);                // Handle additional decimal for proper rounding.
+    v = useRounding ? round(v) : v;
+  }
 
-  return useRounding ? round(v) : v;
+  return v;
+}
+
+/**
+ * Formats a currency object
+ * @param currency
+ * @param {object} [opts]
+ */
+function format(currency, settings) {
+  let { pattern, negativePattern, symbol, separator, decimal, groups } = settings
+    , split = ('' + currency).replace(/^-/, '').split('.')
+    , dollars = split[0]
+    , cents = split[1];
+
+  return (currency.value >= 0 ? pattern : negativePattern)
+    .replace('!', symbol)
+    .replace('#', dollars.replace(groups, '$1' + separator) + (cents ? decimal + cents : ''));
 }
 
 currency.prototype = {
@@ -169,18 +190,14 @@ currency.prototype = {
    * @param {boolean} useSymbol - format with currency symbol
    * @returns {string}
    */
-  format(useSymbol) {
-    let { pattern, negativePattern, formatWithSymbol, symbol, separator, decimal, groups } = this._settings
-      , values = (this + '').replace(/^-/, '').split('.')
-      , dollars = values[0]
-      , cents = values[1];
+  format(options) {
+    let { _settings } = this;
 
-    // set symbol formatting
-    typeof(useSymbol) === 'undefined' && (useSymbol = formatWithSymbol);
+    if(typeof options === 'function') {
+      return options(this, _settings);
+    }
 
-    return (this.value >= 0 ? pattern : negativePattern)
-      .replace('!', useSymbol ? symbol : '')
-      .replace('#', `${dollars.replace(groups, '$1' + separator)}${cents ? decimal + cents : ''}`);
+    return _settings.format(this, Object.assign({}, _settings, options));
   },
 
   /**

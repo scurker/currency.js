@@ -4,10 +4,8 @@ You can customize the formatting and parsing of `currency.js` with an optional o
 
 ### symbol *default*: `"$"`
 
-When `formatWithSymbol` is set to `true`, this currency symbol will be used when calling `currency.format()`.
-
 ```js
-currency(1.23, { formatWithSymbol: true }).format(); // => "$1.23"
+currency(1.23).format(); // => "$1.23"
 ```
 
 ### separator *default*: `","`
@@ -22,8 +20,8 @@ currency(1234.56, { separator: ' ' }).format(); // => "1 234.56"
 ### decimal *default*: `"."`
 
 ```js
-currency(1.23, { decimal: '.' }).format(); // => "1.23"
-currency(1.23, { decimal: ',' }).format(); // => "1,23"
+currency(1.23, { decimal: '.' }).format(); // => "$1.23"
+currency(1.23, { decimal: ',' }).format(); // => "$1,23"
 ```
 
 ### precision *default*: `2`
@@ -35,23 +33,13 @@ currency(1.234, { precision: 2 }); // => "1.23"
 currency(1.234, { precision: 3 }); // => "1.234"
 ```
 
-### formatWithSymbol *default*: `false`
-
-Includes the `symbol` option when calling `currency.format()`.
-
-```js
-currency(1.23, { formatWithSymbol: true }).format(); // => "$1.23"
-currency(1.23, { formatWithSymbol: false }).format(); // => "1.23"
-```
-
 ### pattern *default*: `!#`
 
 Allows you to customize the format pattern using `!` as replacement for the currency symbol and `#` as replacement for the currency amount.
 
 ```js
 currency(1.23, {
-  pattern: `# !`,
-  formatWithSymbol: true
+  pattern: `# !`
 }).format(); // => "1.23 $"
 ```
 
@@ -61,9 +49,30 @@ Allows you to customize the negative format pattern using `!` as replacement for
 
 ```js
 currency(-1.23, {
-  negativePattern: `(!#)`,
-  formatWithSymbol: true
+  negativePattern: `(!#)`
 }).format(); // => "($1.23)"
+```
+
+### format *default*: `null`
+
+Allows you to customize the format of the currency when calling `currency.format()`. `format` passes in the `currency` object as well as the `options` object to the function and expects a string to be returned. Use this when the provided formatting options do not meet your needs.
+
+```js
+function format(currency, options) {
+  return `${currency.dollars}.${currency.cents}`;
+}
+currency(1234.56, { format }).format(); // => "1234.56"
+```
+
+### fromCents *default*: `false`
+
+Currency accepts decimal values (i.e. `1.23`) with a default precision of 2, but can accept a minor currency unit (e.g. cents in a dollar). This will respect the precision option when parsing.
+
+```javascript
+currency(123456, { fromCents: true });               // => "1234.56"
+currency('123456', { fromCents: true });             // => "1234.56"
+currency(123456, { fromCents: true, precision: 0 }); // => "123456"
+currency(123456, { fromCents: true, precision: 3 }); // => "123.456"
 ```
 
 ### errorOnInvalid *default*: `false`

@@ -17,13 +17,13 @@ currency(1.23, {
   symbol: '$',
   separator: ',',
   decimal: '.',
-  formatWithSymbol: true,
   errorOnInvalid: true,
   precision: 2,
   increment: .05,
   useVedic: false,
   pattern: '!#',
-  negativePattern: '-!#'
+  negativePattern: '-!#',
+  format: (currency, options) => '1.23'
 });
 
 // add
@@ -57,7 +57,8 @@ let c1: number = currencyInstance.cents();
 
 // format
 let s1: string = currencyInstance.format();
-let s2: string = currencyInstance.format(true);
+let s2: string = currencyInstance.format({ symbol: '£' });
+let s3: string = currencyInstance.format((currency, options) => '1.23');
 
 // property values
 let v1: number = currencyInstance.value;
