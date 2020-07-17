@@ -72,11 +72,31 @@ test('should add floating point value', t => {
   t.not(parseFloat(value), 2.51+.01, 'currency(2.51).add(.01) does not equal 2.5199999999999996');
 });
 
+test('should maintain fromCents setting when adding', t => {
+  var value = currency(251, { fromCents: true }).add(1);
+
+  t.is(
+    parseFloat(value),
+    2.52,
+    'currency(251, { fromCents: true }).add(1) equals decimal value 2.52'
+  );
+});
+
 test('should subtract floating point', t => {
   var value = currency(2.52).subtract(.01);
 
   t.is(parseFloat(value), 2.51, 'currency(2.52).subtract(.01) equals decimal value 2.51');
   t.not(parseFloat(value), 2.52-.01, 'currency(2.52).subtract(.01) does not equal 2.5100000000000002');
+});
+
+test('should maintain fromCents setting when subtracting', t => {
+  var value = currency(251, { fromCents: true }).subtract(1);
+
+  t.is(
+    parseFloat(value),
+    2.50,
+    'currency(251, { fromCents: true }).subtract(1) equals decimal value 2.50'
+  );
 });
 
 test('should round half up', t => {
@@ -125,6 +145,15 @@ test('currency multiplication with precision', t => {
   t.is(parseFloat(value), 4.107, 'currency(1.369).multiply(3) is 4.107');
 });
 
+test("currency multiplication with fromCents", (t) => {
+  var value = currency(123, { fromCents: true }).multiply(2);
+  t.is(
+    parseFloat(value),
+    2.46,
+    "currency(123, { fromCents: true }).multiply(2) is 2.46"
+  );
+});
+
 test('currency division', t => {
   var value = currency(9.87).divide(2);
   t.is(parseFloat(value), 4.94, 'currency(9.87).divide(2) is 4.94');
@@ -133,6 +162,15 @@ test('currency division', t => {
 test('currency division with precision', t => {
   var value = currency(4.107, { precision: 3 }).divide(3);
   t.is(parseFloat(value), 1.369, 'currency(4.107).divide(3) is 1.369');
+});
+
+test("currency division with fromCents", (t) => {
+  var value = currency(987, { fromCents: true }).divide(2);
+  t.is(
+    parseFloat(value),
+    4.94,
+    "currency(987, { fromCents: true }).divide(2) is 4.94"
+  );
 });
 
 test('should parse negative values', t => {
@@ -189,6 +227,20 @@ test('should create non-equal distribution with a negative penny', t => {
   }
 
   t.is(total, -0.01, 'sum of values matches our original amount');
+});
+
+test('should create distribution with fromCents', t => {
+  var values = currency(123, { fromCents: true }).distribute(2);
+
+  t.is(parseFloat(values[0]), 0.62, 'first value is not 0.62');
+  t.is(parseFloat(values[1]), 0.61, 'second value is not 0.61');
+
+  var total = 0;
+  for(var i = 0; i < values.length; i++) {
+    total += parseFloat(values[i]);
+  }
+
+  t.is(total, 1.23, 'sum of values matches our original amount');
 });
 
 test('should get dollar value', t => {
