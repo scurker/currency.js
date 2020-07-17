@@ -111,7 +111,7 @@ currency.prototype = {
    */
   add(number) {
     let { intValue, _settings, _precision } = this;
-    let cleanSettings = { ..._settings, fromCents: false };
+    let cleanSettings = Object.assign({}, _settings, { fromCents: false });
     return currency(
       (intValue += parse(number, _settings)) / _precision,
       cleanSettings
@@ -125,7 +125,7 @@ currency.prototype = {
    */
   subtract(number) {
     let { intValue, _settings, _precision } = this;
-    let cleanSettings = { ..._settings, fromCents: false };
+    let cleanSettings = Object.assign({}, _settings, { fromCents: false });
     return currency(
       (intValue -= parse(number, _settings)) / _precision,
       cleanSettings
@@ -139,7 +139,7 @@ currency.prototype = {
    */
   multiply(number) {
     let { intValue, _settings } = this;
-    let cleanSettings = { ..._settings, fromCents: false };
+    let cleanSettings = Object.assign({}, _settings, { fromCents: false });
     return currency(
       (intValue *= number) / pow(_settings.precision),
       cleanSettings
@@ -153,7 +153,7 @@ currency.prototype = {
    */
   divide(number) {
     let { intValue, _settings } = this;
-    let cleanSettings = { ..._settings, fromCents: false };
+    let cleanSettings = Object.assign({}, _settings, { fromCents: false });
     return currency(
       (intValue /= parse(number, cleanSettings, false)),
       cleanSettings
@@ -171,7 +171,7 @@ currency.prototype = {
       , distribution = []
       , split = Math[intValue >= 0 ? 'floor' : 'ceil'](intValue / count)
       , pennies = Math.abs(intValue - (split * count));
-    let cleanSettings = { ..._settings, fromCents: false };
+    let cleanSettings = Object.assign({}, _settings, { fromCents: false });
 
     for (; count !== 0; count--) {
       let item = currency(split / _precision, cleanSettings);
