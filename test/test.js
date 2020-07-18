@@ -548,3 +548,34 @@ test('should truncate decimals from a string when using fromCents option', t => 
   t.is(c3.value, 0.123);
   t.is(c3.intValue, 123);
 });
+
+test('should handle add with fromCents option', t => {
+  let c1 = currency(12345, { fromCents: true });
+  let c2 = currency(123, { fromCents: true });
+
+  t.is(c1.add(123).value, 124.68);
+  t.is(c1.add(c2).value, 124.68);
+});
+
+test('should handle subtract with fromCents option', t => {
+  let c1 = currency(12345, { fromCents: true });
+  let c2 = currency(123, { fromCents: true });
+
+  t.is(c1.subtract(123).value, 122.22);
+  t.is(c1.subtract(c2).value, 122.22);
+});
+
+test('should handle multiply with fromCents option', t => {
+  let c1 = currency(12345, { fromCents: true });
+  t.is(c1.multiply(2).value, 246.90);
+});
+
+test('should handle divide with fromCents option', t => {
+  let c1 = currency(12345, { fromCents: true });
+  t.is(c1.divide(2).value, 61.72);
+});
+
+test('should handle distribute with fromCents option', t => {
+  var values = currency(1.00).distribute(4);
+  t.deepEqual(values.map(v => v.value), [.25, .25, .25, .25]);
+});

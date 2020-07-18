@@ -56,10 +56,15 @@ function parse(value, opts, useRounding = true) {
   let v = 0
     , { decimal, errorOnInvalid, precision: decimals, fromCents } = opts
     , precision = pow(decimals)
-    , isNumber = typeof value === 'number';
+    , isNumber = typeof value === 'number'
+    , isCurrency = value instanceof currency;
 
-  if (isNumber || value instanceof currency) {
-    v = (isNumber ? value : value.value);
+  if (isCurrency && fromCents) {
+    return value.intValue;
+  }
+
+  if (isNumber || isCurrency) {
+    v = isCurrency ? value.value : value;
   } else if (typeof value === 'string') {
     let regex = new RegExp('[^-\\d' + decimal + ']', 'g')
       , decimalString = new RegExp('\\' + decimal, 'g');
@@ -111,7 +116,7 @@ currency.prototype = {
    */
   add(number) {
     let { intValue, _settings, _precision } = this;
-    return currency((intValue += parse(number, _settings)) / _precision, _settings);
+    return currency((intValue += parse(number, _settings)) / (_settings.fromCents ? 1 : _precision), _settings);
   },
 
   /**
@@ -121,7 +126,7 @@ currency.prototype = {
    */
   subtract(number) {
     let { intValue, _settings, _precision } = this;
-    return currency((intValue -= parse(number, _settings)) / _precision, _settings);
+    return currency((intValue -= parse(number, _settings)) / (_settings.fromCents ? 1 : _precision), _settings);
   },
 
   /**
@@ -131,7 +136,7 @@ currency.prototype = {
    */
   multiply(number) {
     let { intValue, _settings } = this;
-    return currency((intValue *= number) / pow(_settings.precision), _settings);
+    return currency((intValue *= number) / (_settings.fromCents ? 1 : pow(_settings.precision)), _settings);
   },
 
   /**
