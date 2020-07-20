@@ -1,3 +1,7 @@
+# 2.0.2
+
+* Fixed incorrect values from `distribute()` when using `fromCents`
+
 # 2.0.1
 
 * Fixed incorrect values being returned from methods when using `fromCents` ([#260](https://github.com/scurker/currency.js/issues/260) thanks [@chrisvariety](https://github.com/chrisvariety))
