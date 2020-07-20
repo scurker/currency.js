@@ -1,3 +1,7 @@
+# 2.0.1
+
+* Fixed incorrect values being returned from methods when using `fromCents` ([#260](https://github.com/scurker/currency.js/issues/260) thanks [@chrisvariety](https://github.com/chrisvariety))
+
 # 2.0.0
 
 * Parse currency as cents ([#166](https://github.com/scurker/currency.js/issues/166) thanks [@ryanwood](https://github.com/ryanwood))
