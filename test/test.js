@@ -576,6 +576,6 @@ test('should handle divide with fromCents option', t => {
 });
 
 test('should handle distribute with fromCents option', t => {
-  var values = currency(1.00).distribute(4);
+  var values = currency(100, { fromCents: true }).distribute(4);
   t.deepEqual(values.map(v => v.value), [.25, .25, .25, .25]);
 });

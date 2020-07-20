@@ -159,13 +159,14 @@ currency.prototype = {
     let { intValue, _precision, _settings } = this
       , distribution = []
       , split = Math[intValue >= 0 ? 'floor' : 'ceil'](intValue / count)
-      , pennies = Math.abs(intValue - (split * count));
+      , pennies = Math.abs(intValue - (split * count))
+      , precision =  _settings.fromCents ? 1 : _precision;
 
     for (; count !== 0; count--) {
-      let item = currency(split / _precision, _settings);
+      let item = currency(split / precision, _settings);
 
       // Add any left over pennies
-      pennies-- > 0 && (item = intValue >= 0 ? item.add(1 / _precision) : item.subtract(1 / _precision));
+      pennies-- > 0 && (item = item[intValue >= 0 ? 'add' : 'subtract'](1 / precision));
 
       distribution.push(item);
     }
