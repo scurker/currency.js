@@ -314,7 +314,7 @@ test('should format vedic groupings', t => {
 });
 
 test('should format using patterns', t => {
-  let c = (value, opts) => currency(value, Object.assign({}, { formatWithSymbol: true, pattern: '# !'}, opts))
+  let c = (value, opts) => currency(value, Object.assign({}, { pattern: '# !'}, opts))
     , value1 = c(1.23)
     , value2 = c(1234.56)
     , value3 = c(1234567.89)
@@ -329,7 +329,7 @@ test('should format using patterns', t => {
 });
 
 test('should format using negative patterns', t => {
-  let c = (value, opts) => currency(value, Object.assign({}, { formatWithSymbol: true, negativePattern: '! (#)'}, opts))
+  let c = (value, opts) => currency(value, Object.assign({}, { negativePattern: '! (#)'}, opts))
     , value1 = c(-1.23)
     , value2 = c(-1234.56)
     , value3 = c(-1234567.89)
