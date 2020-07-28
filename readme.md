@@ -110,7 +110,7 @@ euro("1.237,72").subtract(300).format();          // "€937,72"
 *currency.js* comes with its own set of default options conforming to USD. You can customize these according to your locale.
 
 `symbol` *default*: `$`<br/>
-When `formatWithSymbol` is set to `true`, will include the currency symbol when calling `currency.format()`.
+Currency symbol included when calling `currency.format()`.
 
 `separator` *default*: `,`<br/>
 Separator dividing the number groups when calling `currency.format()`.
