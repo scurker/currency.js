@@ -1,3 +1,7 @@
+# 2.0.3
+
+* Fixed truncation of fractional cents when using `fromCents`
+
 # 2.0.2
 
 * Fixed incorrect values from `distribute()` when using `fromCents`
