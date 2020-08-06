@@ -80,15 +80,12 @@ function parse(value, opts, useRounding = true) {
     v = 0;
   }
 
-  if (fromCents) {
-    v = Math.trunc(v);               // Remove decimals. Invalid for cents.
-  } else {
+  if (!fromCents) {
     v *= precision;                  // scale number to integer value
     v = v.toFixed(4);                // Handle additional decimal for proper rounding.
-    v = useRounding ? round(v) : v;
   }
 
-  return v;
+  return useRounding ? round(v) : v;
 }
 
 /**
