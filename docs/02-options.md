@@ -59,7 +59,7 @@ Allows you to customize the format of the currency when calling `currency.format
 
 ```js
 function format(currency, options) {
-  return `${currency.dollars}.${currency.cents}`;
+  return `${currency.dollars()}.${currency.cents()}`;
 }
 currency(1234.56, { format }).format(); // => "1234.56"
 ```
