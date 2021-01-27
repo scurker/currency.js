@@ -142,7 +142,7 @@ Formats number groupings using the Indian Numbering System, i.e. `10,00,000.00`
 `fromCents` *default*: `false`<br/>
 Parse the amount value as a minor currency unit (e.g. cents in a dollar) instead of dollars.
 
-> View more examples and full documentation at [scurker.github.io/currency.js](http://scurker.github.io/currency.js).
+> View more examples and full documentation at [https://currency.js.org](https://currency.js.org).
 
 ### Internationalization Examples
 
