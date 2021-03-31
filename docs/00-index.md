@@ -3,22 +3,6 @@
   <h1>currency.js</h1>
   <p>{{description}}</p>
   <a class="btn" href="https://unpkg.com/currency.js/{{dist}}">Download currency.js</a>
-    
-  ## Installation
-
-  <p>
-With [npm](https://www.npmjs.com/):
-
-```sh
-npm install --save currency.js
-```
-
-With [yarn](https://yarnpkg.com):
-
-```sh
-yarn add currency.js
-```
-  </p>
   <p><strong>v{{version}}</strong> <em>({{size}})</em></p>
   <aside class="center">
     <a class="github-button" href="https://github.com/scurker/currency.js" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star scurker/currency.js on GitHub">Star</a>
