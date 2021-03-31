@@ -4,7 +4,7 @@
   <p>{{description}}</p>
   <a class="btn" href="https://unpkg.com/currency.js/{{dist}}">Download currency.js</a>
   <p><strong>v{{version}}</strong> <em>({{size}})</em></p>
-  <aside class="center">
+  <div class="center">
     <a class="github-button" href="https://github.com/scurker/currency.js" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star scurker/currency.js on GitHub">Star</a>
-  </aside>
+  </div>
 </header>
