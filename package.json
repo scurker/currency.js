@@ -70,7 +70,7 @@
     "@babel/register": "^7.5.5",
     "@scurker/eslint-config": "^1.1.5",
     "ava": "^2.2.0",
-    "cheerio": "^1.0.0-rc.2",
+    "cheerio": "^1.0.0-rc",
     "eslint": "^7.4.0",
     "flow-bin": "^0.147.0",
     "google-closure-compiler-js": "^20200719.0.0",
