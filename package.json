@@ -67,7 +67,7 @@
     "@babel/node": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-flow": "^7.10.4",
-    "@babel/register": "^7.5.5",
+    "@babel/register": "^7.10.4",
     "@scurker/eslint-config": "^1.1.5",
     "ava": "^2.2.0",
     "cheerio": "^1.0.0-rc",
