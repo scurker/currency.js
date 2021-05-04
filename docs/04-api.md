@@ -95,7 +95,7 @@ currency("1,234,567/90").add("200,000").format(); // => "$1,434,567.89"
 The default formatter can be overridden by passing in options as a second parameter.
 
 ```js
-var euro = value => currency(value, { separator: ' ', decimal: ',', format: ... });
+var euro = value => currency(value, { separator: ' ', decimal: ',', precision: 0, format: ... });
 
 // ...
 

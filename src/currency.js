@@ -35,6 +35,7 @@ function currency(value, opts) {
 
   that.intValue = v;
   that.value = v / precision;
+  that.originalValue = value;
 
   // Set default incremental value
   settings.increment = settings.increment || (1 / precision);
@@ -93,15 +94,24 @@ function parse(value, opts, useRounding = true) {
  * @param currency
  * @param {object} [opts]
  */
-function format(currency, settings) {
-  let { pattern, negativePattern, symbol, separator, decimal, groups } = settings
-    , split = ('' + currency).replace(/^-/, '').split('.')
+function format(currencyObj, settings) {
+  let { pattern, negativePattern, symbol, separator, decimal, groups, precision } = settings
+    , split = ('' + currencyObj).replace(/^-/, '').split('.')
     , dollars = split[0]
-    , cents = split[1];
+    , cents = split[1]
+    , dollarReplacement = dollars.replace(groups, '$1' + separator)
+    , centsReplacement = precision === 0 ? '' : (cents ? decimal + cents : '');
 
-  return (currency.value >= 0 ? pattern : negativePattern)
+  if (precision && currencyObj.originalValue) {
+    // grab a new currency object with the correct precision
+    const curr = new currency(currencyObj.originalValue, settings);
+    delete curr.originalValue;
+    return curr.format(settings);
+  }
+
+  return (currencyObj.value >= 0 ? pattern : negativePattern)
     .replace('!', symbol)
-    .replace('#', dollars.replace(groups, '$1' + separator) + (cents ? decimal + cents : ''));
+    .replace('#', dollarReplacement + centsReplacement);
 }
 
 currency.prototype = {
@@ -195,8 +205,15 @@ currency.prototype = {
    */
   format(options) {
     let { _settings } = this;
+    let { precision: formatPrecision } = options || {};
 
-    if(typeof options === 'function') {
+    // if precision wasn't passed or is same as original object, we don't 
+    // need the originalValue anymore
+    if (!formatPrecision || formatPrecision === _settings.precision) {
+      delete this.originalValue;
+    }
+
+    if (typeof options === 'function') {
       return options(this, _settings);
     }
 
