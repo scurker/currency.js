@@ -138,12 +138,17 @@ currency.prototype = {
 
   /**
    * Divides value.
-   * @param {number} number
+   * @param {number|currency} value
    * @returns {currency}
    */
-  divide(number) {
+  divide(value) {
     let { intValue, _settings } = this;
-    return currency(intValue /= parse(number, _settings, false), _settings);
+
+    if (value instanceof currency) {
+      return intValue / parse(value, _settings, false);
+    }
+    
+    return currency(intValue /= parse(value, _settings, false), _settings);
   },
 
   /**
