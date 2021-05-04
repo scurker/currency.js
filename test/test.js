@@ -394,6 +394,16 @@ test('should override defaults options when formatting with options', t => {
   t.is(currency(1.23, { symbol: '$' }).format({ symbol: '£' }), '£1.23', 'value is not "£1.23"');
 });
 
+test('should allow for precision to be passed in to format and override', t => {
+  let c1 = currency('1,234.00', { precision: 2 });
+  let c2 = currency('1,234.5678');
+  let c3 = currency('1,234,567.8900');
+
+  t.is(c1.format({ precision: 0 }), '$1,234');
+  t.is(c2.format({ precision: 3 }), '$1,234.570');
+  t.is(c3.format({ precision: 4 }), '$1,234,567.8900');
+});
+
 test('should return 0.00 currency with invalid input', t => {
   // eslint-disable-next-line no-undefined
   var value = currency(undefined);
