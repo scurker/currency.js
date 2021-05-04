@@ -556,3 +556,14 @@ test('should handle fractional cents', t => {
   t.is(values.intValue, 1235);
   t.is(values.value, 12.35);
 });
+
+test('equals', t => {
+  let c1 = currency(2.52).subtract(.01);
+  let c2 = currency(2.50).add(.01);
+  let c3 = currency(10);
+  
+  t.is(c1.equals(c2), true);
+  t.is(c3.equals(c1), false);
+  t.is(c3.equals(10), true);
+  t.is(c3.equals(10.0), true);
+});
