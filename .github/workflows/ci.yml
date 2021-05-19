@@ -36,13 +36,13 @@ jobs:
         id: node-cache
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-16-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node-version }}-
+            ${{ runner.os }}-node-16-
       - name: Use node version 16
         uses: actions/setup-node@v2
         with:
           node-version: 16
-      - npm: npm ci
+      - run: npm ci
       - run: npm install -g coveralls
       - run: npm run coverage
