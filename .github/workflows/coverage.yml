@@ -12,6 +12,7 @@ jobs:
         with:
           node-version: 16
       - run: npm install -g coveralls
+      - run: npm ci
       - run: npm run build
       - run: npm run coverage
       - run: npm run coverage:report
