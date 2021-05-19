@@ -47,4 +47,7 @@ jobs:
       - run: npm ci
       - run: npm install -g coveralls
       - run: npm run coverage
-      - run: npm run coverage:report
+      - name: Upload coverage
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run coverage:report
