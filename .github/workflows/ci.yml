@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   build:
+    name: node ${{ matrix.node-version }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -11,7 +12,6 @@ jobs:
           - 14
           - 15
           - 16
-      name: test node ${{ matrix.node-version }}.x
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
