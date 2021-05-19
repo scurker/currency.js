@@ -20,7 +20,7 @@
     "clean:docs": "rm -rf docs/build",
     "compile:docs": "npx babel-node --presets=@babel/preset-env ./docs/src/build-docs.js",
     "coverage": "BABEL_ENV=test nyc ava ./test/test.js",
-    "coverage:report": "nyc report --reporter=text-lcov | coveralls",
+    "coverage:report": "nyc report --reporter=text-lcov > ./coverage/lcov.info",
     "copy-typescript-definition": "cp -f src/currency.d.ts dist",
     "copy-flow-definition": "cp -f src/currency.js.flow dist",
     "lint": "eslint .",
