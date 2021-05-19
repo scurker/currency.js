@@ -1,3 +1,7 @@
+# 2.0.4
+
+* Release for security fixes in devDependencies
+
 # 2.0.3
 
 * Fixed truncation of fractional cents when using `fromCents`
