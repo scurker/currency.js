@@ -48,6 +48,3 @@ jobs:
       - run: npm install -g coveralls
       - run: npm run coverage
       - run: npm run coverage:report
-      - uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
