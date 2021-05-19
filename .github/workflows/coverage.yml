@@ -1,0 +1,17 @@
+name: Test
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use node 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - run: npm install -g coveralls
+      - run: npm run build
+      - run: npm run coverage
+      - run: npm run coverage:report
