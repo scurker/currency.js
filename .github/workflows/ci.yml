@@ -11,6 +11,7 @@ jobs:
           - 14
           - 15
           - 16
+      name: test node ${{ matrix.node-version }}.x
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
