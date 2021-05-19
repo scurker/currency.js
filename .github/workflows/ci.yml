@@ -24,6 +24,16 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node_version }}
-      - run: npm run ci
+      - run: npm ci
       - run: npm run build
       - run: npm test
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use node version 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - run: npm install -g coveralls
+      - run: npm run coverage
