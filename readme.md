@@ -4,7 +4,7 @@
 
 # currency.js
 
-[![Build Status](https://travis-ci.org/scurker/currency.js.svg?branch=master)](https://travis-ci.org/scurker/currency.js)
+[![Build Status](https://github.com/scurker/currency.js/actions/workflows/ci.yml/badge.svg)](https://github.com/scurker/currency.js/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/scurker/currency.js/badge.svg?branch=master&service=github)](https://coveralls.io/github/scurker/currency.js?branch=master)
 [![npm](https://img.shields.io/npm/v/currency.js.svg?style=flat)](https://www.npmjs.com/package/currency.js)
 [![gzip size](http://img.badgesize.io/https://unpkg.com/currency.js/dist/currency.min.js?compression=gzip)](https://unpkg.com/currency.js/dist/currency.min.js)
