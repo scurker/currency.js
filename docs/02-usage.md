@@ -58,7 +58,7 @@ By default, currency resolves to a `string` value.
 document.getElementsByTagName("input")[0].value = currency(1234.56).add(6.44); // 1241.00
 ```
 
-If you need access to the raw numbers, the value is stored as both an `integer` and a `string`, which you can access with `.intValue` or `.value`;
+*currency.js* stores values as both an `integer` and a `string`. If you need access to the raw numbers, you can access them with `.intValue` or `.value`;
 
 ```js
 // Get the internal values
