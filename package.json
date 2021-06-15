@@ -72,7 +72,7 @@
     "ava": "^2.2.0",
     "cheerio": "^1.0.0-rc",
     "eslint": "^7.4.0",
-    "flow-bin": "^0.152.0",
+    "flow-bin": "^0.153.0",
     "google-closure-compiler-js": "^20200719.0.0",
     "gzip-size": "^6.0.0",
     "handlebars": "^4.7.6",
