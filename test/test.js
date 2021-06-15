@@ -556,3 +556,7 @@ test('should handle fractional cents', t => {
   t.is(values.intValue, 1235);
   t.is(values.value, 12.35);
 });
+
+test('division by currency should result in a number, not currency', t => {
+  t.is(currency(110).divide(currency(20)), 5.5);
+});
