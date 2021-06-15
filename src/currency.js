@@ -17,6 +17,8 @@ const rounding = (value, increment) => round(value / increment) * increment;
 const groupRegex = /(\d)(?=(\d{3})+\b)/g;
 const vedicRegex = /(\d)(?=(\d\d)+\d\b)/g;
 
+let userGlobalDefaults = {};
+
 /**
  * Create a new instance of currency.js
  * @param {number|string|currency} value
@@ -29,7 +31,7 @@ function currency(value, opts) {
     return new currency(value, opts);
   }
 
-  let settings = Object.assign({}, defaults, opts)
+  let settings = Object.assign({}, defaults, userGlobalDefaults, opts)
     , precision = pow(settings.precision)
     , v = parse(value, settings);
 
@@ -51,6 +53,10 @@ function currency(value, opts) {
   this._settings = settings;
   this._precision = precision;
 }
+
+currency.setGlobalDefaults = opts => {
+  userGlobalDefaults = opts;
+};
 
 function parse(value, opts, useRounding = true) {
   let v = 0

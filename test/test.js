@@ -556,3 +556,14 @@ test('should handle fractional cents', t => {
   t.is(values.intValue, 1235);
   t.is(values.value, 12.35);
 });
+
+test('setting global defaults should stick', t => {
+  currency.setGlobalDefaults({
+    fromCents: true,
+    separator: ' ',
+    decimal: ',',
+    symbol: '$'
+  });
+
+  t.is(currency(12312345).format(), '$123 123,45');
+});
