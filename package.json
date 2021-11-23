@@ -74,7 +74,7 @@
     "eslint": "^8.0.0",
     "flow-bin": "^0.165.0",
     "google-closure-compiler-js": "^20200719.0.0",
-    "gzip-size": "^6.0.0",
+    "gzip-size": "^7.0.0",
     "handlebars": "^4.7.6",
     "highlight.js": "^11.0.0",
     "html-minifier": "^4.0.0",
