@@ -556,3 +556,50 @@ test('should handle fractional cents', t => {
   t.is(values.intValue, 1235);
   t.is(values.value, 12.35);
 });
+
+test('lessThan', t => {
+  let c1 = currency('10');
+  let c2 = currency(10);
+
+  t.is(c1.lessThan(currency('10.1')), true);
+  t.is(c1.lessThan(10.01), true);
+  t.is(c2.lessThan(currency('10.1')), true);
+  t.is(c2.lessThan(10.01), true);
+});
+
+test('lessThanOrEqual', t => {
+  let c1 = currency('10');
+  let c2 = currency(10);
+
+  t.is(c1.lessThanOrEqual(currency('10')), true);
+  t.is(c1.lessThanOrEqual(10.01), true);
+  t.is(c1.lessThanOrEqual('10.01'), true);
+
+  t.is(c2.lessThanOrEqual(currency('10')), true);
+  t.is(c2.lessThanOrEqual(10.01), true);
+  t.is(c2.lessThanOrEqual('10.01'), true);
+});
+
+test('greaterThan', t => {
+  let c1 = currency('10');
+  let c2 = currency(10);
+
+  t.is(c1.greaterThan(currency('9.99')), true);
+  t.is(c1.greaterThan(9.99), true);
+
+  t.is(c2.greaterThan(currency('9.99')), true);
+  t.is(c2.greaterThan(9.99), true);
+});
+
+test('greaterThanOrEqual', t => {
+  let c1 = currency('10');
+  let c2 = currency(10);
+
+  t.is(c1.greaterThanOrEqual(currency('10')), true);
+  t.is(c1.greaterThanOrEqual(9.99), true);
+  t.is(c1.greaterThanOrEqual('9.99'), true);
+
+  t.is(c2.greaterThanOrEqual(currency('10')), true);
+  t.is(c2.greaterThanOrEqual(9.99), true);
+  t.is(c2.greaterThanOrEqual('9.99'), true);
+});
