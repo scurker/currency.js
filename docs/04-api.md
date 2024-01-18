@@ -81,6 +81,43 @@ currency(12.35).distribute(3); // => [4.12, 4.12, 4.11]
 currency(12.00).distribute(3); // => [4.00, 4.00, 4.00]
 ```
 
+### mapDistribute
+
+`currency.mapDistribute( arrayToDistribute, callbackFn )`
+`currency.mapDistribute( arrayToDistribute, callbackFn, thisArg )`
+
+Map an array element distributing the currency value with the array element. See [distribute](#distribute)
+
+#### Parameters
+
+##### `arrayToDistribute`
+The array to distribute the value to.
+
+##### `callbackFn`
+A function to execute for each element in the array and its own distribution. Its return value is added as a single element in the new array. The function is called with the following arguments:
+
+> `element`
+> &nbsp;&nbsp;&nbsp;&nbsp;The current element being processed in the array.
+> `distributionElement`
+> &nbsp;&nbsp;&nbsp;&nbsp;The current distribution element corresponding to the `element`.
+> `index`
+> &nbsp;&nbsp;&nbsp;&nbsp;The index of the current element being processed in the array.
+> `array`
+> &nbsp;&nbsp;&nbsp;&nbsp;The `arrayToDistribute` use on the whole distribution.
+
+##### `thisArg` *optional*
+A value to use as `this` when executing `callbackFn`.
+
+```javascript
+const paymentInstruments = ['CreditCard1', 'CreditCard2']
+const mapped = currency(2.75).mapDistribute(paymentInstruments, callbackFn)
+// => the callbackFn is called
+// first with CreditCard1 and 1.38
+// then CreditCard2 and 1.37
+
+// and mapped would be the array of all the results of callbackFn
+```
+
 ### format
 
 `currency.format([ function | options ])`

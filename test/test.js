@@ -1,4 +1,5 @@
 import test from 'ava';
+import { spy } from 'sinon';
 import currency from '../dist/currency';
 
 test('should be immutable', t => {
@@ -189,6 +190,27 @@ test('should create non-equal distribution with a negative penny', t => {
   }
 
   t.is(total, -0.01, 'sum of values matches our original amount');
+});
+
+test('should map distributing the value by the array length', t => {
+  var arrayToDistribute = ['a', 'b', 'c'];
+  var justCopyTheArguments = (element, currencyElement, index, array) => [element, currencyElement, index, array];
+  var result = currency(1).mapDistribute(arrayToDistribute, justCopyTheArguments);
+
+  t.deepEqual(result, [
+    ['a', currency(0.34), 0, arrayToDistribute],
+    ['b', currency(0.33), 1, arrayToDistribute],
+    ['c', currency(0.33), 2, arrayToDistribute],
+  ]);
+});
+
+test('should call the callbackFn with thisArg', t => {
+  var arrayToDistribute = ['a'];
+  var spyToTestThisArg = spy();
+  var thisArg = { just: 'for Reference' };
+  currency(1).mapDistribute(arrayToDistribute, spyToTestThisArg, thisArg);
+
+  t.is(spyToTestThisArg.firstCall.thisValue, thisArg);
 });
 
 test('should get dollar value', t => {

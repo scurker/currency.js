@@ -25,6 +25,8 @@ declare class currency {
   multiply(number: $currency$any): currency;
   divide(number: $currency$any): currency;
   distribute(count: number): Array<currency>;
+  mapDistribute<T, U>(arrayToDistribute: Array<T>, callbackFn: (element: T, distributionElement: currency, index: number, array: Array<T>) => U, thisArg?: any): Array<U>;
+
   dollars(): number;
   cents(): number;
   format(options?: $currency$opts | formatFunction): string;

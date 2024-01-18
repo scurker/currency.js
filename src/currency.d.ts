@@ -27,6 +27,8 @@ declare module 'currency.js' {
     multiply(number: currency.Any): currency;
     divide(number: currency.Any): currency;
     distribute(count: number): Array<currency>;
+    mapDistribute<T, U>(arrayToDistribute: Array<T>, callbackFn: (element: T, distributionElement: currency, index: number, array: Array<T>) => U, thisArg?: any): Array<U>;
+
     dollars(): number;
     cents(): number;
     format(opts?: currency.Options | currency.Format): string;
