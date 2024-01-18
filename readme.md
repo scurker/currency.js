@@ -173,6 +173,7 @@ Maybe currency.js isn't the right fit for your needs. Check out some of these ot
 * [accounting.js](https://github.com/openexchangerates/accounting.js)
 * [dinero.js](https://github.com/sarahdayan/dinero.js)
 * [walletjs](https://github.com/dleitee/walletjs)
+* [currency-to-float](https://github.com/mateus4k/currency-to-float)
 
 ## License
 
