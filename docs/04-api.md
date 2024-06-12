@@ -124,3 +124,23 @@ Returns the cent value of the currency.
 currency(123.45).cents(); // => 45
 currency("0.99").cents(); // => 99
 ```
+
+### static setGlobalDefaults
+
+`currency.setGlobalDefaults`
+
+Set global defaults for currency to use. 
+_*This is a static method.*_
+You cannot call this method on a currency instance, only on the currency
+object itself.
+
+```js
+currency.setGlobalDefaults({
+  fromCents: true,
+  separator: ' ',
+  decimal: ',',
+  symbol: '$'
+});
+
+currency(12312345).format() // => '$123 123,45'
+```
