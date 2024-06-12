@@ -89,7 +89,17 @@ currency(5.00).subtract(0.50);    // 4.50
 currency(45.25).multiply(3);      // 135.75
 currency(1.12).distribute(5);     // [0.23, 0.23, 0.22, 0.22, 0.22]
 ```
+]
+There's also a utility function to map and distribute over an array
+```javascript
+const paymentInstruments = ['CreditCard1', 'CreditCard2']
+const mapped = currency(2.75).mapDistribute(paymentInstruments, callbackFn)
+// => the callbackFn is called
+// first with CreditCard1 and 1.38
+// then CreditCard2 and 1.37
 
+// and mapped would be the array of all the results of callbackFn
+```
 There's even a built in formatter that will automatically place comma delimiters in the right place.
 
 ```javascript
