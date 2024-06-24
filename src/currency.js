@@ -89,17 +89,20 @@ function parse(value, opts, useRounding = true) {
   return useRounding ? round(v) : v;
 }
 
-function shortFormat(num) {
-  if (num >= 1e9) {
-    return (num / 1e9).toFixed(1).replace(/\.0$/, '') + 'B';
+function shortFormat(number) {
+  if (number >= 1e12) {
+    return (number / 1e12).toFixed(1).replace(/\.0$/, '') + 'T';
   }
-  if (num >= 1e6) {
-    return (num / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
+  if (number >= 1e9) {
+    return (number / 1e9).toFixed(1).replace(/\.0$/, '') + 'B';
   }
-  if (num >= 1e3) {
-    return (num / 1e3).toFixed(1).replace(/\.0$/, '') + 'K';
+  if (number >= 1e6) {
+    return (number / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
   }
-  return num;
+  if (number >= 1e3) {
+    return (number / 1e3).toFixed(1).replace(/\.0$/, '') + 'K';
+  }
+  return number;
 }
 
 /**

@@ -558,13 +558,15 @@ test('should handle fractional cents', t => {
 });
 
 test('should to short representation of currency values', t => {
-  var oneThousand = currency(1000, { short: true });
-  var tenThousand = currency(10000, { short: true });
+  var oneThousand = currency(1500, { short: true });
+  var tenThousand = currency(10500, { short: true });
   var oneMillion = currency(1000000, { short: true });
   var oneBillion = currency(1000000000, { short: true });
+  var oneTrillion = currency(1000000000000, { short: true });
 
-  t.is(oneThousand.format(), '$1K');
-  t.is(tenThousand.format(), '$10K');
+  t.is(oneThousand.format(), '$1.5K');
+  t.is(tenThousand.format(), '$10.5K');
   t.is(oneMillion.format(), '$1M');
   t.is(oneBillion.format(), '$1B');
+  t.is(oneTrillion.format(), '$1T');
 });
