@@ -70,6 +70,17 @@ Divides the current currency instance by `number`.
 currency(123.45).divide(2); // => "61.73"
 ```
 
+### equals
+
+`currency.equals( number|currency )`
+
+Compares the current currency's value to another currency or `number` value.
+
+```js
+currency(123.45).equals(currency(123.45)); // => true
+currency(10).equals(10); // => true
+```
+
 ### distribute
 
 `currency.distribute( number )`

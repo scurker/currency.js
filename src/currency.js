@@ -147,6 +147,21 @@ currency.prototype = {
   },
 
   /**
+   * Compares value to another currency instance's value
+   * @param {number|currency} foreign 
+   * @returns {boolean}
+   */
+  equals(foreign) {
+    let { value } = this;
+    if (foreign instanceof currency) {
+      let { value: foreignValue } = foreign;
+
+      return value === foreignValue;
+    }
+    return foreign === value;
+  },
+
+  /**
    * Takes the currency amount and distributes the values evenly. Any extra pennies
    * left over from the distribution will be stacked onto the first set of entries.
    * @param {number} count
