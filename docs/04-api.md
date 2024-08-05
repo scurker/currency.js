@@ -70,6 +70,52 @@ Divides the current currency instance by `number`.
 currency(123.45).divide(2); // => "61.73"
 ```
 
+### lessThan
+
+`currency.lessThan( number|currency )`
+
+Compares if value is less than another currency instance's value
+
+```js
+currency(10).lessThan(currency('10.1')); // => true
+currency('10').lessThan(10.01); // => true
+```
+
+### lessThanOrEqual
+
+`currency.lessThanOrEqual( number|currency )`
+
+Compares if value is less than or equal to another currency instance's value
+
+```js
+currency(10).lessThanOrEqual(currency('10.1')); // => true
+currency('10').lessThanOrEqual(10.01); // => true
+currency('10').lessThanOrEqual(10); // => true
+```
+
+### greaterThan
+
+`currency.greaterThan( number|currency )`
+
+Compares if value is greater than another currency instance's value
+
+```js
+currency(10).greaterThan(currency('9.99')); // => true
+currency('10').greaterThan(9.99); // => true
+```
+
+### greaterThanOrEqual
+
+`currency.greaterThanOrEqual( number|currency )`
+
+Compares if value is greater than or equal to another currency instance's value
+
+```js
+currency(10).greaterThanOrEqual(currency('9.99')); // => true
+currency('10').greaterThanOrEqual(9.99); // => true
+currency('9.99').greaterThanOrEqual(9.99); // => true
+```
+
 ### distribute
 
 `currency.distribute( number )`
