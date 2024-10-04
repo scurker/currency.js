@@ -7,7 +7,8 @@ const defaults = {
   pattern: '!#',
   negativePattern: '-!#',
   format,
-  fromCents: false
+  fromCents: false,
+  short: false
 };
 
 const round = v => Math.round(v);
@@ -54,7 +55,7 @@ function currency(value, opts) {
 
 function parse(value, opts, useRounding = true) {
   let v = 0
-    , { decimal, errorOnInvalid, precision: decimals, fromCents } = opts
+    , { decimal, errorOnInvalid, precision: decimals, fromCents, short } = opts
     , precision = pow(decimals)
     , isNumber = typeof value === 'number'
     , isCurrency = value instanceof currency;
@@ -88,20 +89,42 @@ function parse(value, opts, useRounding = true) {
   return useRounding ? round(v) : v;
 }
 
+function shortFormat(number) {
+  if (number >= 1e12) {
+    return (number / 1e12).toFixed(1).replace(/\.0$/, '') + 'T';
+  }
+  if (number >= 1e9) {
+    return (number / 1e9).toFixed(1).replace(/\.0$/, '') + 'B';
+  }
+  if (number >= 1e6) {
+    return (number / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
+  }
+  if (number >= 1e3) {
+    return (number / 1e3).toFixed(1).replace(/\.0$/, '') + 'K';
+  }
+  return number;
+}
+
 /**
  * Formats a currency object
  * @param currency
  * @param {object} [opts]
  */
 function format(currency, settings) {
-  let { pattern, negativePattern, symbol, separator, decimal, groups } = settings
+  let { pattern, negativePattern, symbol, separator, decimal, groups, short } = settings
     , split = ('' + currency).replace(/^-/, '').split('.')
     , dollars = split[0]
     , cents = split[1];
 
-  return (currency.value >= 0 ? pattern : negativePattern)
+  if (short) {
+    return symbol + shortFormat(dollars);
+  }
+
+  const result = (currency.value >= 0 ? pattern : negativePattern)
     .replace('!', symbol)
     .replace('#', dollars.replace(groups, '$1' + separator) + (cents ? decimal + cents : ''));
+
+  return result;
 }
 
 currency.prototype = {
