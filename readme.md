@@ -166,6 +166,8 @@ GAS(1234.56).format(); // "$1,234.560"
 
 * [babel-plugin-transform-currency-operators](https://github.com/scurker/babel-plugin-transform-currency-operators): An experimental babel plugin for transforming currency operations `currency(1.23) + 4.56` to `currency(1.23).add(4.56)`.
 
+*[eslint-plugin-currency-operations](https://www.npmjs.com/package/eslint-plugin-currency-operations): An eslint plugin for detecting floating point math operations that are being done without a wrapper and trigger warning. `1.23 + 4.56 // eslint will trigger` and `currency(1.23).add(4.56) // eslint will not trigger`.
+
 ## Other Libraries
 
 Maybe currency.js isn't the right fit for your needs. Check out some of these other fine libraries:
