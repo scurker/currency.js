@@ -49,6 +49,10 @@ currencyInstance.divide(currencyInstance);
 // distribute
 let a1: Array<currency> = currencyInstance.distribute(4);
 
+// mapDistribute
+let elements: Array<string> = ['a', 'b']
+let a2: Array<[string, currency]> = currencyInstance.mapDistribute(elements, (element, c) => [element, c]);
+
 // dollars
 let d1: number = currencyInstance.dollars();
 

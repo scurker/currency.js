@@ -104,6 +104,35 @@ function format(currency, settings) {
     .replace('#', dollars.replace(groups, '$1' + separator) + (cents ? decimal + cents : ''));
 }
 
+/**
+ * Takes the currency amount and distributes the values evenly. Any extra pennies
+ * left over from the distribution will be stacked onto the first set of entries.
+ * And apply the mapFunction for each array element and it owns distributed value.
+ * @param {number} intValue
+ * @param {number} precision
+ * @param {object} settings
+ * @param {number} count
+ * @returns {array}
+ */
+function distribute(intValue, precision, settings, count) {
+  let distribution = []
+    , split = Math[intValue >= 0 ? 'floor' : 'ceil'](intValue / count)
+    , pennies = Math.abs(intValue - (split * count))
+    , precisionToUse =  settings.fromCents ? 1 : precision;
+
+  for (; count !== 0; count--) {
+    let item = currency(split / precisionToUse, settings);
+
+    // Add any left over pennies
+    pennies-- > 0 && (item = item[intValue >= 0 ? 'add' : 'subtract'](1 / precision));
+
+    distribution.push(item);
+  }
+
+  return distribution;
+}
+
+
 currency.prototype = {
 
   /**
@@ -153,22 +182,31 @@ currency.prototype = {
    * @returns {array}
    */
   distribute(count) {
-    let { intValue, _precision, _settings } = this
-      , distribution = []
-      , split = Math[intValue >= 0 ? 'floor' : 'ceil'](intValue / count)
-      , pennies = Math.abs(intValue - (split * count))
-      , precision =  _settings.fromCents ? 1 : _precision;
+    const { intValue, _precision, _settings } = this;
 
-    for (; count !== 0; count--) {
-      let item = currency(split / precision, _settings);
+    return distribute(intValue, _precision, _settings, count);
+  },
 
-      // Add any left over pennies
-      pennies-- > 0 && (item = item[intValue >= 0 ? 'add' : 'subtract'](1 / precision));
+  /**
+   * Takes the currency amount and distributes the values evenly. Any extra pennies
+   * left over from the distribution will be stacked onto the first set of entries.
+   * And apply the mapFunction for each array element and it owns distributed value.
+   * @param {array} array to distribute on
+   * @param {callbackFn} callback function to apply while mapping
+   * @param {thisArg} A value to use as this when executing callbackFn 
+   * @returns {array}
+   */
+  mapDistribute(arrayToDistribute, callbackFn, thisArg) {
+    const { intValue, _precision, _settings } = this;
 
-      distribution.push(item);
+    const distribution = distribute(intValue, _precision, _settings, arrayToDistribute.length);
+    const distributionResult = [];
+
+    for (const [index, item] of distribution.entries()) {
+      distributionResult.push(callbackFn.call(thisArg, arrayToDistribute[index], item, index, arrayToDistribute));
     }
 
-    return distribution;
+    return distributionResult;
   },
 
   /**
