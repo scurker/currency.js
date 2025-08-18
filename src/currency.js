@@ -147,6 +147,66 @@ currency.prototype = {
   },
 
   /**
+   * Compares if value is less than another currency instance's value
+   * @param {number|currency} foreign 
+   * @returns {boolean}
+   */
+  lessThan(foreign) {
+    let { value } = this;
+    if (foreign instanceof currency) {
+      let { value: foreignValue } = foreign;
+
+      return value < foreignValue;
+    }
+    return value < foreign;
+  },
+
+  /**
+   * Compares if value is less than or equal to another currency instance's value
+   * @param {number|currency} foreign 
+   * @returns {boolean}
+   */
+  lessThanOrEqual(foreign) {
+    let { value } = this;
+    if (foreign instanceof currency) {
+      let { value: foreignValue } = foreign;
+
+      return value <= foreignValue;
+    }
+    return value < foreign;
+  },
+
+  /**
+   * Compares if value is greater than another currency instance's value
+   * @param {number|currency} foreign 
+   * @returns {boolean}
+   */
+  greaterThan(foreign) {
+    let { value } = this;
+    if (foreign instanceof currency) {
+      let { value: foreignValue } = foreign;
+
+      return value >= foreignValue;
+    }
+    return value >= foreign;
+  },
+
+  /**
+   * Compares if value is greater than or equal to another currency instance's value
+   * @param {number|currency} foreign 
+   * @returns {boolean}
+   */
+  greaterThanOrEqual(foreign) {
+    let { value } = this;
+    if (foreign instanceof currency) {
+      let { value: foreignValue } = foreign;
+
+      return value >= foreignValue;
+    }
+    return value >= foreign;
+  },
+
+  /**
    * Takes the currency amount and distributes the values evenly. Any extra pennies
    * left over from the distribution will be stacked onto the first set of entries.
    * @param {number} count
