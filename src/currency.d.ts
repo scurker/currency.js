@@ -17,7 +17,8 @@ declare module 'currency.js' {
       pattern?: string,
       negativePattern?: string,
       format?: currency.Format,
-      fromCents?: boolean
+      fromCents?: boolean,
+      groups?: RegExp
     }
   }
 
