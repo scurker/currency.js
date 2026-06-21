@@ -142,6 +142,27 @@ Formats number groupings using the Indian Numbering System, i.e. `10,00,000.00`
 `fromCents` *default*: `false`<br/>
 Parse the amount value as a minor currency unit (e.g. cents in a dollar) instead of dollars.
 
+### Additional Examples
+
+```javascript
+// Properties
+currency(123.45).value;        // 123.45
+currency(123.45).intValue;     // 12345
+
+// Negative values
+currency(-5.50);               // -5.50
+currency("(5.50)");            // -5.50
+currency("-5.50");             // -5.50
+
+// Comparisons
+currency(1.23).equals(1.23);         // true
+currency(1.23).greaterThan(1.00);    // true
+currency(1.23).lessThan(2.00);       // true
+
+// TypeScript (types included in the package)
+import currency from 'currency.js';
+```
+
 > View more examples and full documentation at [https://currency.js.org](https://currency.js.org).
 
 ### Internationalization Examples
