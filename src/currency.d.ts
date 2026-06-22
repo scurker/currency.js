@@ -1,6 +1,6 @@
 declare module 'currency.js' {
   namespace currency {
-    type Any = number | string | currency;
+    type Any = number | string | currency | null | undefined;
     type Format = (currency?: currency, opts?: Options) => string;
     interface Constructor {
       (value: currency.Any, opts?: currency.Options): currency,
