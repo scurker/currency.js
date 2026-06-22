@@ -105,6 +105,34 @@ euro("2.573.693,75").add("100.275,50").format();  // "€2.673.969,25"
 euro("1.237,72").subtract(300).format();          // "€937,72"
 ```
 
+### Additional Usage
+
+```javascript
+// Properties
+var money = currency(123.45);
+money.value;      // 123.45
+money.intValue;   // 123
+
+// Negative values
+currency(-1.23);             // -1.23
+currency("-1.23");           // -1.23
+currency("(1.23)");          // -1.23
+currency("-1.23").add(0.50); // -0.73
+
+// Comparison
+currency(1.23).equals(1.23);    // true
+currency(1.23).equals(2.46);    // false
+currency(1.23).compare(1.23);   // 0 (equal)
+currency(1.23).compare(2.46);   // -1 (less than)
+currency(2.46).compare(1.23);   // 1 (greater than)
+```
+
+TypeScript definitions are included with the package. Import using:
+
+```typescript
+import currency from 'currency.js';
+```
+
 ### Options
 
 *currency.js* comes with its own set of default options conforming to USD. You can customize these according to your locale.
