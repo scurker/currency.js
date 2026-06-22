@@ -163,6 +163,11 @@ test('should create equal distribution', t => {
   t.deepEqual(realValues, [0.25, 0.25, 0.25, 0.25], 'all distributed items are equal');
 });
 
+test('should not loop forever for a non-positive count', t => {
+  t.deepEqual(currency(1.00).distribute(0), [], 'distribute(0) is empty');
+  t.deepEqual(currency(1.00).distribute(-1), [], 'distribute(-1) is empty instead of looping forever');
+});
+
 test('should create non-equal distribution with pennies', t => {
   var values = currency(1.01).distribute(4);
 

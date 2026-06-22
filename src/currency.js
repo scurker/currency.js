@@ -159,7 +159,7 @@ currency.prototype = {
       , pennies = Math.abs(intValue - (split * count))
       , precision =  _settings.fromCents ? 1 : _precision;
 
-    for (; count !== 0; count--) {
+    for (let i = 0; i < count; i++) {
       let item = currency(split / precision, _settings);
 
       // Add any left over pennies
