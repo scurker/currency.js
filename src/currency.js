@@ -33,6 +33,13 @@ function currency(value, opts) {
     , precision = pow(settings.precision)
     , v = parse(value, settings);
 
+  // `fromCents` governs only how the *initial* value is parsed. It must not be
+  // retained on the instance: derived instances (add/subtract/multiply/divide)
+  // pass their already-scaled integer value back through the constructor, and a
+  // lingering `fromCents` would make it re-interpret that value as cents and
+  // mis-scale on every subsequent operation. See #425.
+  settings.fromCents = false;
+
   that.intValue = v;
   that.value = v / precision;
 
