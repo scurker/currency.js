@@ -520,6 +520,25 @@ test('should parse cents from a string when using fromCents option', t => {
   t.is(c3.intValue, 123);
 });
 
+test('should not carry the fromCents option into derived instances', t => {
+  // `fromCents` only affects how the initial value is parsed; derived instances
+  // (divide/multiply/add/...) must behave identically to a plain instance. See #425.
+  let fromCents = currency('800000', { fromCents: true, precision: 4 });
+  let plain = currency('80.00', { precision: 4 });
+  let divisor = currency('80.00', { precision: 4 });
+  let discount = currency('20.00', { precision: 4 });
+
+  t.is(
+    discount.multiply(fromCents.divide(divisor)).value,
+    discount.multiply(plain.divide(divisor)).value,
+    'a fromCents-derived chain should match the plain-derived chain'
+  );
+  t.is(discount.multiply(fromCents.divide(divisor)).value, 20);
+
+  // Arithmetic operates in the main unit, not cents, once parsed.
+  t.is(currency(500, { fromCents: true }).add(5).value, 10);
+});
+
 test('should handle add with fromCents option', t => {
   let c1 = currency(12345, { fromCents: true });
   let c2 = currency(123, { fromCents: true });
