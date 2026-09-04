@@ -62,12 +62,12 @@
     "url": "https://github.com/scurker/currency.js/issues"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.4",
+    "@babel/cli": "^8.0.0",
     "@babel/core": "^7.10.4",
-    "@babel/node": "^7.10.4",
-    "@babel/preset-env": "^7.10.4",
-    "@babel/preset-flow": "^7.10.4",
-    "@babel/register": "^7.5.5",
+    "@babel/node": "^8.0.0",
+    "@babel/preset-env": "^8.0.0",
+    "@babel/preset-flow": "^8.0.0",
+    "@babel/register": "^8.0.0",
     "@scurker/eslint-config": "^1.1.5",
     "ava": "^2.2.0",
     "cheerio": "^1.0.0-rc",
