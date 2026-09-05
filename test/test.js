@@ -199,6 +199,18 @@ test('should get dollar value', t => {
   t.is(value.subtract(3).dollars(), -1, 'is negative dollar amount');
 });
 
+test('should get dollar values outside the signed 32-bit range', t => {
+  [2147483648.99, 4294967296.99, 90071992547.12].forEach(value => {
+    t.is(currency(value).dollars(), Math.floor(value));
+    t.is(currency(-value).dollars(), -Math.floor(value));
+  });
+});
+
+test('should preserve zero for dollar values below one', t => {
+  t.is(currency(.99).dollars(), 0);
+  t.is(currency(-.99).dollars(), 0);
+});
+
 test('should get cent value', t => {
   var value = currency(1.23);
 

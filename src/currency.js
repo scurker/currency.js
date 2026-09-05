@@ -176,7 +176,7 @@ currency.prototype = {
    * @returns {number}
    */
   dollars() {
-    return ~~this.value;
+    return Math[this.value >= 0 ? 'floor' : 'ceil'](this.value) || 0;
   },
 
   /**
