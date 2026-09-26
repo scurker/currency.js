@@ -206,6 +206,11 @@ test('should get cent value', t => {
   t.is(value.add(.31).cents(), 54, 'is cent amount');
 });
 
+test('should get cent values outside the signed 32-bit range', t => {
+  t.is(currency('0.25', { precision: 10 }).cents(), 2500000000);
+  t.is(currency('-0.25', { precision: 10 }).cents(), -2500000000);
+});
+
 test('should support different precision values', t => {
   let c1 = currency(1.234, { precision: 3 });
   let c2 = currency(1.234, { symbol: '¥', precision: 0 });

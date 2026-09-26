@@ -185,7 +185,8 @@ currency.prototype = {
    */
   cents() {
     let { intValue, _precision } = this;
-    return ~~(intValue % _precision);
+    // ~~ would keep only 32 bits, so a long fraction came back negative.
+    return Math.trunc(intValue % _precision);
   },
 
   /**
