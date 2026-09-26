@@ -143,6 +143,9 @@ currency.prototype = {
    */
   divide(number) {
     let { intValue, _settings } = this;
+    if (number instanceof currency) {
+      number = number.value;
+    }
     return currency(intValue /= parse(number, _settings, false), _settings);
   },
 
