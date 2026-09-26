@@ -546,6 +546,51 @@ test('should handle divide with fromCents option', t => {
   t.is(c1.divide(2).value, 61.73);
 });
 
+test('should use the value of a currency divisor with fromCents', t => {
+  [0, 2, 4].forEach(precision => {
+    [0, 2, 4].forEach(divisorPrecision => {
+      [false, true].forEach(fromCents => {
+        [-80, 80].forEach(value => {
+          let amount = currency(fromCents ? value * Math.pow(10, precision) : value, { fromCents, precision });
+          let divisor = currency(2, { precision: divisorPrecision });
+          t.is(amount.divide(divisor).value, amount.divide(2).value);
+          t.is(amount.value, value);
+          t.is(divisor.value, 2);
+        });
+      });
+    });
+  });
+});
+
+test('should preserve a fractional currency divisor with fromCents', t => {
+  let amount = currency(9000, { fromCents: true });
+  let divisor = currency(2.25, { precision: 3, increment: 0.5 });
+  t.is(amount.divide(divisor).value, 40);
+  t.is(amount.divide(currency(0.5)).value, 180);
+});
+
+test('should preserve decimal settings with a currency divisor', t => {
+  let amount = currency(8000, { fromCents: true, decimal: ',', symbol: '€' });
+  let result = amount.divide(currency(2.5));
+  t.is(result.value, 32);
+  t.is(result.format(), '€32,00');
+});
+
+test('should preserve fromCents after using a currency divisor', t => {
+  let amount = currency(8000, { fromCents: true });
+  let result = amount.divide(currency(2));
+  t.is(result.add(100).value, 41);
+  t.is(result.value, 40);
+  t.is(amount.value, 80);
+});
+
+test('should calculate a discount after using a currency divisor', t => {
+  let amount = currency('800000', { fromCents: true, precision: 4 });
+  let subtotal = currency('80.00', { precision: 4 });
+  let discount = currency('20.00', { precision: 4 });
+  t.is(discount.multiply(amount.divide(subtotal)).value, 20);
+});
+
 test('should handle distribute with fromCents option', t => {
   var values = currency(100, { fromCents: true }).distribute(4);
   t.deepEqual(values.map(v => v.value), [.25, .25, .25, .25]);
